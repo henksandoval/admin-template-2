@@ -1,0 +1,155 @@
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+
+@Component({
+  selector: 'app-dashboard',
+  standalone: true,
+  imports: [
+    CommonModule,
+    MatCardModule,
+    MatIconModule,
+    MatButtonModule
+  ],
+  template: `
+    <div class="p-6 space-y-6">
+      <!-- Stats Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <mat-card class="p-6 bg-gradient-to-br from-blue-500 to-blue-600 text-white border-0">
+          <div class="flex items-center justify-between">
+            <div>
+              <p class="text-blue-100 text-sm font-medium">Total Users</p>
+              <p class="text-3xl font-bold">12,543</p>
+            </div>
+            <mat-icon class="text-4xl text-blue-200">people</mat-icon>
+          </div>
+          <div class="mt-4 flex items-center text-blue-100 text-sm">
+            <mat-icon class="text-sm mr-1">trending_up</mat-icon>
+            <span>+12% from last month</span>
+          </div>
+        </mat-card>
+
+        <mat-card class="p-6 bg-gradient-to-br from-green-500 to-green-600 text-white border-0">
+          <div class="flex items-center justify-between">
+            <div>
+              <p class="text-green-100 text-sm font-medium">Revenue</p>
+              <p class="text-3xl font-bold">$45,123</p>
+            </div>
+            <mat-icon class="text-4xl text-green-200">attach_money</mat-icon>
+          </div>
+          <div class="mt-4 flex items-center text-green-100 text-sm">
+            <mat-icon class="text-sm mr-1">trending_up</mat-icon>
+            <span>+8% from last month</span>
+          </div>
+        </mat-card>
+
+        <mat-card class="p-6 bg-gradient-to-br from-purple-500 to-purple-600 text-white border-0">
+          <div class="flex items-center justify-between">
+            <div>
+              <p class="text-purple-100 text-sm font-medium">Orders</p>
+              <p class="text-3xl font-bold">1,234</p>
+            </div>
+            <mat-icon class="text-4xl text-purple-200">shopping_cart</mat-icon>
+          </div>
+          <div class="mt-4 flex items-center text-purple-100 text-sm">
+            <mat-icon class="text-sm mr-1">trending_down</mat-icon>
+            <span>-3% from last month</span>
+          </div>
+        </mat-card>
+
+        <mat-card class="p-6 bg-gradient-to-br from-orange-500 to-orange-600 text-white border-0">
+          <div class="flex items-center justify-between">
+            <div>
+              <p class="text-orange-100 text-sm font-medium">Performance</p>
+              <p class="text-3xl font-bold">98.5%</p>
+            </div>
+            <mat-icon class="text-4xl text-orange-200">speed</mat-icon>
+          </div>
+          <div class="mt-4 flex items-center text-orange-100 text-sm">
+            <mat-icon class="text-sm mr-1">trending_up</mat-icon>
+            <span>+2% from last month</span>
+          </div>
+        </mat-card>
+      </div>
+
+      <!-- Main Content Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <!-- Recent Activity -->
+        <div class="lg:col-span-2">
+          <mat-card class="p-6">
+            <div class="flex items-center justify-between mb-6">
+              <h2 class="text-xl font-semibold mat-headline-medium">
+                Recent Activity
+              </h2>
+              <button mat-button color="primary">View All</button>
+            </div>
+
+            <div class="space-y-4">
+              <div class="flex items-center space-x-4 p-4 mat-elevation-z1 rounded-lg">
+                <mat-icon class="text-blue-600">person_add</mat-icon>
+                <div class="flex-1">
+                  <p class="font-medium mat-body-medium">New user registered</p>
+                  <p class="text-sm mat-caption">John Doe joined the platform</p>
+                </div>
+                <span class="text-sm mat-caption">2 min ago</span>
+              </div>
+
+              <div class="flex items-center space-x-4 p-4 mat-elevation-z1 rounded-lg">
+                <mat-icon class="text-green-600">shopping_bag</mat-icon>
+                <div class="flex-1">
+                  <p class="font-medium mat-body-medium">New order placed</p>
+                  <p class="text-sm mat-caption">Order #12345 for $299.99</p>
+                </div>
+                <span class="text-sm mat-caption">5 min ago</span>
+              </div>
+
+              <div class="flex items-center space-x-4 p-4 mat-elevation-z1 rounded-lg">
+                <mat-icon class="text-orange-600">security</mat-icon>
+                <div class="flex-1">
+                  <p class="font-medium mat-body-medium">Security update</p>
+                  <p class="text-sm mat-caption">System security patches applied</p>
+                </div>
+                <span class="text-sm mat-caption">1 hour ago</span>
+              </div>
+            </div>
+          </mat-card>
+        </div>
+
+        <!-- Quick Actions -->
+        <div>
+          <mat-card class="p-6">
+            <h2 class="text-xl font-semibold mat-headline-medium mb-6">
+              Quick Actions
+            </h2>
+
+            <div class="space-y-3">
+              <button mat-raised-button color="primary" class="w-full justify-start">
+                <mat-icon class="mr-2">add</mat-icon>
+                Create New User
+              </button>
+
+              <button mat-raised-button color="accent" class="w-full justify-start">
+                <mat-icon class="mr-2">upload</mat-icon>
+                Import Data
+              </button>
+
+              <button mat-stroked-button class="w-full justify-start">
+                <mat-icon class="mr-2">download</mat-icon>
+                Export Report
+              </button>
+
+              <button mat-stroked-button class="w-full justify-start">
+                <mat-icon class="mr-2">settings</mat-icon>
+                System Settings
+              </button>
+            </div>
+          </mat-card>
+        </div>
+      </div>
+    </div>
+  `,
+  styles: []
+})
+export class DashboardComponent {}

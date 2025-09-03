@@ -25,16 +25,6 @@ import {LayoutService} from '@layout/services/layout.service';
           </ol>
         </nav>
 
-        <!-- Page header con Material Design theming -->
-        <div class="mb-8">
-          <h1 class="text-2xl md:text-3xl font-bold mat-headline-large mb-2">
-            {{ layoutService.currentPageTitle() }}
-          </h1>
-          <p class="mat-body-medium">
-            {{ layoutService.currentPageDescription() }}
-          </p>
-        </div>
-
         <!-- Content area - aquí va el router-outlet -->
         <div class="rounded-lg min-h-96">
           <router-outlet></router-outlet>

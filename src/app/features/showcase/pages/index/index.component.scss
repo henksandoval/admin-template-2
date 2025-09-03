@@ -1,0 +1,22 @@
+.showcase-card {
+  transition: transform 0.2s ease-in-out;
+}
+
+.showcase-card:hover {
+  transform: translateY(-2px);
+}
+
+.showcase-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.showcase-avatar mat-icon {
+  font-size: 24px;
+  width: 24px;
+  height: 24px;
+}

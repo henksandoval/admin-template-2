@@ -10,14 +10,29 @@ export const routes: Routes = [
       {path: 'dashboard', component: DashboardComponent},
       {
         path: 'showcase',
+        loadComponent: () => import('./features/showcase/showcase.component').then(m => m.ShowcaseComponent),
         children: [
           {
             path: '',
-            loadComponent: () => import('./features/showcase/showcase.component').then(m => m.ShowcaseComponent)
+            loadComponent: () => import('./features/showcase/pages/index/index.component').then(m => m.IndexComponent)
           },
           {
             path: 'forms',
-            loadComponent: () => import('./features/showcase/basic-forms/basic-forms.component').then(m => m.BasicFormsComponent)
+            loadComponent: () => import('./features/showcase/pages/basic-forms/basic-forms.component').then(m => m.BasicFormsComponent)
+          },
+        ]
+      },
+      {
+        path: 'pds',
+        loadComponent: () => import('./features/pds/showcase.component').then(m => m.ShowcaseComponent),
+        children: [
+          {
+            path: '',
+            loadComponent: () => import('./features/pds/pages/index/index.component').then(m => m.IndexComponent)
+          },
+          {
+            path: 'forms',
+            loadComponent: () => import('./features/pds/pages/basic-forms/basic-forms.component').then(m => m.BasicFormsComponent)
           },
         ]
       },

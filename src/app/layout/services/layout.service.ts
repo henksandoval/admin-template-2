@@ -195,6 +195,30 @@ export class LayoutService {
       ]
     },
     {
+      id: 'pds',
+      label: 'PDS',
+      icon: 'dashboard_customize',
+      level: 1,
+      children: [
+        {
+          id: 'components-showcase-pds',
+          label: 'Showcase',
+          icon: 'visibility',
+          route: '/pds',
+          level: 2,
+          children: [
+            {
+              id: 'showcase-forms',
+              label: 'Form Fields',
+              icon: 'edit_note',
+              route: '/pds/forms',
+              level: 3
+            }
+          ]
+        }
+      ]
+    },
+    {
       id: 'users',
       label: 'User Management',
       icon: 'people',
@@ -299,16 +323,6 @@ export class LayoutService {
       return 'Components Showcase';
     }
     return 'Dashboard';
-  });
-
-  readonly currentPageDescription = computed(() => {
-    const route = this._currentRoute();
-    if (route.includes('dashboard')) {
-      return 'Welcome to your admin dashboard';
-    } else if (route.includes('showcase')) {
-      return 'Explore Angular Material components with Tailwind styling';
-    }
-    return 'Welcome to your admin dashboard';
   });
 
   constructor(private router: Router) {

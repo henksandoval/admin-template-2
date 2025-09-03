@@ -1,24 +1,30 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { Router } from '@angular/router';
+import { TextInputDirective } from '@shared/atoms/text-input.directive';
+import { FormFieldDirective } from '@shared/atoms/form-field.directive';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {FormFieldInputComponent} from '@shared/molecules/form-field-input/form-field-input.component';
 
 @Component({
-  selector: 'app-pds-basic-forms',
+  selector: 'app-basic-forms',
   standalone: true,
   imports: [
     CommonModule,
-    FormsModule,
-    MatFormFieldModule,
-    MatInputModule,
     MatCardModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    TextInputDirective,
+    FormFieldDirective,
+    ReactiveFormsModule,
+    FormFieldInputComponent
   ],
   template: `
     <div class="p-6">
@@ -29,10 +35,10 @@ import { Router } from '@angular/router';
           Back to Showcase
         </button>
         <h1 class="text-3xl font-bold mb-2" style="color: var(--mat-sys-primary);">
-          📝 Basic Form Fields (PDS)
+          📝 Basic Form Fields (Atomic Design)
         </h1>
         <p class="text-lg" style="color: var(--mat-sys-on-surface-variant);">
-          Input fields, textareas, and form controls with various appearances and configurations
+          Input fields with atomic design directives
         </p>
       </div>
 
@@ -43,109 +49,171 @@ import { Router } from '@angular/router';
           <mat-card-subtitle>Essential input components for forms</mat-card-subtitle>
         </mat-card-header>
         <mat-card-content class="p-6">
-          <form class="min-w-[150px] max-w-[500px] w-full">
-            <!-- Simple Input -->
-            <mat-form-field class="w-full mb-4">
+          <!-- IMPORTANTE: El form debe tener [formGroup] -->
+          <form [formGroup]="form" class="min-w-[150px] max-w-[500px] w-full">
+
+            <!-- Campo simple sin validación -->
+            <mat-form-field appFormField>
               <mat-label>Favorite food</mat-label>
-              <input matInput placeholder="Ex. Pizza">
+              <input matInput appTextInput placeholder="Ex. Pizza">
             </mat-form-field>
 
-            <!-- Textarea -->
-            <mat-form-field class="w-full mb-4">
-              <mat-label>Leave a comment</mat-label>
-              <textarea matInput placeholder="Ex. It makes me feel..."></textarea>
+            <!-- Campo con validación -->
+            <mat-form-field appFormField>
+              <mat-label>Nombre completo</mat-label>
+              <input
+                matInput
+                appTextInput
+                formControlName="fullName"
+                placeholder="Ej. Juan Pérez"
+                ariaLabel="Nombre completo"
+                [hasError]="getControl('fullName').invalid && getControl('fullName').touched">
+              <mat-error *ngIf="getControl('fullName').hasError('required')">
+                El nombre es requerido.
+              </mat-error>
+              <mat-error *ngIf="getControl('fullName').hasError('minlength')">
+                El nombre debe tener al menos 3 caracteres.
+              </mat-error>
             </mat-form-field>
 
-            <!-- Input with hint -->
-            <mat-form-field class="w-full mb-4">
-              <mat-label>Enter your name</mat-label>
-              <input matInput placeholder="John Doe">
-              <mat-hint>First and last name</mat-hint>
-            </mat-form-field>
+            <app-form-field-input
+              formControlName="fullNameWrapper"
+              type="text"
+              ariaLabel="Nombre completo (componente wrapper)"
+              label="Nombre completo"
+              placeholder="Ej. Juan Pérez Wrapper"
+              hint="Este es un campo de texto con validación usando un componente wrapper."
+              icon="person"
+              [errorMessages]="{
+              required: 'El nombre es requerido.',
+              minlength: 'El nombre debe tener al menos 3 caracteres.'
+            }">
+            </app-form-field-input>
 
-            <!-- Input with prefix & suffix -->
-            <mat-form-field class="w-full mb-4">
-              <mat-label>Price</mat-label>
-              <span matTextPrefix>$&nbsp;</span>
-              <input matInput placeholder="0">
-              <span matTextSuffix>.00</span>
-            </mat-form-field>
-
-            <!-- Input with icon -->
-            <mat-form-field class="w-full mb-4">
+            <!-- Email con validación -->
+            <mat-form-field appFormField>
               <mat-label>Email</mat-label>
-              <input matInput placeholder="example&#64;email.com">
+              <input
+                matInput
+                appTextInput
+                type="email"
+                formControlName="email"
+                placeholder="usuario@ejemplo.com"
+                ariaLabel="Correo electrónico"
+                [hasError]="getControl('email').invalid && getControl('email').touched">
               <mat-icon matSuffix>email</mat-icon>
+              <mat-error *ngIf="getControl('email').hasError('required')">
+                El email es requerido.
+              </mat-error>
+              <mat-error *ngIf="getControl('email').hasError('email')">
+                Por favor ingrese un email válido.
+              </mat-error>
             </mat-form-field>
 
-            <!-- Password field -->
-            <mat-form-field class="w-full mb-4">
-              <mat-label>Password</mat-label>
-              <input matInput type="password" placeholder="Enter password">
+            <!-- Password -->
+            <mat-form-field appFormField>
+              <mat-label>Contraseña</mat-label>
+              <input
+                matInput
+                appTextInput
+                type="password"
+                formControlName="password"
+                placeholder="Mínimo 8 caracteres"
+                [hasError]="getControl('password').invalid && getControl('password').touched">
               <mat-icon matSuffix>lock</mat-icon>
+              <mat-error *ngIf="getControl('password').hasError('required')">
+                La contraseña es requerida.
+              </mat-error>
+              <mat-error *ngIf="getControl('password').hasError('minlength')">
+                La contraseña debe tener al menos 8 caracteres.
+              </mat-error>
             </mat-form-field>
 
-            <!-- Number input -->
-            <mat-form-field class="w-full mb-4">
-              <mat-label>Age</mat-label>
-              <input matInput type="" placeholder="25">
-            </mat-form-field>
+            <!-- Diferentes apariencias -->
+            <h3 class="text-lg font-medium mb-3 mt-6">Apariencias</h3>
 
-            <!-- Different appearances -->
-            <h3 class="text-lg font-medium mb-3 mt-6">Form Field Appearances</h3>
-
-            <mat-form-field appearance="fill" class="w-full mb-4">
-              <mat-label>Fill appearance</mat-label>
-              <input matInput placeholder="Placeholder">
-            </mat-form-field>
-
-            <mat-form-field appearance="outline" class="w-full mb-4">
+            <mat-form-field appFormField appearance="outline">
               <mat-label>Outline appearance</mat-label>
-              <input matInput placeholder="Placeholder">
+              <input matInput appTextInput placeholder="Placeholder">
             </mat-form-field>
+
+            <!-- Botones -->
+            <div class="flex gap-4 mt-6">
+              <button
+                mat-raised-button
+                color="primary"
+                type="submit"
+                [disabled]="form.invalid"
+                (click)="onSubmit()">
+                Enviar
+              </button>
+              <button
+                mat-stroked-button
+                type="button"
+                (click)="onReset()">
+                Limpiar
+              </button>
+            </div>
+
+            <!-- Debug: Estado del formulario -->
+            <div class="mt-6 p-4 bg-gray-100 rounded" *ngIf="showFormState">
+              <h3 class="font-semibold mb-2">Estado del formulario:</h3>
+              <pre class="text-sm">{{ form.value | json }}</pre>
+              <p class="text-sm mt-2">
+                Válido: <span [class.text-green-600]="form.valid" [class.text-red-600]="!form.valid">
+                  {{ form.valid ? 'Sí' : 'No' }}
+                </span>
+              </p>
+            </div>
           </form>
-        </mat-card-content>
-      </mat-card>
-
-      <!-- Code Example -->
-      <mat-card class="mb-8">
-        <mat-card-header>
-          <mat-card-title class="text-lg font-semibold">Code Example</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <div class="p-4 rounded-lg" style="background-color: var(--mat-sys-surface-variant);">
-            <pre class="text-sm overflow-x-auto" style="color: var(--mat-sys-on-surface-variant);">
-<span style="color: var(--mat-sys-primary);">// Basic form field with icon</span>
-&lt;mat-form-field class="w-full"&gt;
-  &lt;mat-label&gt;Email&lt;/mat-label&gt;
-  &lt;input matInput placeholder="example&#64;email.com"&gt;
-  &lt;mat-icon matSuffix&gt;email&lt;/mat-icon&gt;
-&lt;/mat-form-field&gt;
-
-<span style="color: var(--mat-sys-primary);">// Form field with prefix and suffix</span>
-&lt;mat-form-field class="w-full"&gt;
-  &lt;mat-label&gt;Price&lt;/mat-label&gt;
-  &lt;span matTextPrefix&gt;$&amp;nbsp;&lt;/span&gt;
-  &lt;input matInput placeholder="0"&gt;
-  &lt;span matTextSuffix&gt;.00&lt;/span&gt;
-&lt;/mat-form-field&gt;</pre>
-          </div>
         </mat-card-content>
       </mat-card>
     </div>
   `,
   styles: [`
-    pre {
-      white-space: pre-wrap;
-      word-wrap: break-word;
+    :host {
+      display: block;
     }
   `]
 })
-export class BasicFormsComponent {
+export class BasicFormsComponent implements OnInit {
+  public form!: FormGroup;
+  public showFormState = false;
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private fb: FormBuilder
+  ) {}
 
-  goBack() {
+  ngOnInit(): void {
+    this.form = this.fb.group({
+      fullName: ['', [Validators.required, Validators.minLength(3)]],
+      fullNameWrapper: ['', [Validators.required, Validators.minLength(3)]],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(8)]],
+      phone: [''],
+      age: ['', [Validators.required, Validators.min(18), Validators.max(120)]],
+      disabledField: [{ value: 'Valor predefinido', disabled: true }]
+    });
+  }
+
+  getControl(name: string): FormControl {
+    return this.form.get(name) as FormControl;
+  }
+
+  goBack(): void {
     this.router.navigate(['/pds']);
+  }
+
+  onSubmit(): void {
+    if (this.form.valid) {
+      console.log('Formulario enviado:', this.form.value);
+      this.showFormState = true;
+    }
+  }
+
+  onReset(): void {
+    this.form.reset();
+    this.showFormState = false;
   }
 }

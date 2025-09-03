@@ -14,7 +14,11 @@ export const routes: Routes = [
           {
             path: '',
             loadComponent: () => import('./features/showcase/showcase.component').then(m => m.ShowcaseComponent)
-          }
+          },
+          {
+            path: 'forms',
+            loadComponent: () => import('./features/showcase/basic-forms/basic-forms.component').then(m => m.BasicFormsComponent)
+          },
         ]
       },
       {path: '', redirectTo: 'dashboard', pathMatch: 'full'}

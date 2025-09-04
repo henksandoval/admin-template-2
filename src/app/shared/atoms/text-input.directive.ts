@@ -1,20 +1,35 @@
-// shared/atoms/text-input.directive.ts
-import { Directive, Input } from '@angular/core';
+import { Directive, Input, HostBinding } from '@angular/core';
+import { TextInputConfig } from '@shared/atoms/models/text-input-config.model';
 
 @Directive({
   selector: 'input[appTextInput], textarea[appTextInput]',
-  standalone: true,
-  host: {
-    '[type]': 'type',
-    '[placeholder]': 'placeholder',
-    '[attr.aria-label]': 'ariaLabel',
-    '[class.border-red-500]': 'hasError',
-    'class': 'w-full'
-  }
+  standalone: true
 })
 export class TextInputDirective {
-  @Input() type: 'text' | 'password' | 'email' | 'number' | 'tel' = 'text';
-  @Input() placeholder = '';
-  @Input() ariaLabel = '';
-  @Input() hasError = false;
+  @Input() config: TextInputConfig = {};
+
+  @HostBinding('type')
+  get type(): string {
+    return this.config.type || 'text';
+  }
+
+  @HostBinding('placeholder')
+  get placeholder(): string {
+    return this.config.placeholder || '';
+  }
+
+  @HostBinding('attr.aria-label')
+  get ariaLabel(): string {
+    return this.config.ariaLabel || '';
+  }
+
+  @HostBinding('class.border-red-500')
+  get hasErrorClass(): boolean {
+    return this.config.hasError || false;
+  }
+
+  @HostBinding('class.w-full')
+  get isFullWidth(): boolean {
+    return true;
+  }
 }

@@ -10,6 +10,8 @@ import { TextInputDirective } from '@shared/atoms/text-input.directive';
 import { FormFieldDirective } from '@shared/atoms/form-field.directive';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import {FormFieldInputComponent} from '@shared/molecules/form-field-input/form-field-input.component';
+import {FormFieldInputOptions} from '@shared/molecules/form-field-input/form-field-input.model';
+import {TextInputConfig} from '@shared/atoms/models/text-input-config.model';
 
 @Component({
   selector: 'app-basic-forms',
@@ -58,16 +60,14 @@ import {FormFieldInputComponent} from '@shared/molecules/form-field-input/form-f
               <input matInput appTextInput placeholder="Ex. Pizza">
             </mat-form-field>
 
-            <!-- Campo con validación -->
             <mat-form-field appFormField>
               <mat-label>Nombre completo</mat-label>
               <input
                 matInput
                 appTextInput
                 formControlName="fullName"
-                placeholder="Ej. Juan Pérez"
-                ariaLabel="Nombre completo"
-                [hasError]="getControl('fullName').invalid && getControl('fullName').touched">
+                [config]="fullNameInputConfig"
+              >
               <mat-error *ngIf="getControl('fullName').hasError('required')">
                 El nombre es requerido.
               </mat-error>
@@ -78,93 +78,9 @@ import {FormFieldInputComponent} from '@shared/molecules/form-field-input/form-f
 
             <app-form-field-input
               formControlName="fullNameWrapper"
-              type="text"
-              ariaLabel="Nombre completo (componente wrapper)"
-              label="Nombre completo"
-              placeholder="Ej. Juan Pérez Wrapper"
-              hint="Este es un campo de texto con validación usando un componente wrapper."
-              icon="person"
-              [errorMessages]="{
-              required: 'El nombre es requerido.',
-              minlength: 'El nombre debe tener al menos 3 caracteres.'
-            }">
+              [config]="fullNameConfig">
             </app-form-field-input>
 
-            <!-- Email con validación -->
-            <mat-form-field appFormField>
-              <mat-label>Email</mat-label>
-              <input
-                matInput
-                appTextInput
-                type="email"
-                formControlName="email"
-                placeholder="usuario@ejemplo.com"
-                ariaLabel="Correo electrónico"
-                [hasError]="getControl('email').invalid && getControl('email').touched">
-              <mat-icon matSuffix>email</mat-icon>
-              <mat-error *ngIf="getControl('email').hasError('required')">
-                El email es requerido.
-              </mat-error>
-              <mat-error *ngIf="getControl('email').hasError('email')">
-                Por favor ingrese un email válido.
-              </mat-error>
-            </mat-form-field>
-
-            <!-- Password -->
-            <mat-form-field appFormField>
-              <mat-label>Contraseña</mat-label>
-              <input
-                matInput
-                appTextInput
-                type="password"
-                formControlName="password"
-                placeholder="Mínimo 8 caracteres"
-                [hasError]="getControl('password').invalid && getControl('password').touched">
-              <mat-icon matSuffix>lock</mat-icon>
-              <mat-error *ngIf="getControl('password').hasError('required')">
-                La contraseña es requerida.
-              </mat-error>
-              <mat-error *ngIf="getControl('password').hasError('minlength')">
-                La contraseña debe tener al menos 8 caracteres.
-              </mat-error>
-            </mat-form-field>
-
-            <!-- Diferentes apariencias -->
-            <h3 class="text-lg font-medium mb-3 mt-6">Apariencias</h3>
-
-            <mat-form-field appFormField appearance="outline">
-              <mat-label>Outline appearance</mat-label>
-              <input matInput appTextInput placeholder="Placeholder">
-            </mat-form-field>
-
-            <!-- Botones -->
-            <div class="flex gap-4 mt-6">
-              <button
-                mat-raised-button
-                color="primary"
-                type="submit"
-                [disabled]="form.invalid"
-                (click)="onSubmit()">
-                Enviar
-              </button>
-              <button
-                mat-stroked-button
-                type="button"
-                (click)="onReset()">
-                Limpiar
-              </button>
-            </div>
-
-            <!-- Debug: Estado del formulario -->
-            <div class="mt-6 p-4 bg-gray-100 rounded" *ngIf="showFormState">
-              <h3 class="font-semibold mb-2">Estado del formulario:</h3>
-              <pre class="text-sm">{{ form.value | json }}</pre>
-              <p class="text-sm mt-2">
-                Válido: <span [class.text-green-600]="form.valid" [class.text-red-600]="!form.valid">
-                  {{ form.valid ? 'Sí' : 'No' }}
-                </span>
-              </p>
-            </div>
           </form>
         </mat-card-content>
       </mat-card>
@@ -178,12 +94,33 @@ import {FormFieldInputComponent} from '@shared/molecules/form-field-input/form-f
 })
 export class BasicFormsComponent implements OnInit {
   public form!: FormGroup;
-  public showFormState = false;
 
   constructor(
     private router: Router,
     private fb: FormBuilder
   ) {}
+
+  get fullNameInputConfig(): TextInputConfig {
+    const control = this.getControl('fullName');
+    return {
+      placeholder: 'Ej. Juan Pérez',
+      ariaLabel: 'Nombre completo',
+      hasError: control.invalid && (control.touched || control.dirty)
+    };
+  }
+
+  fullNameConfig: FormFieldInputOptions = {
+    label: 'Nombre completo',
+    placeholder: 'Ej. Juan Pérez Wrapper',
+    hint: 'Este es un campo de texto con validación usando un componente wrapper.',
+    icon: 'person',
+    ariaLabel: 'Nombre completo (componente wrapper)',
+    appearance: 'fill',
+    errorMessages: {
+      required: 'El nombre es requerido (desde config).',
+      minlength: 'El nombre debe tener al menos 3 caracteres (desde config).'
+    }
+  };
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -203,17 +140,5 @@ export class BasicFormsComponent implements OnInit {
 
   goBack(): void {
     this.router.navigate(['/pds']);
-  }
-
-  onSubmit(): void {
-    if (this.form.valid) {
-      console.log('Formulario enviado:', this.form.value);
-      this.showFormState = true;
-    }
-  }
-
-  onReset(): void {
-    this.form.reset();
-    this.showFormState = false;
   }
 }

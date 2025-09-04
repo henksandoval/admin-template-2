@@ -1,22 +1,9 @@
 import {
-  Component,
-  Input,
-  forwardRef,
-  OnInit,
-  Injector,
-  AfterViewInit,
-  OnDestroy,
-  ChangeDetectorRef,
-  inject
+  AfterViewInit, ChangeDetectorRef, Component, computed, effect, forwardRef, inject, Injector, input, OnDestroy, OnInit, signal
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
-  ControlValueAccessor,
-  NG_VALUE_ACCESSOR,
-  FormControl,
-  NgControl,
-  ReactiveFormsModule,
-  ValidationErrors
+  ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR, NgControl, ReactiveFormsModule, ValidationErrors
 } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -24,7 +11,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { FormFieldDirective } from '@shared/atoms/form-field.directive';
 import { TextInputDirective } from '@shared/atoms/text-input.directive';
 import { Subject } from 'rxjs';
-import { takeUntil, startWith } from 'rxjs/operators';
+import { startWith, takeUntil } from 'rxjs/operators';
+import { FormFieldInputConfig, FormFieldInputOptions } from './form-field-input.model';
+import { TextInputConfig } from '@shared/atoms/models/text-input-config.model';
 
 @Component({
   selector: 'app-form-field-input',
@@ -39,27 +28,25 @@ import { takeUntil, startWith } from 'rxjs/operators';
     TextInputDirective
   ],
   template: `
-    <mat-form-field appFormField [appearance]="appearance">
-      <mat-label *ngIf="label">{{ label }}</mat-label>
-      <span *ngIf="prefix" matTextPrefix>{{ prefix }}&nbsp;</span>
+    <mat-form-field appFormField [appearance]="fullConfig().appearance">
+      <mat-label *ngIf="fullConfig().label">{{ fullConfig().label }}</mat-label>
+      <span *ngIf="fullConfig().prefix" matTextPrefix>{{ fullConfig().prefix }}&nbsp;</span>
 
       <input
         matInput
         appTextInput
         [formControl]="internalControl"
-        [type]="type"
-        [placeholder]="placeholder"
         (blur)="handleBlur()"
-        [attr.aria-label]="ariaLabel || label"
-        [required]="required"
+        [required]="required()"
+        [config]="textInputConfig()"
       >
 
-      <span *ngIf="suffix" matTextSuffix>{{ suffix }}</span>
-      <mat-icon *ngIf="icon" matSuffix>{{ icon }}</mat-icon>
-      <mat-hint *ngIf="hint">{{ hint }}</mat-hint>
+      <span *ngIf="fullConfig().suffix" matTextSuffix>{{ fullConfig().suffix }}</span>
+      <mat-icon *ngIf="fullConfig().icon" matSuffix>{{ fullConfig().icon }}</mat-icon>
+      <mat-hint *ngIf="fullConfig().hint">{{ fullConfig().hint }}</mat-hint>
 
-      <mat-error *ngIf="parentControl?.errors && (parentControl?.touched || parentControl?.dirty)">
-        {{ getErrorMessage(errorKeys[0], parentControl?.errors ?? null) }}
+      <mat-error *ngIf="parentControlState().invalid && (parentControlState().touched || parentControlState().dirty)">
+        {{ getErrorMessage(parentControlState().errorKeys[0], parentControlState().errors) }}
       </mat-error>
     </mat-form-field>
   `,
@@ -72,20 +59,42 @@ import { takeUntil, startWith } from 'rxjs/operators';
   ]
 })
 export class FormFieldInputComponent implements ControlValueAccessor, OnInit, AfterViewInit, OnDestroy {
-  @Input() label = '';
-  @Input() placeholder = '';
-  @Input() hint = '';
-  @Input() icon = '';
-  @Input() prefix = '';
-  @Input() suffix = '';
-  @Input() type: 'text' | 'email' | 'password' | 'number' | 'tel' = 'text';
-  @Input() appearance: 'fill' | 'outline' = 'fill';
-  @Input() ariaLabel = '';
-  @Input() errorMessages: Record<string, string> = {};
-  @Input() required = false;
+  config = input<FormFieldInputOptions>({});
+  fullConfig = computed<FormFieldInputConfig>(() => ({
+    appearance: 'fill',
+    type: 'text',
+    label: '',
+    placeholder: '',
+    hint: '',
+    icon: '',
+    prefix: '',
+    suffix: '',
+    ariaLabel: '',
+    errorMessages: {},
+    ...this.config()
+  }));
+
+  parentControl = signal<NgControl | null>(null);
+  parentControlState = signal({
+    invalid: false,
+    touched: false,
+    dirty: false,
+    errors: null as ValidationErrors | null,
+    errorKeys: [] as string[]
+  });
+  required = signal(false);
+
+  textInputConfig = computed<TextInputConfig>(() => {
+    const state = this.parentControlState();
+    return {
+      type: this.fullConfig().type,
+      placeholder: this.fullConfig().placeholder,
+      ariaLabel: this.fullConfig().ariaLabel || this.fullConfig().label,
+      hasError: (state.invalid && (state.touched || state.dirty))
+    };
+  });
 
   internalControl = new FormControl('');
-  parentControl: NgControl | null = null;
   private destroyed$ = new Subject<void>();
   private readonly injector: Injector = inject(Injector);
   private readonly changeDetectorRef: ChangeDetectorRef = inject(ChangeDetectorRef);
@@ -99,6 +108,18 @@ export class FormFieldInputComponent implements ControlValueAccessor, OnInit, Af
     pattern: 'El formato no es válido.'
   };
 
+  constructor() {
+    effect(() => {
+      const parent = this.parentControl();
+      if (parent?.control) {
+        const parentErrors = parent.errors;
+        if (JSON.stringify(this.internalControl.errors) !== JSON.stringify(parentErrors)) {
+          this.internalControl.setErrors(parentErrors ?? null);
+        }
+      }
+    });
+  }
+
   ngOnInit() {
     this.internalControl.valueChanges
       .pipe(takeUntil(this.destroyed$))
@@ -108,29 +129,29 @@ export class FormFieldInputComponent implements ControlValueAccessor, OnInit, Af
   }
 
   ngAfterViewInit() {
-    setTimeout(() => {
-      this.parentControl = this.injector.get(NgControl, null);
-      if (this.parentControl?.control) {
-        const parentValidator = this.parentControl.control.validator;
-        if (parentValidator) {
-          const errors = parentValidator(new FormControl(''));
-          if (errors && errors['required']) {
-            this.required = true;
-          }
-        }
+    const parent = this.injector.get(NgControl, null);
+    this.parentControl.set(parent);
 
-        this.parentControl.control.statusChanges
-          .pipe(startWith(this.parentControl.control.status), takeUntil(this.destroyed$))
-          .subscribe(() => {
-            const parentErrors = this.parentControl?.errors;
-            if (JSON.stringify(this.internalControl.errors) !== JSON.stringify(parentErrors)) {
-              this.internalControl.setErrors(parentErrors ?? null);
-            }
-          });
+    if (parent?.control) {
+      const parentValidator = parent.control.validator;
+      if (parentValidator) {
+        this.required.set(!!parentValidator(new FormControl(''))?.['required']);
       }
 
-      this.changeDetectorRef.detectChanges();
-    });
+      parent.control.statusChanges
+        .pipe(startWith(parent.control.status), takeUntil(this.destroyed$))
+        .subscribe(() => {
+          const errors = parent.errors;
+          this.parentControlState.set({
+            invalid: parent.invalid ?? false,
+            touched: parent.touched ?? false,
+            dirty: parent.dirty ?? false,
+            errors: errors,
+            errorKeys: errors ? Object.keys(errors) : []
+          });
+        });
+    }
+    this.changeDetectorRef.detectChanges();
   }
 
   ngOnDestroy() {
@@ -138,26 +159,15 @@ export class FormFieldInputComponent implements ControlValueAccessor, OnInit, Af
     this.destroyed$.complete();
   }
 
-  get errorKeys(): string[] {
-    return this.parentControl?.errors ? Object.keys(this.parentControl.errors) : [];
-  }
-
   getErrorMessage(errorKey: string, errors: ValidationErrors | null): string {
     if (!errors || !errorKey) return '';
-
-    return this.errorMessages[errorKey] || this.defaultErrorMessages[errorKey] || 'Error';
+    const customMessages = this.fullConfig().errorMessages || {};
+    return customMessages[errorKey] || this.defaultErrorMessages[errorKey] || 'Error';
   }
 
   handleBlur(): void { this.onTouched(); }
-
-  writeValue(value: any): void {
-    this.internalControl.setValue(value, { emitEvent: false });
-  }
-
+  writeValue(value: any): void { this.internalControl.setValue(value, { emitEvent: false }); }
   registerOnChange(fn: any): void { this.onChange = fn; }
   registerOnTouched(fn: any): void { this.onTouched = fn; }
-
-  setDisabledState(isDisabled: boolean): void {
-    isDisabled ? this.internalControl.disable() : this.internalControl.enable();
-  }
+  setDisabledState(isDisabled: boolean): void { isDisabled ? this.internalControl.disable() : this.internalControl.enable(); }
 }

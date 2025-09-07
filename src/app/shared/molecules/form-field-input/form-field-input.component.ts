@@ -8,12 +8,9 @@ import {
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
-import { FormFieldDirective } from '@shared/atoms/form-field.directive';
-import { TextInputDirective } from '@shared/atoms/text-input.directive';
 import { Subject } from 'rxjs';
 import { startWith, takeUntil } from 'rxjs/operators';
 import { FormFieldInputConfig, FormFieldInputOptions } from './form-field-input.model';
-import { TextInputConfig } from '@shared/atoms/models/text-input-config.model';
 
 @Component({
   selector: 'app-form-field-input',
@@ -23,22 +20,18 @@ import { TextInputConfig } from '@shared/atoms/models/text-input-config.model';
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatIconModule,
-    FormFieldDirective,
-    TextInputDirective
+    MatIconModule
   ],
   template: `
-    <mat-form-field appFormField [appearance]="fullConfig().appearance">
+    <mat-form-field class="w-full" [appearance]="fullConfig().appearance">
       <mat-label *ngIf="fullConfig().label">{{ fullConfig().label }}</mat-label>
       <span *ngIf="fullConfig().prefix" matTextPrefix>{{ fullConfig().prefix }}&nbsp;</span>
 
       <input
         matInput
-        appTextInput
         [formControl]="internalControl"
         (blur)="handleBlur()"
         [required]="required()"
-        [config]="textInputConfig()"
       >
 
       <span *ngIf="fullConfig().suffix" matTextSuffix>{{ fullConfig().suffix }}</span>
@@ -83,16 +76,6 @@ export class FormFieldInputComponent implements ControlValueAccessor, OnInit, Af
     errorKeys: [] as string[]
   });
   required = signal(false);
-
-  textInputConfig = computed<TextInputConfig>(() => {
-    const state = this.parentControlState();
-    return {
-      type: this.fullConfig().type,
-      placeholder: this.fullConfig().placeholder,
-      ariaLabel: this.fullConfig().ariaLabel || this.fullConfig().label,
-      hasError: (state.invalid && (state.touched || state.dirty))
-    };
-  });
 
   internalControl = new FormControl('');
   private destroyed$ = new Subject<void>();

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
@@ -17,7 +17,7 @@ import { NavigationItem, NavigationService } from '@layout/services/navigation/n
 export class SidebarMenuItemComponent {
   @Input() item!: NavigationItem;
 
-  constructor(public navigationService: NavigationService) {}
+  public navigationService = inject(NavigationService);
 
   getExtraPadding(level: number): number {
     return (level - 1) * 12;
@@ -81,7 +81,6 @@ export class SidebarMenuItemComponent {
     let baseClasses = '';
     let colorClasses = '';
 
-    // Definir clases base según el nivel
     switch (level) {
       case 1:
         baseClasses = 'text-sm font-semibold';
@@ -96,7 +95,6 @@ export class SidebarMenuItemComponent {
         baseClasses = 'text-sm font-medium';
     }
 
-    // Definir colores según el estado activo usando tokens Material
     if (isActive) {
       colorClasses = 'text-on-surface';
     } else {

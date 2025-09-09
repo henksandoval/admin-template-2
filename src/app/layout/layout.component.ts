@@ -1,4 +1,4 @@
-import { Component, ViewChild, Renderer2, Inject, effect } from '@angular/core';
+import { Component, ViewChild, Renderer2, Inject, effect, inject } from '@angular/core';
 import { CommonModule, DOCUMENT } from '@angular/common';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import {HeaderComponent} from '@layout/components/header/header.component';
@@ -27,14 +27,14 @@ import { StickyHeaderDirective } from '@shared/directives/sticky-header.directiv
 export class AppLayoutComponent {
   headerHeight = 64;
 
-  constructor(
-    private renderer: Renderer2,
-    @Inject(DOCUMENT) private document: Document,
-    private overlayContainer: OverlayContainer,
-    public layoutService: LayoutService,
-    public navigationService: NavigationService,
-    private themeService: ThemeService
-  ) {
+  private renderer = inject(Renderer2);
+  private document = inject(DOCUMENT);
+  private overlayContainer = inject(OverlayContainer);
+  public layoutService = inject(LayoutService);
+  public navigationService = inject(NavigationService);
+  private themeService = inject(ThemeService);
+
+  constructor() {
     effect(() => {
       this.updateOverlayTheme();
     });

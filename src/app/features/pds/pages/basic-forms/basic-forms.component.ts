@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule, JsonPipe } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
@@ -82,10 +82,8 @@ export class BasicFormsComponent implements OnInit {
     hint: 'Este campo no se puede editar.'
   };
 
-  constructor(
-    private router: Router,
-    private fb: FormBuilder
-  ) {}
+  private router = inject(Router);
+  private fb = inject(FormBuilder);
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -105,7 +103,6 @@ export class BasicFormsComponent implements OnInit {
     } else {
       console.log('El formulario contiene errores.');
       alert('El formulario no es válido.');
-      // Marcar todos los campos como 'touched' para mostrar los errores
       this.form.markAllAsTouched();
     }
   }

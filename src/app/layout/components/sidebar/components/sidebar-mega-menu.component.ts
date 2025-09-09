@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
@@ -29,7 +29,7 @@ export class SidebarMegaMenuComponent {
 
   private megaMenuExpandedGroups = new Set<string>();
 
-  constructor(public navigationService: NavigationService) {}
+  public navigationService = inject(NavigationService);
 
   onMegaMenuEnter() {
     this.megaMenuEnter.emit();

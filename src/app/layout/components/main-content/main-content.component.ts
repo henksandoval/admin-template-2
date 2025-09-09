@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet, RouterModule } from '@angular/router';
 import {LayoutService} from '@layout/services/layout.service';
@@ -38,5 +38,5 @@ import {LayoutService} from '@layout/services/layout.service';
   `]
 })
 export class MainContentComponent {
-  constructor(public layoutService: LayoutService) {}
+  public layoutService = inject(LayoutService);
 }

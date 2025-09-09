@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -54,7 +54,7 @@ export class SidebarNavigationComponent {
   megaMenuPosition = { left: 0, top: 0 };
   private megaMenuTimeout: any;
 
-  constructor(public navigationService: NavigationService) {}
+  public navigationService = inject(NavigationService);
 
   onItemHover(item: NavigationItem, index: number, event: MouseEvent) {
     if (!item.children || !this.navigationService.isSidebarCollapsed()) return;

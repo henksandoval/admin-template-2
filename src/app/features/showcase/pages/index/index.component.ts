@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {MatButtonModule} from "@angular/material/button";
 import {MatCardModule} from "@angular/material/card";
 import {CommonModule} from "@angular/common";
@@ -126,8 +126,7 @@ export class IndexComponent {
     }
   ];
 
-
-  constructor(private router: Router) {}
+  private router = inject(Router);
 
   navigateToShowcase(route: string) {
     this.router.navigate([route]);

@@ -1,14 +1,14 @@
-import { Injectable, signal, computed, OnDestroy } from '@angular/core';
+import { Injectable, signal, computed, OnDestroy, inject } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-import { NavigationItem } from '@layout/services/navigation/navigation.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LayoutService implements OnDestroy {
   private destroy$ = new Subject<void>();
+  private router = inject(Router);
   
   private _isDarkTheme = signal(false);
   private _currentRoute = signal('');
@@ -23,7 +23,7 @@ export class LayoutService implements OnDestroy {
     return 'Dashboard';
   });
 
-  constructor(private router: Router) {
+  constructor() {
     this.initializeTheme();
     this.listenToRouteChanges();
   }

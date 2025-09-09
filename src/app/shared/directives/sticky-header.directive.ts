@@ -1,4 +1,4 @@
-import { Directive, Inject, signal, effect, ElementRef, Renderer2, OnDestroy } from '@angular/core';
+import { Directive, Inject, signal, effect, ElementRef, Renderer2, OnDestroy, inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 
 @Directive({
@@ -11,11 +11,11 @@ export class StickyHeaderDirective implements OnDestroy {
   private isHeaderVisible = signal(true);
   private scrollListener?: () => void;
 
-  constructor(
-    private el: ElementRef,
-    private renderer: Renderer2,
-    @Inject(DOCUMENT) private document: Document
-  ) {
+  private el = inject(ElementRef);
+  private renderer = inject(Renderer2);
+  private document = inject(DOCUMENT);
+
+  constructor() {
     this.setupStickyHeader();
   }
 

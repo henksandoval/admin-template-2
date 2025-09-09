@@ -12,6 +12,7 @@ import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } 
 import {FormFieldInputComponent} from '@shared/molecules/form-field-input/form-field-input.component';
 import {FormFieldInputOptions} from '@shared/molecules/form-field-input/form-field-input.model';
 import {TextInputConfig} from '@shared/atoms/models/text-input-config.model';
+import {ControlConnectorDirective} from '@shared/molecules/form-field-input/control-connector.directive';
 
 @Component({
   selector: 'app-basic-forms',
@@ -26,7 +27,8 @@ import {TextInputConfig} from '@shared/atoms/models/text-input-config.model';
     TextInputDirective,
     FormFieldDirective,
     ReactiveFormsModule,
-    FormFieldInputComponent
+    FormFieldInputComponent,
+    ControlConnectorDirective
   ],
   template: `
     <div class="p-6">
@@ -60,6 +62,12 @@ import {TextInputConfig} from '@shared/atoms/models/text-input-config.model';
               <input matInput appTextInput placeholder="Ex. Pizza">
             </mat-form-field>
 
+            <!-- Campo simple con validación -->
+            <mat-form-field appFormField>
+              <mat-label>Favorite food</mat-label>
+              <input matInput appTextInput placeholder="Ex. Pizza" required>
+            </mat-form-field>
+
             <mat-form-field appFormField>
               <mat-label>Nombre completo</mat-label>
               <input
@@ -78,7 +86,8 @@ import {TextInputConfig} from '@shared/atoms/models/text-input-config.model';
 
             <app-form-field-input
               formControlName="fullNameWrapper"
-              [config]="fullNameConfig">
+              [config]="fullNameConfig"
+              appControlConnector>
             </app-form-field-input>
 
           </form>

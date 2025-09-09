@@ -1,45 +1,44 @@
-import {
-  AfterViewInit, ChangeDetectorRef, Component, computed, effect, forwardRef, inject, Injector, input, OnDestroy, OnInit, signal
-} from '@angular/core';
+import { ChangeDetectorRef, Component, computed, DestroyRef, forwardRef, inject, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
-  ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR, NgControl, ReactiveFormsModule, ValidationErrors
+  ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR, NgControl, ReactiveFormsModule, Validators
 } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
-import { Subject } from 'rxjs';
-import { startWith, takeUntil } from 'rxjs/operators';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { startWith } from 'rxjs/operators';
 import { FormFieldInputConfig, FormFieldInputOptions } from './form-field-input.model';
+
+interface ErrorState {
+  shouldShow: boolean;
+  message: string;
+}
 
 @Component({
   selector: 'app-form-field-input',
   standalone: true,
   imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatIconModule
+    CommonModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatIconModule
   ],
   template: `
     <mat-form-field class="w-full" [appearance]="fullConfig().appearance">
       <mat-label *ngIf="fullConfig().label">{{ fullConfig().label }}</mat-label>
       <span *ngIf="fullConfig().prefix" matTextPrefix>{{ fullConfig().prefix }}&nbsp;</span>
-
       <input
         matInput
+        [type]="fullConfig().type"
         [formControl]="internalControl"
         (blur)="handleBlur()"
-        [required]="required()"
+        [placeholder]="fullConfig().placeholder"
+        [attr.aria-label]="fullConfig().ariaLabel"
+        [required]="isRequired"
       >
-
       <span *ngIf="fullConfig().suffix" matTextSuffix>{{ fullConfig().suffix }}</span>
       <mat-icon *ngIf="fullConfig().icon" matSuffix>{{ fullConfig().icon }}</mat-icon>
       <mat-hint *ngIf="fullConfig().hint">{{ fullConfig().hint }}</mat-hint>
-
-      <mat-error *ngIf="parentControlState().invalid && (parentControlState().touched || parentControlState().dirty)">
-        {{ getErrorMessage(parentControlState().errorKeys[0], parentControlState().errors) }}
+      <mat-error *ngIf="errorState.shouldShow">
+        {{ errorState.message }}
       </mat-error>
     </mat-form-field>
   `,
@@ -51,106 +50,87 @@ import { FormFieldInputConfig, FormFieldInputOptions } from './form-field-input.
     }
   ]
 })
-export class FormFieldInputComponent implements ControlValueAccessor, OnInit, AfterViewInit, OnDestroy {
+export class FormFieldInputComponent implements ControlValueAccessor {
   config = input<FormFieldInputOptions>({});
   fullConfig = computed<FormFieldInputConfig>(() => ({
-    appearance: 'fill',
-    type: 'text',
-    label: '',
-    placeholder: '',
-    hint: '',
-    icon: '',
-    prefix: '',
-    suffix: '',
-    ariaLabel: '',
-    errorMessages: {},
+    appearance: 'fill', type: 'text', label: '', placeholder: '', hint: '',
+    icon: '', prefix: '', suffix: '', ariaLabel: '', errorMessages: {},
     ...this.config()
   }));
 
-  parentControl = signal<NgControl | null>(null);
-  parentControlState = signal({
-    invalid: false,
-    touched: false,
-    dirty: false,
-    errors: null as ValidationErrors | null,
-    errorKeys: [] as string[]
-  });
-  required = signal(false);
-
   internalControl = new FormControl('');
-  private destroyed$ = new Subject<void>();
-  private readonly injector: Injector = inject(Injector);
+  public ngControl: NgControl | null = null;
+  public isRequired = false;
+
   private readonly changeDetectorRef: ChangeDetectorRef = inject(ChangeDetectorRef);
+  private readonly destroyRef: DestroyRef = inject(DestroyRef);
 
   onChange: (value: any) => void = () => {};
   onTouched: () => void = () => {};
 
-  private defaultErrorMessages: Record<string, string> = {
-    required: 'Este campo es requerido.',
-    email: 'Por favor ingrese un email válido.',
+  private readonly defaultErrorMessages: Record<string, string> = {
+    required: 'Este campo es requerido.', email: 'Por favor ingrese un email válido.',
+    minlength: 'El valor es demasiado corto.', maxlength: 'El valor es demasiado largo.',
     pattern: 'El formato no es válido.'
   };
 
   constructor() {
-    effect(() => {
-      const parent = this.parentControl();
-      if (parent?.control) {
-        const parentErrors = parent.errors;
-        if (JSON.stringify(this.internalControl.errors) !== JSON.stringify(parentErrors)) {
-          this.internalControl.setErrors(parentErrors ?? null);
-        }
-      }
-    });
-  }
-
-  ngOnInit() {
     this.internalControl.valueChanges
-      .pipe(takeUntil(this.destroyed$))
+      .pipe(takeUntilDestroyed())
       .subscribe(value => {
         this.onChange(value);
       });
   }
 
-  ngAfterViewInit() {
-    const parent = this.injector.get(NgControl, null);
-    this.parentControl.set(parent);
+  public connectControl(ngControl: NgControl): void {
+    this.ngControl = ngControl;
+    this.ngControl.valueAccessor = this;
+    const parentControl = this.ngControl.control;
 
-    if (parent?.control) {
-      const parentValidator = parent.control.validator;
-      if (parentValidator) {
-        this.required.set(!!parentValidator(new FormControl(''))?.['required']);
-      }
+    if (parentControl) {
+      this.isRequired = parentControl.hasValidator(Validators.required);
+      this.internalControl.setValidators(parentControl.validator);
+      this.internalControl.updateValueAndValidity({ emitEvent: false });
 
-      parent.control.statusChanges
-        .pipe(startWith(parent.control.status), takeUntil(this.destroyed$))
-        .subscribe(() => {
-          const errors = parent.errors;
-          this.parentControlState.set({
-            invalid: parent.invalid ?? false,
-            touched: parent.touched ?? false,
-            dirty: parent.dirty ?? false,
-            errors: errors,
-            errorKeys: errors ? Object.keys(errors) : []
-          });
-        });
+      parentControl.statusChanges.pipe(
+        startWith(parentControl.status),
+        takeUntilDestroyed(this.destroyRef)
+      ).subscribe(() => {
+        this.changeDetectorRef.markForCheck();
+      });
     }
     this.changeDetectorRef.detectChanges();
   }
 
-  ngOnDestroy() {
-    this.destroyed$.next();
-    this.destroyed$.complete();
-  }
-
-  getErrorMessage(errorKey: string, errors: ValidationErrors | null): string {
-    if (!errors || !errorKey) return '';
+  public get errorState(): ErrorState {
+    const control = this.ngControl?.control;
+    const shouldShow = !!(control && control.invalid && (control.touched || control.dirty));
+    if (!shouldShow) return { shouldShow: false, message: '' };
+    const errors = control.errors;
+    if (!errors) return { shouldShow: false, message: '' };
+    const errorKey = Object.keys(errors)[0];
     const customMessages = this.fullConfig().errorMessages || {};
-    return customMessages[errorKey] || this.defaultErrorMessages[errorKey] || 'Error';
+    const message = customMessages[errorKey] || this.defaultErrorMessages[errorKey] || 'Error de validación.';
+    return { shouldShow: true, message };
   }
 
-  handleBlur(): void { this.onTouched(); }
-  writeValue(value: any): void { this.internalControl.setValue(value, { emitEvent: false }); }
-  registerOnChange(fn: any): void { this.onChange = fn; }
-  registerOnTouched(fn: any): void { this.onTouched = fn; }
-  setDisabledState(isDisabled: boolean): void { isDisabled ? this.internalControl.disable() : this.internalControl.enable(); }
+  handleBlur(): void {
+    this.onTouched();
+  }
+
+  writeValue(value: any): void {
+    this.internalControl.setValue(value, { emitEvent: false });
+  }
+
+  registerOnChange(fn: any): void {
+    this.onChange = fn;
+  }
+
+  registerOnTouched(fn: any): void {
+    this.onTouched = fn;
+  }
+
+  setDisabledState(isDisabled: boolean): void {
+    isDisabled ? this.internalControl.disable({ emitEvent: false }) : this.internalControl.enable({ emitEvent: false });
+  }
 }

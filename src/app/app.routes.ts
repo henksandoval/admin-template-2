@@ -76,6 +76,18 @@ export const routes: AppRoute[] = [
           },
         ]
       },
+      // Example: Adding a new menu item is now this simple!
+      // Just add a route with data.label and it appears in the menu
+      // {
+      //   path: 'settings',
+      //   component: SettingsComponent,
+      //   data: {
+      //     label: 'Settings',
+      //     icon: 'settings',
+      //     level: 1,
+      //     order: 4
+      //   }
+      // },
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
     ]
   },

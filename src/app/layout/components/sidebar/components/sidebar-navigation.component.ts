@@ -4,8 +4,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { SidebarMenuItemComponent } from './sidebar-menu-item.component';
 import { SidebarMegaMenuComponent } from './sidebar-mega-menu.component';
-import {NavigationItem} from '@layout/services/layout.service';
-import {NavigationService} from '@layout/services/navigation/navigation.service';
+import { NavigationItem, NavigationService } from '@layout/services/navigation/navigation.service';
 
 @Component({
   selector: 'app-sidebar-navigation',
@@ -19,15 +18,15 @@ import {NavigationService} from '@layout/services/navigation/navigation.service'
   ],
   template: `
     <!-- Navigation Items - Expanded -->
-    <div class="py-2" *ngIf="!layoutService.isSidebarCollapsed()">
-      <div *ngFor="let item of layoutService.navigationItems()" class="px-2 mb-1">
+    <div class="py-2" *ngIf="!navigationService.isSidebarCollapsed()">
+      <div *ngFor="let item of navigationService.navigationItems()" class="px-2 mb-1">
         <app-sidebar-menu-item [item]="item"></app-sidebar-menu-item>
       </div>
     </div>
 
     <!-- Navigation Items - Collapsed (Solo iconos de nivel 1 con mega menús) -->
-    <div class="py-2" *ngIf="layoutService.isSidebarCollapsed()">
-      <div *ngFor="let item of layoutService.navigationItems(); let i = index" class="px-2 mb-1">
+    <div class="py-2" *ngIf="navigationService.isSidebarCollapsed()">
+      <div *ngFor="let item of navigationService.navigationItems(); let i = index" class="px-2 mb-1">
         <div class="relative">
           <div (mouseenter)="onItemHover(item, i, $event)"
                (mouseleave)="onItemLeave()"
@@ -58,10 +57,10 @@ export class SidebarNavigationComponent {
   megaMenuPosition = { left: 0, top: 0 };
   private megaMenuTimeout: any;
 
-  constructor(public layoutService: NavigationService) {}
+  constructor(public navigationService: NavigationService) {}
 
   onItemHover(item: NavigationItem, index: number, event: MouseEvent) {
-    if (!item.children || !this.layoutService.isSidebarCollapsed()) return;
+    if (!item.children || !this.navigationService.isSidebarCollapsed()) return;
 
     clearTimeout(this.megaMenuTimeout);
 
@@ -77,7 +76,7 @@ export class SidebarNavigationComponent {
   }
 
   onItemLeave() {
-    if (this.layoutService.isSidebarCollapsed()) {
+    if (this.navigationService.isSidebarCollapsed()) {
       this.megaMenuTimeout = setTimeout(() => {
         this.showMegaMenu = null;
       }, 100);
@@ -95,7 +94,7 @@ export class SidebarNavigationComponent {
   }
 
   getIconClasses(item: NavigationItem): string {
-    const isActive = item.route && this.layoutService.isActiveRoute(item.route.substring(1));
+    const isActive = item.route && this.navigationService.isActiveRoute(item.route.substring(1));
 
     let baseClasses = 'transition-colors duration-200';
     let colorClasses = '';

@@ -4,9 +4,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatBadgeModule } from '@angular/material/badge';
-import {GlobalSearchComponent} from '@layout/components/global-search/global-search.component';
 import {ThemeSelectorComponent} from '@layout/components/theme-selector/theme-selector.component';
-import {LayoutService} from '@layout/services/layout.service';
 
 @Component({
   selector: 'app-header',
@@ -18,7 +16,6 @@ import {LayoutService} from '@layout/services/layout.service';
     MatIconModule,
     MatBadgeModule,
     ThemeSelectorComponent,
-    GlobalSearchComponent
   ],
   template: `
     <!-- Header usando Angular Material Toolbar + Tailwind -->
@@ -37,11 +34,6 @@ import {LayoutService} from '@layout/services/layout.service';
           <span class="jobmagnetic-title text-lg whitespace-nowrap">
             Admin Dashboard
           </span>
-        </div>
-
-        <!-- Center section: Global Search (hidden on small screens) -->
-        <div class="flex-1 max-w-md mx-4 hidden md:block">
-          <app-global-search></app-global-search>
         </div>
 
         <!-- Right section: Actions -->
@@ -115,8 +107,6 @@ import {LayoutService} from '@layout/services/layout.service';
 })
 export class HeaderComponent {
   @Output() menuToggle = new EventEmitter<void>();
-
-  constructor(public layoutService: LayoutService) {}
 
   onMenuToggle() {
     this.menuToggle.emit();

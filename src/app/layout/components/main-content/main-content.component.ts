@@ -11,10 +11,8 @@ import {LayoutService} from '@layout/services/layout.service';
     RouterOutlet
   ],
   template: `
-    <!-- Main content con Tailwind responsive padding -->
     <main class="flex-1 p-4 md:p-6 lg:p-8 max-w-full overflow-x-hidden">
       <div class="max-w-7xl mx-auto">
-        <!-- Breadcrumbs con Material Design theming -->
         <nav class="mb-6">
           <ol class="flex items-center space-x-2 text-sm mat-caption">
             <li><a (click)="layoutService.navigateTo('/dashboard')" class="hover:text-primary transition-colors cursor-pointer">Home</a></li>
@@ -25,7 +23,6 @@ import {LayoutService} from '@layout/services/layout.service';
           </ol>
         </nav>
 
-        <!-- Content area - aquí va el router-outlet -->
         <div class="rounded-lg min-h-96">
           <router-outlet></router-outlet>
         </div>

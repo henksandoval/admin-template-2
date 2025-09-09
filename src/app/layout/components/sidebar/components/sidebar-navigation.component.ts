@@ -4,7 +4,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { SidebarMenuItemComponent } from './sidebar-menu-item.component';
 import { SidebarMegaMenuComponent } from './sidebar-mega-menu.component';
-import {LayoutService, NavigationItem} from '@layout/services/layout.service';
+import {NavigationItem} from '@layout/services/layout.service';
+import {NavigationService} from '@layout/services/navigation/navigation.service';
 
 @Component({
   selector: 'app-sidebar-navigation',
@@ -57,7 +58,7 @@ export class SidebarNavigationComponent {
   megaMenuPosition = { left: 0, top: 0 };
   private megaMenuTimeout: any;
 
-  constructor(public layoutService: LayoutService) {}
+  constructor(public layoutService: NavigationService) {}
 
   onItemHover(item: NavigationItem, index: number, event: MouseEvent) {
     if (!item.children || !this.layoutService.isSidebarCollapsed()) return;

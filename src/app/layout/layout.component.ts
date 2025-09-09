@@ -7,6 +7,7 @@ import {FooterComponent} from '@layout/components/footer/footer.component';
 import {MainContentComponent} from '@layout/components/main-content/main-content.component';
 import {LayoutService} from '@layout/services/layout.service';
 import {ThemeService} from '@layout/services/theme/theme.service';
+import {NavigationService} from '@layout/services/navigation/navigation.service';
 
 @Component({
   selector: 'app-layout',
@@ -25,7 +26,7 @@ import {ThemeService} from '@layout/services/theme/theme.service';
       <!-- Header Component - Sticky header que se oculta/muestra inteligentemente -->
       <div class="sticky top-0 z-50 transition-transform duration-300" id="header-container">
         <app-header
-          (menuToggle)="layoutService.toggleSidebarVisible()">
+          (menuToggle)="navigationService.toggleSidebarVisible()">
         </app-header>
       </div>
 
@@ -33,9 +34,9 @@ import {ThemeService} from '@layout/services/theme/theme.service';
       <div class="flex flex-1 relative">
 
         <!-- Sidebar fijo con scroll interno - estilo GitHub -->
-        <div *ngIf="layoutService.isSidebarVisible()"
+        <div *ngIf="navigationService.isSidebarVisible()"
              class="fixed left-0 z-40 transition-all duration-300 ease-in-out fixed-sidebar"
-             [style.width.px]="layoutService.sidebarWidth()"
+             [style.width.px]="navigationService.sidebarWidth()"
              [style.top.px]="isHeaderVisible() ? headerHeight : 0"
              [style.height]="isHeaderVisible() ? 'calc(100vh - ' + headerHeight + 'px)' : '100vh'">
 
@@ -47,7 +48,7 @@ import {ThemeService} from '@layout/services/theme/theme.service';
 
         <!-- Main Content Area con margen dinámico -->
         <div class="flex-1 transition-all duration-300 ease-in-out"
-             [style.margin-left.px]="layoutService.isSidebarVisible() ? layoutService.sidebarWidth() : 0"
+             [style.margin-left.px]="navigationService.isSidebarVisible() ? navigationService.sidebarWidth() : 0"
              [style.margin-top.px]="headerHeight">
 
           <!-- Main Content Component -->
@@ -259,6 +260,7 @@ export class AppLayoutComponent {
     @Inject(DOCUMENT) private document: Document,
     private overlayContainer: OverlayContainer,
     public layoutService: LayoutService,
+    public navigationService: NavigationService,
     private themeService: ThemeService
   ) {
     // Effect para aplicar el tema cuando cambie - ahora usando ThemeService

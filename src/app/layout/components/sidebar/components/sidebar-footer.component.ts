@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {LayoutService} from '@layout/services/layout.service';
+import {NavigationService} from '@layout/services/navigation/navigation.service';
 
 @Component({
   selector: 'app-sidebar-footer',
@@ -24,5 +24,5 @@ import {LayoutService} from '@layout/services/layout.service';
   `
 })
 export class SidebarFooterComponent {
-  constructor(public layoutService: LayoutService) {}
+  constructor(public layoutService: NavigationService) {}
 }

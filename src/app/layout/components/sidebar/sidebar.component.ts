@@ -29,5 +29,4 @@ import {LayoutService} from '@layout/services/layout.service';
   styles: []
 })
 export class SidebarComponent {
-  constructor(public layoutService: LayoutService) {}
 }

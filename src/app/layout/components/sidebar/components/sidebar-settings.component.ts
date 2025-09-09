@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDividerModule } from '@angular/material/divider';
-import {LayoutService} from '@layout/services/layout.service';
+import {NavigationService} from '@layout/services/navigation/navigation.service';
 
 @Component({
   selector: 'app-sidebar-settings',
@@ -59,5 +59,5 @@ import {LayoutService} from '@layout/services/layout.service';
   `
 })
 export class SidebarSettingsComponent {
-  constructor(public layoutService: LayoutService) {}
+  constructor(public layoutService: NavigationService) {}
 }

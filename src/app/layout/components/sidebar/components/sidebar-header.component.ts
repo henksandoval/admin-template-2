@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
-import {LayoutService} from '@layout/services/layout.service';
+import {NavigationService} from '@layout/services/navigation/navigation.service';
 
 @Component({
   selector: 'app-sidebar-header',
@@ -27,5 +27,5 @@ import {LayoutService} from '@layout/services/layout.service';
   `
 })
 export class SidebarHeaderComponent {
-  constructor(public layoutService: LayoutService) {}
+  constructor(public layoutService: NavigationService) {}
 }

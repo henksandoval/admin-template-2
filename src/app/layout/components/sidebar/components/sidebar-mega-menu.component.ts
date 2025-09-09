@@ -2,6 +2,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import {LayoutService, NavigationItem} from '@layout/services/layout.service';
+import {NavigationService} from '@layout/services/navigation/navigation.service';
 
 @Component({
   selector: 'app-sidebar-mega-menu',
@@ -101,7 +102,7 @@ export class SidebarMegaMenuComponent {
 
   private megaMenuExpandedGroups = new Set<string>();
 
-  constructor(public layoutService: LayoutService) {}
+  constructor(public layoutService: NavigationService) {}
 
   onMegaMenuEnter() {
     this.megaMenuEnter.emit();

@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import {LayoutService, NavigationItem} from '@layout/services/layout.service';
+import {NavigationService} from '@layout/services/navigation/navigation.service';
 
 @Component({
   selector: 'app-sidebar-menu-item',
@@ -62,7 +63,7 @@ import {LayoutService, NavigationItem} from '@layout/services/layout.service';
 export class SidebarMenuItemComponent {
   @Input() item!: NavigationItem;
 
-  constructor(public layoutService: LayoutService) {}
+  constructor(public layoutService: NavigationService) {}
 
   getExtraPadding(level: number): number {
     return (level - 1) * 12;

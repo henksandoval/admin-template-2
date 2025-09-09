@@ -1,4 +1,4 @@
-import { Component, ViewChild, Renderer2, Inject, effect, inject } from '@angular/core';
+import { Component, Renderer2, effect, inject } from '@angular/core';
 import { CommonModule, DOCUMENT } from '@angular/common';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import {HeaderComponent} from '@layout/components/header/header.component';

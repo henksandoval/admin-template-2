@@ -1,4 +1,4 @@
-import { Directive, Inject, signal, effect, ElementRef, Renderer2, OnDestroy, inject } from '@angular/core';
+import { Directive, signal, ElementRef, Renderer2, OnDestroy, inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 
 @Directive({

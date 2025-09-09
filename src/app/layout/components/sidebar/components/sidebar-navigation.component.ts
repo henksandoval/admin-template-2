@@ -17,14 +17,12 @@ import { NavigationItem, NavigationService } from '@layout/services/navigation/n
     SidebarMegaMenuComponent
   ],
   template: `
-    <!-- Navigation Items - Expanded -->
     <div class="py-2" *ngIf="!navigationService.isSidebarCollapsed()">
       <div *ngFor="let item of navigationService.navigationItems()" class="px-2 mb-1">
         <app-sidebar-menu-item [item]="item"></app-sidebar-menu-item>
       </div>
     </div>
 
-    <!-- Navigation Items - Collapsed (Solo iconos de nivel 1 con mega menús) -->
     <div class="py-2" *ngIf="navigationService.isSidebarCollapsed()">
       <div *ngFor="let item of navigationService.navigationItems(); let i = index" class="px-2 mb-1">
         <div class="relative">
@@ -38,7 +36,6 @@ import { NavigationItem, NavigationService } from '@layout/services/navigation/n
               {{ item.icon }}
             </mat-icon>
 
-            <!-- Mega Menu - Solo para items con children -->
             <app-sidebar-mega-menu
               *ngIf="item.children && showMegaMenu === i"
               [item]="item"

@@ -1,0 +1,75 @@
+<div [style.position]="'fixed'"
+     [style.left.px]="position.left"
+     [style.top.px]="position.top"
+     (mouseenter)="onMegaMenuEnter()"
+     (mouseleave)="onMegaMenuLeave()"
+     class="mega-menu-content min-w-80 rounded-lg shadow-none border border-opacity-10 border-gray-300 dark:border-gray-600 z-50">
+  <div class="p-3 border-b border-opacity-10 border-gray-300 dark:border-gray-600">
+    <div class="flex items-center space-x-2">
+      <mat-icon [class]="getIconClasses(item)" class="text-lg">{{ item.icon }}</mat-icon>
+      <span class="font-semibold text-on-surface">{{ item.label }}</span>
+    </div>
+  </div>
+  <div class="p-2 max-h-96 overflow-y-auto">
+    <div *ngFor="let subItem of item.children">
+      <ng-container [ngTemplateOutlet]="megaMenuItemTemplate" [ngTemplateOutletContext]="{item: subItem, parentItem: item}"></ng-container>
+    </div>
+  </div>
+</div>
+<ng-template #megaMenuItemTemplate let-item="item" let-parentItem="parentItem">
+  <div class="mb-1">
+    <div *ngIf="!item.children"
+         [routerLink]="item.route"
+         [class]="getItemClasses(item)"
+         class="rounded-md transition-all duration-200 cursor-pointer p-2 hover:bg-surface-variant hover:bg-opacity-10"
+         [style.cursor]="item.route ? 'pointer' : 'default'">
+
+      <div class="flex items-center space-x-2">
+        <mat-icon [class]="getIconClasses(item)" class="text-base">
+          {{ item.icon }}
+        </mat-icon>
+
+        <span [class]="getTextClasses(item)" class="text-sm">{{ item.label }}</span>
+      </div>
+    </div>
+    <div *ngIf="item.children">
+      <div class="border-l-2 border-surface-variant ml-2">
+        <div (click)="toggleMegaMenuGroup(getMegaMenuGroupKey(parentItem?.label || '', item.label), $event)"
+             class="flex items-center justify-between p-2 cursor-pointer hover:bg-surface-variant hover:bg-opacity-10 rounded-lg transition-all duration-200">
+
+          <div class="flex items-center space-x-2">
+            <mat-icon [class]="getIconClasses(item)" class="text-base">{{ item.icon }}</mat-icon>
+            <span class="font-medium text-on-surface text-sm">{{ item.label }}</span>
+          </div>
+
+          <mat-icon class="text-on-surface-variant text-sm transition-transform duration-200"
+                    [class.rotate-90]="isMegaMenuGroupExpanded(getMegaMenuGroupKey(parentItem?.label || '', item.label))">
+            chevron_right
+          </mat-icon>
+        </div>
+
+        <div class="ml-6 space-y-1 overflow-hidden transition-all duration-300"
+             [class.max-h-0]="!isMegaMenuGroupExpanded(getMegaMenuGroupKey(parentItem?.label || '', item.label))"
+             [class.max-h-96]="isMegaMenuGroupExpanded(getMegaMenuGroupKey(parentItem?.label || '', item.label))"
+             [class.opacity-0]="!isMegaMenuGroupExpanded(getMegaMenuGroupKey(parentItem?.label || '', item.label))"
+             [class.opacity-100]="isMegaMenuGroupExpanded(getMegaMenuGroupKey(parentItem?.label || '', item.label))">
+
+          <div *ngFor="let subSubItem of item.children"
+               [routerLink]="subSubItem.route"
+               [class]="getItemClasses(subSubItem)"
+               class="rounded-md transition-all duration-200 cursor-pointer p-1.5 hover:bg-surface-variant hover:bg-opacity-10"
+               [style.cursor]="subSubItem.route ? 'pointer' : 'default'">
+
+            <div class="flex items-center space-x-2">
+              <mat-icon [class]="getIconClasses(subSubItem)" class="text-sm">
+                {{ subSubItem.icon }}
+              </mat-icon>
+
+              <span [class]="getTextClasses(subSubItem)" class="text-xs">{{ subSubItem.label }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

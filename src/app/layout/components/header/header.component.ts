@@ -18,11 +18,9 @@ import {ThemeSelectorComponent} from '@layout/components/theme-selector/theme-se
     ThemeSelectorComponent,
   ],
   template: `
-    <!-- Header usando Angular Material Toolbar + Tailwind -->
     <mat-toolbar color="primary" class="shadow-md z-50 flex-shrink-0 !h-16">
       <div class="flex items-center justify-between w-full">
 
-        <!-- Left section: Menu + Title -->
         <div class="flex items-center flex-shrink-0">
           <button
             mat-icon-button
@@ -36,9 +34,7 @@ import {ThemeSelectorComponent} from '@layout/components/theme-selector/theme-se
           </span>
         </div>
 
-        <!-- Right section: Actions -->
         <div class="flex items-center gap-1 flex-shrink-0">
-          <!-- Mobile search button (visible only on small screens) -->
           <button mat-icon-button class="md:hidden transition-transform hover:scale-110">
             <mat-icon>search</mat-icon>
           </button>
@@ -54,7 +50,6 @@ import {ThemeSelectorComponent} from '@layout/components/theme-selector/theme-se
             <mat-icon>account_circle</mat-icon>
           </button>
 
-          <!-- Theme Selector Component -->
           <app-theme-selector></app-theme-selector>
         </div>
 

@@ -1,0 +1,100 @@
+<button mat-icon-button
+        [matMenuTriggerFor]="themeMenu"
+        [matTooltip]="themeService.getThemeModeLabel()"
+        class="theme-toggle">
+  <mat-icon>{{ themeService.getThemeModeIcon() }}</mat-icon>
+</button>
+
+<mat-menu #themeMenu="matMenu" class="theme-menu">
+  <div class="theme-menu-header">
+    <mat-icon class="theme-icon">palette</mat-icon>
+    <span class="theme-title">Theme Settings</span>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <div class="theme-section">
+    <div class="section-title">Theme Mode</div>
+
+    <button mat-menu-item
+            (click)="setThemeMode('light')"
+            [class.active]="themeService.currentTheme().mode === 'light'">
+      <mat-icon>light_mode</mat-icon>
+      <span>Light</span>
+      @if (themeService.currentTheme().mode === 'light') {
+        <mat-icon class="check-icon">check</mat-icon>
+      }
+    </button>
+
+    <button mat-menu-item
+            (click)="setThemeMode('dark')"
+            [class.active]="themeService.currentTheme().mode === 'dark'">
+      <mat-icon>dark_mode</mat-icon>
+      <span>Dark</span>
+      @if (themeService.currentTheme().mode === 'dark') {
+        <mat-icon class="check-icon">check</mat-icon>
+      }
+    </button>
+
+    <button mat-menu-item
+            (click)="setThemeMode('auto')"
+            [class.active]="themeService.currentTheme().mode === 'auto'">
+      <mat-icon>brightness_auto</mat-icon>
+      <span>Auto (System)</span>
+      @if (themeService.currentTheme().mode === 'auto') {
+        <mat-icon class="check-icon">check</mat-icon>
+      }
+    </button>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <div class="theme-section">
+    <div class="section-title">JobMagnetic Colors</div>
+
+    <div class="color-control">
+      <div class="color-label">
+        <span>Primary Color</span>
+        <div class="color-preview"
+             [style.background-color]="themeService.currentTheme().primaryColor">
+        </div>
+      </div>
+      <div class="color-presets">
+        @for (color of primaryColorPresets; track color.name) {
+          <button class="color-preset"
+                  [style.background-color]="color.value"
+                  [class.active]="themeService.currentTheme().primaryColor === color.value"
+                  (click)="setPrimaryColor(color.value)"
+                  [matTooltip]="color.name">
+          </button>
+        }
+      </div>
+    </div>
+
+    <div class="color-control">
+      <div class="color-label">
+        <span>Accent Color</span>
+        <div class="color-preview"
+             [style.background-color]="themeService.currentTheme().accentColor">
+        </div>
+      </div>
+      <div class="color-presets">
+        @for (color of accentColorPresets; track color.name) {
+          <button class="color-preset"
+                  [style.background-color]="color.value"
+                  [class.active]="themeService.currentTheme().accentColor === color.value"
+                  (click)="setAccentColor(color.value)"
+                  [matTooltip]="color.name">
+          </button>
+        }
+      </div>
+    </div>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <button mat-menu-item (click)="resetTheme()" class="reset-button">
+    <mat-icon>restore</mat-icon>
+    <span>Reset to JobMagnetic Defaults</span>
+  </button>
+</mat-menu>

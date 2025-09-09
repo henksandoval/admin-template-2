@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
+import { RouterModule } from '@angular/router';
 import { NavigationItem, NavigationService } from '@layout/services/navigation/navigation.service';
 
 @Component({
@@ -8,56 +9,10 @@ import { NavigationItem, NavigationService } from '@layout/services/navigation/n
   standalone: true,
   imports: [
     CommonModule,
-    MatIconModule
+    MatIconModule,
+    RouterModule
   ],
-  template: `
-    <div class="mb-1">
-      <div *ngIf="!item.children"
-           (click)="item.route && navigationService.navigateTo(item.route)"
-           [class]="getItemClasses(item)"
-           class="rounded-lg transition-all duration-200 cursor-pointer p-2 group hover:bg-surface-variant hover:bg-opacity-10">
-
-        <div class="flex items-center space-x-3" [style.padding-left.px]="getExtraPadding(item.level || 1)">
-          <mat-icon [class]="getIconClasses(item)" [style.font-size.px]="getIconSize(item.level || 1)">
-            {{ item.icon }}
-          </mat-icon>
-
-          <span [class]="getTextClasses(item)">{{ item.label }}</span>
-        </div>
-      </div>
-
-      <div *ngIf="item.children">
-        <div (click)="navigationService.toggleMenuItem(item.id)"
-             [class]="getItemClasses(item)"
-             class="rounded-lg transition-all duration-200 cursor-pointer p-2 group hover:bg-surface-variant hover:bg-opacity-10">
-
-          <div class="flex items-center justify-between" [style.padding-left.px]="getExtraPadding(item.level || 1)">
-            <div class="flex items-center space-x-3">
-              <mat-icon [class]="getIconClasses(item)" [style.font-size.px]="getIconSize(item.level || 1)">
-                {{ item.icon }}
-              </mat-icon>
-
-              <span [class]="getTextClasses(item)">{{ item.label }}</span>
-            </div>
-
-            <mat-icon class="text-on-surface-variant transition-transform duration-200 text-lg"
-                     [class.rotate-90]="navigationService.isMenuExpanded(item.id)">
-              chevron_right
-            </mat-icon>
-          </div>
-        </div>
-
-        <div *ngIf="navigationService.isMenuExpanded(item.id)"
-             class="overflow-hidden transition-all duration-300 ease-in-out">
-          <div class="space-y-1">
-            <div *ngFor="let subItem of item.children">
-              <app-sidebar-menu-item [item]="subItem"></app-sidebar-menu-item>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  `
+  templateUrl: './sidebar-menu-item.component.html'
 })
 export class SidebarMenuItemComponent {
   @Input() item!: NavigationItem;

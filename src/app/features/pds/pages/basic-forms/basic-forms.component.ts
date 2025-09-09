@@ -5,9 +5,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { FormFieldInputComponent } from '@shared/molecules/form-field-input/form-field-input.component';
-import { FormFieldInputOptions } from '@shared/molecules/form-field-input/form-field-input.model';
-import { ControlConnectorDirective } from '@shared/molecules/form-field-input/control-connector.directive';
+import { FormFieldInputComponent } from '@shared/atoms/form-field-input/form-field-input.component';
+import { FormFieldInputOptions } from '@shared/atoms/form-field-input/form-field-input.model';
+import { ControlConnectorDirective } from '@shared/atoms/form-field-input/control-connector.directive';
 
 @Component({
   selector: 'app-basic-forms',

@@ -17,7 +17,7 @@ import {NavigationService} from '@layout/services/navigation/navigation.service'
   template: `
     <mat-divider class="border-opacity-20 border-gray-300 dark:border-gray-600"></mat-divider>
 
-    <div class="py-2" *ngIf="!layoutService.isSidebarCollapsed()">
+    <div class="py-2" *ngIf="!navigationService.isSidebarCollapsed()">
       <div class="px-3 py-2">
         <h3 class="text-xs font-bold uppercase tracking-wider text-on-surface-variant">
           Settings
@@ -41,7 +41,7 @@ import {NavigationService} from '@layout/services/navigation/navigation.service'
       </div>
     </div>
 
-    <div class="py-2" *ngIf="layoutService.isSidebarCollapsed()">
+    <div class="py-2" *ngIf="navigationService.isSidebarCollapsed()">
       <div class="px-2 space-y-1">
         <div class="rounded-lg hover:bg-surface-variant hover:bg-opacity-10 transition-colors cursor-pointer p-2 flex justify-center"
              matTooltip="Preferences"
@@ -59,5 +59,5 @@ import {NavigationService} from '@layout/services/navigation/navigation.service'
   `
 })
 export class SidebarSettingsComponent {
-  constructor(public layoutService: NavigationService) {}
+  constructor(public navigationService: NavigationService) {}
 }

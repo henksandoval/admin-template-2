@@ -1,5 +1,6 @@
 import {computed, inject, Injectable, signal} from '@angular/core';
-import {Router} from '@angular/router';
+import {Router, NavigationEnd} from '@angular/router';
+import { filter } from 'rxjs/operators';
 import { RouteMenuService } from '@core/services/route-menu.service';
 import { routes } from '../../../app.routes';
 
@@ -31,12 +32,34 @@ export class NavigationService {
 
   constructor() {
     this.initializeNavigation();
+    this.initializeSidebar();
+    this.listenToRouteChanges();
   }
 
   private initializeNavigation() {
     // Generate navigation items from routes
     const menuItems = this._routeMenuService.generateMenuFromRoutes(routes);
     this._navigationItems.set(menuItems);
+  }
+
+  private initializeSidebar() {
+    const savedCollapsed = localStorage.getItem('sidebarCollapsed');
+    if (savedCollapsed) {
+      this._isSidebarCollapsed.set(savedCollapsed === 'true');
+    }
+
+    const savedVisible = localStorage.getItem('sidebarVisible');
+    if (savedVisible) {
+      this._isSidebarVisible.set(savedVisible === 'true');
+    }
+  }
+
+  private listenToRouteChanges() {
+    this._router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe((event: NavigationEnd) => {
+      this._currentRoute.set(event.url);
+    });
   }
 
   isActiveRoute(route: string): boolean {

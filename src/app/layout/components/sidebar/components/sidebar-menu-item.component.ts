@@ -1,8 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
-import {LayoutService, NavigationItem} from '@layout/services/layout.service';
-import {NavigationService} from '@layout/services/navigation/navigation.service';
+import { NavigationItem, NavigationService } from '@layout/services/navigation/navigation.service';
 
 @Component({
   selector: 'app-sidebar-menu-item',
@@ -14,7 +13,7 @@ import {NavigationService} from '@layout/services/navigation/navigation.service'
   template: `
     <div class="mb-1">
       <div *ngIf="!item.children"
-           (click)="item.route && layoutService.navigateTo(item.route)"
+           (click)="item.route && navigationService.navigateTo(item.route)"
            [class]="getItemClasses(item)"
            class="rounded-lg transition-all duration-200 cursor-pointer p-2 group hover:bg-surface-variant hover:bg-opacity-10">
 
@@ -28,7 +27,7 @@ import {NavigationService} from '@layout/services/navigation/navigation.service'
       </div>
 
       <div *ngIf="item.children">
-        <div (click)="layoutService.toggleMenuItem(item.id)"
+        <div (click)="navigationService.toggleMenuItem(item.id)"
              [class]="getItemClasses(item)"
              class="rounded-lg transition-all duration-200 cursor-pointer p-2 group hover:bg-surface-variant hover:bg-opacity-10">
 
@@ -42,13 +41,13 @@ import {NavigationService} from '@layout/services/navigation/navigation.service'
             </div>
 
             <mat-icon class="text-on-surface-variant transition-transform duration-200 text-lg"
-                     [class.rotate-90]="layoutService.isMenuExpanded(item.id)">
+                     [class.rotate-90]="navigationService.isMenuExpanded(item.id)">
               chevron_right
             </mat-icon>
           </div>
         </div>
 
-        <div *ngIf="layoutService.isMenuExpanded(item.id)"
+        <div *ngIf="navigationService.isMenuExpanded(item.id)"
              class="overflow-hidden transition-all duration-300 ease-in-out">
           <div class="space-y-1">
             <div *ngFor="let subItem of item.children">
@@ -63,7 +62,7 @@ import {NavigationService} from '@layout/services/navigation/navigation.service'
 export class SidebarMenuItemComponent {
   @Input() item!: NavigationItem;
 
-  constructor(public layoutService: NavigationService) {}
+  constructor(public navigationService: NavigationService) {}
 
   getExtraPadding(level: number): number {
     return (level - 1) * 12;
@@ -79,7 +78,7 @@ export class SidebarMenuItemComponent {
   }
 
   getItemClasses(item: NavigationItem): string {
-    const isActive = item.route && this.layoutService.isActiveRoute(item.route.substring(1));
+    const isActive = item.route && this.navigationService.isActiveRoute(item.route.substring(1));
     const level = item.level || 1;
 
     let baseClasses = 'transition-all duration-200';
@@ -93,7 +92,7 @@ export class SidebarMenuItemComponent {
   }
 
   getIconClasses(item: NavigationItem): string {
-    const isActive = item.route && this.layoutService.isActiveRoute(item.route.substring(1));
+    const isActive = item.route && this.navigationService.isActiveRoute(item.route.substring(1));
     const level = item.level || 1;
 
     let baseClasses = 'transition-colors duration-200';
@@ -121,7 +120,7 @@ export class SidebarMenuItemComponent {
   }
 
   getTextClasses(item: NavigationItem): string {
-    const isActive = item.route && this.layoutService.isActiveRoute(item.route.substring(1));
+    const isActive = item.route && this.navigationService.isActiveRoute(item.route.substring(1));
     const level = item.level || 1;
 
     let baseClasses = '';

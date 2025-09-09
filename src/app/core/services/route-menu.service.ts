@@ -118,22 +118,4 @@ export class RouteMenuService {
     return undefined;
   }
 
-  /**
-   * Finds all routes that should appear in the menu (recursive)
-   */
-  findMenuRoutes(routes: AppRoute[]): AppRoute[] {
-    const menuRoutes: AppRoute[] = [];
-
-    for (const route of routes) {
-      if (route.data && !route.data.hiddenInMenu) {
-        menuRoutes.push(route);
-      }
-
-      if (route.children) {
-        menuRoutes.push(...this.findMenuRoutes(route.children));
-      }
-    }
-
-    return menuRoutes;
-  }
 }

@@ -1,8 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
-import {LayoutService, NavigationItem} from '@layout/services/layout.service';
-import {NavigationService} from '@layout/services/navigation/navigation.service';
+import { NavigationItem, NavigationService } from '@layout/services/navigation/navigation.service';
 
 @Component({
   selector: 'app-sidebar-mega-menu',
@@ -33,7 +32,7 @@ import {NavigationService} from '@layout/services/navigation/navigation.service'
     <ng-template #megaMenuItemTemplate let-item="item" let-parentItem="parentItem">
       <div class="mb-1">
         <div *ngIf="!item.children"
-             (click)="item.route && layoutService.navigateTo(item.route)"
+             (click)="item.route && navigationService.navigateTo(item.route)"
              [class]="getItemClasses(item)"
              class="rounded-md transition-all duration-200 cursor-pointer p-2 hover:bg-surface-variant hover:bg-opacity-10">
 
@@ -68,7 +67,7 @@ import {NavigationService} from '@layout/services/navigation/navigation.service'
                  [class.opacity-100]="isMegaMenuGroupExpanded(getMegaMenuGroupKey(parentItem?.label || '', item.label))">
 
               <div *ngFor="let subSubItem of item.children"
-                   (click)="subSubItem.route && layoutService.navigateTo(subSubItem.route)"
+                   (click)="subSubItem.route && navigationService.navigateTo(subSubItem.route)"
                    [class]="getItemClasses(subSubItem)"
                    class="rounded-md transition-all duration-200 cursor-pointer p-1.5 hover:bg-surface-variant hover:bg-opacity-10">
 
@@ -102,7 +101,7 @@ export class SidebarMegaMenuComponent {
 
   private megaMenuExpandedGroups = new Set<string>();
 
-  constructor(public layoutService: NavigationService) {}
+  constructor(public navigationService: NavigationService) {}
 
   onMegaMenuEnter() {
     this.megaMenuEnter.emit();
@@ -130,7 +129,7 @@ export class SidebarMegaMenuComponent {
   }
 
   getItemClasses(item: NavigationItem): string {
-    const isActive = item.route && this.layoutService.isActiveRoute(item.route.substring(1));
+    const isActive = item.route && this.navigationService.isActiveRoute(item.route.substring(1));
     let baseClasses = 'transition-all duration-200';
     let stateClasses = '';
 
@@ -142,7 +141,7 @@ export class SidebarMegaMenuComponent {
   }
 
   getIconClasses(item: NavigationItem): string {
-    const isActive = item.route && this.layoutService.isActiveRoute(item.route.substring(1));
+    const isActive = item.route && this.navigationService.isActiveRoute(item.route.substring(1));
     const level = item.level || 1;
 
     let baseClasses = 'transition-colors duration-200';
@@ -170,7 +169,7 @@ export class SidebarMegaMenuComponent {
   }
 
   getTextClasses(item: NavigationItem): string {
-    const isActive = item.route && this.layoutService.isActiveRoute(item.route.substring(1));
+    const isActive = item.route && this.navigationService.isActiveRoute(item.route.substring(1));
     const level = item.level || 1;
 
     let baseClasses = '';

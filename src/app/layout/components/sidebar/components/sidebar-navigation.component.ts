@@ -17,22 +17,22 @@ import { NavigationItem, NavigationService } from '@layout/services/navigation/n
     SidebarMegaMenuComponent
   ],
   template: `
-    <div class="py-2" *ngIf="!navigationService.isSidebarCollapsed()">
-      <div *ngFor="let item of navigationService.navigationItems()" class="px-2 mb-1">
+    <div class="sidebar-navigation" *ngIf="!navigationService.isSidebarCollapsed()">
+      <div *ngFor="let item of navigationService.navigationItems()" class="nav-item">
         <app-sidebar-menu-item [item]="item"></app-sidebar-menu-item>
       </div>
     </div>
 
-    <div class="py-2" *ngIf="navigationService.isSidebarCollapsed()">
-      <div *ngFor="let item of navigationService.navigationItems(); let i = index" class="px-2 mb-1">
-        <div class="relative">
+    <div class="sidebar-navigation" *ngIf="navigationService.isSidebarCollapsed()">
+      <div *ngFor="let item of navigationService.navigationItems(); let i = index" class="nav-item">
+        <div class="nav-item-collapsed">
           <div (mouseenter)="onItemHover(item, i, $event)"
                (mouseleave)="onItemLeave()"
-               class="flex items-center justify-center p-2 rounded-lg hover:bg-surface-variant hover:bg-opacity-10 transition-all duration-200 cursor-pointer"
+               class="nav-icon-container"
                [matTooltip]="item.label"
                matTooltipPosition="right">
 
-            <mat-icon [class]="getIconClasses(item)" [style.font-size.px]="20">
+            <mat-icon [class]="getIconClasses(item)">
               {{ item.icon }}
             </mat-icon>
 
@@ -47,7 +47,8 @@ import { NavigationItem, NavigationService } from '@layout/services/navigation/n
         </div>
       </div>
     </div>
-  `
+  `,
+  styleUrl: './sidebar-navigation.component.scss'
 })
 export class SidebarNavigationComponent {
   showMegaMenu: number | null = null;
@@ -92,16 +93,6 @@ export class SidebarNavigationComponent {
 
   getIconClasses(item: NavigationItem): string {
     const isActive = item.route && this.navigationService.isActiveRoute(item.route.substring(1));
-
-    let baseClasses = 'transition-colors duration-200';
-    let colorClasses = '';
-
-    if (isActive) {
-      colorClasses = 'text-primary';
-    } else {
-      colorClasses = 'text-on-surface-variant';
-    }
-
-    return `${baseClasses} ${colorClasses}`;
+    return isActive ? 'nav-icon active' : 'nav-icon inactive';
   }
 }

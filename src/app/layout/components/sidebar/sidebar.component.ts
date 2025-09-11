@@ -17,7 +17,7 @@ import {LayoutService} from '@layout/services/layout.service';
     SidebarFooterComponent
   ],
   template: `
-    <div class="h-full flex flex-col" style="background-color: var(--mat-sys-surface-container); color: var(--mat-sys-on-surface);">
+    <div class="sidebar-container">
       <app-sidebar-header></app-sidebar-header>
       <div class="flex-1 overflow-hidden">
         <app-sidebar-navigation></app-sidebar-navigation>
@@ -26,7 +26,7 @@ import {LayoutService} from '@layout/services/layout.service';
       <app-sidebar-footer></app-sidebar-footer>
     </div>
   `,
-  styles: []
+  styleUrl: './sidebar.component.scss'
 })
 export class SidebarComponent {
 }

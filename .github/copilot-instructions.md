@@ -2,7 +2,66 @@
 
 ¡Hola, Copilot! 👋
 
+**ALWAYS reference these instructions FIRST and follow them to the letter. Only fallback to additional search and context gathering if the information in these instructions is incomplete or found to be in error.**
+
 Soy tu guía para contribuir a este repositorio. Sigue estas instrucciones al pie de la letra para generar código que sea consistente, mantenible y que se alinee con la arquitectura del proyecto.
+
+## 🚀 Quick Start - Build & Run Instructions
+
+### Prerequisites
+- Node.js v20+ (project tested on v20.19.5)
+- npm v10+ (project tested on v10.8.2)
+
+### Bootstrap the Repository
+Execute these commands in order. **NEVER CANCEL any build or long-running command** - wait for completion:
+
+```bash
+# 1. Install dependencies (takes ~75 seconds, NEVER CANCEL)
+npm install
+# Timeout: Set 3+ minutes. Expected warnings about deprecated packages are normal.
+
+# 2. Development build (takes ~10 seconds, NEVER CANCEL)  
+npx ng build --configuration=development
+# Timeout: Set 2+ minutes. Use development config to avoid Google Fonts access issues.
+
+# 3. Run development server (takes ~10 seconds to build, NEVER CANCEL)
+npm start
+# Timeout: Set 2+ minutes. Server runs on http://localhost:4200/
+# Build warnings about duplicate Material theme styles are normal and expected.
+```
+
+### Production Build Limitation
+⚠️ **CRITICAL**: Production builds (`npm run build`) currently fail due to Google Fonts inlining restrictions in sandboxed environments. Always use development builds:
+```bash
+# This WILL FAIL in restricted environments
+npm run build  # ❌ Fails: getaddrinfo ENOTFOUND fonts.googleapis.com
+
+# Use this instead  
+npx ng build --configuration=development  # ✅ Works
+```
+
+### Testing
+- **No test files exist** in the project yet (`find src -name "*.spec.ts"` returns empty)
+- Running `npm run test` will fail with "No inputs were found in config file"
+- Tests are configured for Karma + Jasmine but no test files have been created
+
+### Validation Scenarios
+After making changes, always manually validate by:
+1. **Build validation**: Run `npx ng build --configuration=development` - must complete without errors
+2. **Development server**: Run `npm start` and verify app loads at http://localhost:4200/
+3. **Navigation testing**: Test the main dashboard and navigate to Components Showcase and PDS sections
+4. **Theme switching**: Test light/dark mode toggle in the header
+5. **Responsive design**: Verify sidebar collapse/expand functionality
+
+### Common File Locations
+```
+📁 src/app/
+├── 📂 core/           # Singleton services (AuthService, AuthGuard, etc.)
+├── 📂 features/       # Business features (dashboard, pds, showcase)  
+├── 📂 layout/         # UI shell components (Header, Sidebar, Footer)
+├── 📂 shared/         # Reusable components (atoms, molecules, organisms)
+└── 📂 themes/         # SCSS theme files and Material Design setup
+```
 
 ## 🎯 Stack Tecnológico Principal
 
@@ -68,9 +127,100 @@ Cuando se te pida crear un componente reutilizable, clasifícalo y colócalo en 
 - Sigue las convenciones de estilo de Angular y TypeScript.
 - Usa `Prettier` para formatear el código automáticamente.
 
-3**Comandos Útiles**:
+3.  **Comandos Útiles y Validaciones**:
 
-- Para ejecutar la app: `ng serve -o`
-- Para ejecutar pruebas: `ng test`
+#### Build & Development Commands
+```bash
+# Development server with auto-reload
+npm start                                    # ✅ Works (10s build + serve)
+# Alternative: npm run start
+
+# Development build only  
+npx ng build --configuration=development    # ✅ Works (10s, 2.7MB output)
+
+# Production build - AVOID in restricted environments
+npm run build                               # ❌ Fails (Google Fonts access)
+
+# Watch build during development
+npm run watch                               # ✅ Works (continuous rebuild)
+```
+
+#### Validation Commands (run these before committing)
+```bash
+# 1. Verify clean build
+npx ng build --configuration=development
+
+# 2. Check TypeScript compilation
+npx tsc --noEmit
+
+# 3. Verify no Angular-specific errors
+npx ng build --configuration=development 2>&1 | grep -i error || echo "No build errors"
+```
+
+#### Project Analysis Commands
+```bash
+# Check bundle size after build
+du -sh dist/                               # ~8.7MB for development build
+
+# View route structure  
+cat src/app/app.routes.ts                  # Lazy-loaded features configuration
+
+# Check available npm scripts
+npm run                                    # Shows: start, build, watch, test
+
+# Verify path aliases (should show @core, @shared, @layout, @env)
+grep -A 10 "paths" tsconfig.json
+```
 
 Al seguir estas directrices, me ayudarás a generar PRs de alta calidad que el equipo podrá revisar y fusionar rápidamente. ¡Gracias!
+
+---
+
+## 🔧 Advanced Development Information
+
+### Build Times & Expectations
+- **npm install**: ~75 seconds (warnings about deprecated packages are normal)
+- **Development build**: ~10 seconds (produces ~2.7MB output in dist/)
+- **Development server startup**: ~10 seconds (includes initial build)
+- **Hot reload after changes**: ~2-5 seconds (HMR is enabled)
+
+### Known Issues & Workarounds
+1. **Google Fonts Access**: Production builds fail due to fonts.googleapis.com restrictions
+   - **Solution**: Always use `--configuration=development` for builds
+   
+2. **Material Theme Warnings**: Build shows duplicate theme style warnings
+   - **Status**: Expected and safe to ignore - does not affect functionality
+
+3. **No Tests**: Project has testing infrastructure but no test files yet
+   - **Action**: Skip test running until test files are created
+
+### Project-Specific TypeScript Paths
+The project uses path aliases configured in `tsconfig.json`:
+```typescript
+"@core/*": ["src/app/core/*"]        // Core singleton services
+"@shared/*": ["src/app/shared/*"]    // Reusable components  
+"@layout/*": ["src/app/layout/*"]    // Layout shell components
+"@env/*": ["src/environments/*"]     // Environment configuration
+```
+
+### Features & Lazy Loading
+Current feature modules (all lazy-loaded):
+- **Dashboard** (`/dashboard`) - Main dashboard with metrics cards
+- **Showcase** (`/showcase`) - Component showcase with forms demo  
+- **PDS** (`/pds`) - Design system components showcase
+
+### Theme System
+- **Light/Dark themes** configured in `src/themes/`
+- **Material Design 3** with custom JobMagnetic branding
+- **Tailwind CSS** for utility classes (90% of styling)
+- **Custom fonts**: Plus Jakarta Sans, Inter, Poppins, JetBrains Mono (loaded from Google Fonts)
+
+### Validation Checklist for Changes
+Always verify after making changes:
+- [ ] `npx ng build --configuration=development` completes successfully
+- [ ] `npm start` serves application without errors  
+- [ ] Navigate to http://localhost:4200/ and verify dashboard loads
+- [ ] Test sidebar navigation (Dashboard, Components Showcase, PDS)
+- [ ] Test theme toggle button (light/dark mode switch)
+- [ ] Verify responsive behavior (sidebar collapse on mobile)
+- [ ] Check browser console for runtime errors

@@ -17,7 +17,7 @@ import {LayoutService} from '@layout/services/layout.service';
     SidebarFooterComponent
   ],
   template: `
-    <div class="h-full flex flex-col bg-inherit shadow-lg">
+    <div class="h-full flex flex-col" style="background-color: var(--mat-sys-surface-container); color: var(--mat-sys-on-surface);">
       <app-sidebar-header></app-sidebar-header>
       <div class="flex-1 overflow-hidden">
         <app-sidebar-navigation></app-sidebar-navigation>

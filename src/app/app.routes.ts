@@ -1,11 +1,23 @@
 import { Routes } from '@angular/router';
 import { AppLayoutComponent } from '@layout/layout.component';
 import { AppRoute } from '@core/models/app-route.model';
+import { authGuard } from '@core/guards/auth.guard';
 
 export const routes: AppRoute[] = [
+  // Public routes
+  {
+    path: 'login',
+    loadComponent: () => import('./features/auth/pages/login/login.component').then(m => m.LoginComponent),
+    data: {
+      label: 'Login',
+      hiddenInMenu: true
+    }
+  },
+  // Protected routes
   {
     path: '',
     component: AppLayoutComponent,
+    canActivate: [authGuard],
     children: [
       {
         path: 'dashboard',
@@ -177,5 +189,5 @@ export const routes: AppRoute[] = [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
     ]
   },
-  { path: '**', redirectTo: '' }
+  { path: '**', redirectTo: '/login' }
 ];

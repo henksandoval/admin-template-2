@@ -26,9 +26,10 @@
         <mat-icon>notifications</mat-icon>
       </button>
 
-      <button mat-icon-button class="transition-transform hover:scale-110">
-        <mat-icon>account_circle</mat-icon>
-      </button>
+      <!-- User Menu - only show when authenticated -->
+      @if (authService.isAuthenticated()) {
+        <app-user-menu></app-user-menu>
+      }
 
       <app-theme-selector></app-theme-selector>
     </div>

@@ -1,134 +1,276 @@
 @use 'sass:map';
 @use '@angular/material' as mat;
 
-// Note: Color palettes are generated from primary: #4758B8, secondary: #D0D8E6
-$_palettes: (
-  primary: (
-    0: #000000,
-    10: #00105c,
-    20: #0d2386,
-    25: #1d3091,
-    30: #2b3d9c,
-    35: #3849a9,
-    40: #4556b6,
-    50: #5e6fd1,
-    60: #7989ed,
-    70: #97a5ff,
-    80: #bac3ff,
-    90: #dee0ff,
-    95: #f0efff,
-    98: #fbf8ff,
-    99: #fefbff,
-    100: #ffffff,
-  ),
-  secondary: (
-    0: #000000,
-    10: #141c26,
-    20: #29313c,
-    25: #343c47,
-    30: #3f4753,
-    35: #4b535f,
-    40: #575f6b,
-    50: #6f7884,
-    60: #89919e,
-    70: #a4acb9,
-    80: #bfc7d5,
-    90: #dbe3f1,
-    95: #eaf1ff,
-    98: #f8f9ff,
-    99: #fdfcff,
-    100: #ffffff,
-  ),
-  tertiary: (
-    0: #000000,
-    10: #002111,
-    20: #003921,
-    25: #00452a,
-    30: #005232,
-    35: #005f3b,
-    40: #006d44,
-    50: #008857,
-    60: #00a56a,
-    70: #00c37e,
-    80: #29e195,
-    90: #55ffaf,
-    95: #c0ffd7,
-    98: #e9ffee,
-    99: #f5fff5,
-    100: #ffffff,
-  ),
-  neutral: (
-    0: #000000,
-    10: #1b1b21,
-    20: #303037,
-    25: #3b3b42,
-    30: #46464d,
-    35: #525259,
-    40: #5e5e65,
-    50: #77767e,
-    60: #919098,
-    70: #abaab3,
-    80: #c7c5ce,
-    90: #e3e1ea,
-    95: #f2eff8,
-    98: #fbf8ff,
-    99: #fefbff,
-    100: #ffffff,
-    4: #0d0e14,
-    6: #121319,
-    12: #1f1f25,
-    17: #292930,
-    22: #34343b,
-    24: #38393f,
-    87: #dbd9e2,
-    92: #e9e7f0,
-    94: #efedf6,
-    96: #f5f2fb,
-  ),
-  neutral-variant: (
-    0: #000000,
-    10: #191b26,
-    20: #2e303b,
-    25: #393b46,
-    30: #454652,
-    35: #51525e,
-    40: #5d5d6a,
-    50: #757683,
-    60: #8f909e,
-    70: #aaaab8,
-    80: #c5c5d4,
-    90: #e2e1f0,
-    95: #f0efff,
-    98: #fbf8ff,
-    99: #fefbff,
-    100: #ffffff,
-  ),
-  error: (
-    0: #000000,
-    10: #410002,
-    20: #690005,
-    25: #7e0007,
-    30: #93000a,
-    35: #a80710,
-    40: #ba1a1a,
-    50: #de3730,
-    60: #ff5449,
-    70: #ff897d,
-    80: #ffb4ab,
-    90: #ffdad6,
-    95: #ffedea,
-    98: #fff8f7,
-    99: #fffbff,
-    100: #ffffff,
-  ),
+// ================================================
+// SHARED PALETTES (Common across all themes)
+// ================================================
+
+$_secondary-palette: (
+  0: #000000,
+  10: #141c26,
+  20: #29313c,
+  25: #343c47,
+  30: #3f4753,
+  35: #4b535f,
+  40: #575f6b,
+  50: #6f7884,
+  60: #89919e,
+  70: #a4acb9,
+  80: #bfc7d5,
+  90: #dbe3f1,
+  95: #eaf1ff,
+  98: #f8f9ff,
+  99: #fdfcff,
+  100: #ffffff,
 );
 
-$_rest: (
-  secondary: map.get($_palettes, secondary),
-  neutral: map.get($_palettes, neutral),
-  neutral-variant: map.get($_palettes,  neutral-variant),
-  error: map.get($_palettes, error),
+$_tertiary-palette: (
+  0: #000000,
+  10: #002111,
+  20: #003921,
+  25: #00452a,
+  30: #005232,
+  35: #005f3b,
+  40: #006d44,
+  50: #008857,
+  60: #00a56a,
+  70: #00c37e,
+  80: #29e195,
+  90: #55ffaf,
+  95: #c0ffd7,
+  98: #e9ffee,
+  99: #f5fff5,
+  100: #ffffff,
 );
 
-$primary-palette: map.merge(map.get($_palettes, primary), $_rest);
-$tertiary-palette: map.merge(map.get($_palettes, tertiary), $_rest);
+$_neutral-palette: (
+  0: #000000,
+  10: #1b1b21,
+  20: #303037,
+  25: #3b3b42,
+  30: #46464d,
+  35: #525259,
+  40: #5e5e65,
+  50: #77767e,
+  60: #919098,
+  70: #abaab3,
+  80: #c7c5ce,
+  90: #e3e1ea,
+  95: #f2eff8,
+  98: #fbf8ff,
+  99: #fefbff,
+  100: #ffffff,
+  4: #0d0e14,
+  6: #121319,
+  12: #1f1f25,
+  17: #292930,
+  22: #34343b,
+  24: #38393f,
+  87: #dbd9e2,
+  92: #e9e7f0,
+  94: #efedf6,
+  96: #f5f2fb,
+);
+
+$_neutral-variant-palette: (
+  0: #000000,
+  10: #191b26,
+  20: #2e303b,
+  25: #393b46,
+  30: #454652,
+  35: #51525e,
+  40: #5d5d6a,
+  50: #757683,
+  60: #8f909e,
+  70: #aaaab8,
+  80: #c5c5d4,
+  90: #e2e1f0,
+  95: #f0efff,
+  98: #fbf8ff,
+  99: #fefbff,
+  100: #ffffff,
+);
+
+$_error-palette: (
+  0: #000000,
+  10: #410002,
+  20: #690005,
+  25: #7e0007,
+  30: #93000a,
+  35: #a80710,
+  40: #ba1a1a,
+  50: #de3730,
+  60: #ff5449,
+  70: #ff897d,
+  80: #ffb4ab,
+  90: #ffdad6,
+  95: #ffedea,
+  98: #fff8f7,
+  99: #fffbff,
+  100: #ffffff,
+);
+
+// Common color set to merge with primary palettes
+$_common-colors: (
+  secondary: $_secondary-palette,
+  neutral: $_neutral-palette,
+  neutral-variant: $_neutral-variant-palette,
+  error: $_error-palette,
+);
+
+// ================================================
+// PRIMARY COLOR PALETTES (Material Design 3)
+// ================================================
+
+// JobMagnetic Blue (#4758B8) - Default brand color
+$_jobmagnetic-blue-primary: (
+  0: #000000,
+  10: #00105c,
+  20: #0d2386,
+  25: #1d3091,
+  30: #2b3d9c,
+  35: #3849a9,
+  40: #4556b6,
+  50: #5e6fd1,
+  60: #7989ed,
+  70: #97a5ff,
+  80: #bac3ff,
+  90: #dee0ff,
+  95: #f0efff,
+  98: #fbf8ff,
+  99: #fefbff,
+  100: #ffffff,
+);
+
+// Royal Blue (#4169E1)
+$_royal-blue-primary: (
+  0: #000000,
+  10: #001844,
+  20: #002a6b,
+  25: #003278,
+  30: #003d85,
+  35: #004892,
+  40: #0054a0,
+  50: #1b6bbe,
+  60: #4285dd,
+  70: #689fff,
+  80: #a0cbff,
+  90: #d1e4ff,
+  95: #ecf3ff,
+  98: #f8faff,
+  99: #fdfcff,
+  100: #ffffff,
+);
+
+// Purple (#9C27B0)
+$_purple-primary: (
+  0: #000000,
+  10: #36003c,
+  20: #560a5d,
+  25: #671569,
+  30: #782075,
+  35: #8a2c82,
+  40: #9d378f,
+  50: #c450aa,
+  60: #ed6bc6,
+  70: #ff87e3,
+  80: #ffb0f0,
+  90: #ffd6f7,
+  95: #ffebfb,
+  98: #fff7fa,
+  99: #fffbff,
+  100: #ffffff,
+);
+
+// Indigo (#3F51B5)
+$_indigo-primary: (
+  0: #000000,
+  10: #000f5c,
+  20: #0a2485,
+  25: #173091,
+  30: #243c9d,
+  35: #3048aa,
+  40: #3d54b7,
+  50: #596dd2,
+  60: #7688ef,
+  70: #96a3ff,
+  80: #bac6ff,
+  90: #dee0ff,
+  95: #f0efff,
+  98: #fbf8ff,
+  99: #fefbff,
+  100: #ffffff,
+);
+
+// Deep Purple (#673AB7)
+$_deep-purple-primary: (
+  0: #000000,
+  10: #1f0054,
+  20: #340a75,
+  25: #401681,
+  30: #4c228e,
+  35: #592e9b,
+  40: #663aa8,
+  50: #8153c4,
+  60: #9d6ee1,
+  70: #ba8aff,
+  80: #d2b4ff,
+  90: #eaddff,
+  95: #f5eeff,
+  98: #fcf7ff,
+  99: #fffbff,
+  100: #ffffff,
+);
+
+// Blue (#2196F3)
+$_blue-primary: (
+  0: #000000,
+  10: #001c3b,
+  20: #00315f,
+  25: #003b73,
+  30: #004687,
+  35: #00519c,
+  40: #005db1,
+  50: #2176dd,
+  60: #5092ff,
+  70: #7caeff,
+  80: #a8c9ff,
+  90: #d3e3ff,
+  95: #ecf3ff,
+  98: #f8faff,
+  99: #fdfcff,
+  100: #ffffff,
+);
+
+// ================================================
+// COMPLETE PALETTE MAPS (Primary + Common Colors)
+// ================================================
+
+$jobmagnetic-blue-palette: map.merge($_jobmagnetic-blue-primary, $_common-colors);
+$royal-blue-palette: map.merge($_royal-blue-primary, $_common-colors);
+$purple-palette: map.merge($_purple-primary, $_common-colors);
+$indigo-palette: map.merge($_indigo-primary, $_common-colors);
+$deep-purple-palette: map.merge($_deep-purple-primary, $_common-colors);
+$blue-palette: map.merge($_blue-primary, $_common-colors);
+
+// Tertiary palette (accent color - consistent across all themes)
+$tertiary-palette: map.merge($_tertiary-palette, $_common-colors);
+
+// ================================================
+// CENTRAL MAP OF ALL PRIMARY COLOR OPTIONS
+// ================================================
+
+$primary-color-options: (
+  'jobmagnetic-blue': $jobmagnetic-blue-palette,
+  'royal-blue': $royal-blue-palette,
+  'purple': $purple-palette,
+  'indigo': $indigo-palette,
+  'deep-purple': $deep-purple-palette,
+  'blue': $blue-palette
+);
+
+// ================================================
+// BACKWARD COMPATIBILITY (Default primary palette)
+// ================================================
+
+$primary-palette: $jobmagnetic-blue-palette;

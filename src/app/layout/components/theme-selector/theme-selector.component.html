@@ -56,15 +56,15 @@
       <div class="color-label">
         <span>Primary Color</span>
         <div class="color-preview"
-             [style.background-color]="themeService.currentTheme().primaryColor">
+             [style.background-color]="getCurrentPrimaryColorHex()">
         </div>
       </div>
       <div class="color-presets">
-        @for (color of primaryColorPresets; track color.name) {
+        @for (color of primaryColorPresets; track color.colorKey) {
           <button class="color-preset"
-                  [style.background-color]="color.value"
-                  [class.active]="themeService.currentTheme().primaryColor === color.value"
-                  (click)="setPrimaryColor(color.value)"
+                  [style.background-color]="color.hexValue"
+                  [class.active]="themeService.currentTheme().primaryColor === color.colorKey"
+                  (click)="setPrimaryColor(color.colorKey)"
                   [matTooltip]="color.name">
           </button>
         }

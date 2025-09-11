@@ -7,7 +7,13 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatSliderModule } from '@angular/material/slider';
 import { FormsModule } from '@angular/forms';
-import {ThemeMode, ThemeService} from '@layout/services/theme/theme.service';
+import {ThemeMode, ThemeColor, ThemeService} from '@layout/services/theme/theme.service';
+
+interface ColorPreset {
+  name: string;
+  colorKey: ThemeColor;
+  hexValue: string; // For visual preview only
+}
 
 @Component({
   selector: 'app-theme-selector',
@@ -29,13 +35,13 @@ export class ThemeSelectorComponent {
 
   themeService = inject(ThemeService);
 
-  primaryColorPresets = [
-    { name: 'JobMagnetic Blue', value: '#4758B8' },
-    { name: 'Royal Blue', value: '#4169E1' },
-    { name: 'Purple', value: '#9C27B0' },
-    { name: 'Indigo', value: '#3F51B5' },
-    { name: 'Deep Purple', value: '#673AB7' },
-    { name: 'Blue', value: '#2196F3' }
+  primaryColorPresets: ColorPreset[] = [
+    { name: 'JobMagnetic Blue', colorKey: 'jobmagnetic-blue', hexValue: '#4758B8' },
+    { name: 'Royal Blue', colorKey: 'royal-blue', hexValue: '#4169E1' },
+    { name: 'Purple', colorKey: 'purple', hexValue: '#9C27B0' },
+    { name: 'Indigo', colorKey: 'indigo', hexValue: '#3F51B5' },
+    { name: 'Deep Purple', colorKey: 'deep-purple', hexValue: '#673AB7' },
+    { name: 'Blue', colorKey: 'blue', hexValue: '#2196F3' }
   ];
 
   accentColorPresets = [
@@ -51,8 +57,8 @@ export class ThemeSelectorComponent {
     this.themeService.setThemeMode(mode);
   }
 
-  setPrimaryColor(color: string): void {
-    this.themeService.setPrimaryColor(color);
+  setPrimaryColor(colorKey: ThemeColor): void {
+    this.themeService.setPrimaryColor(colorKey);
   }
 
   setAccentColor(color: string): void {
@@ -61,5 +67,10 @@ export class ThemeSelectorComponent {
 
   resetTheme(): void {
     this.themeService.resetToJobMagneticDefaults();
+  }
+
+  getCurrentPrimaryColorHex(): string {
+    const currentColorKey = this.themeService.currentTheme().primaryColor;
+    return this.primaryColorPresets.find(preset => preset.colorKey === currentColorKey)?.hexValue || '#4758B8';
   }
 }

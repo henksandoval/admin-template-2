@@ -11,20 +11,21 @@ import {NavigationService} from '@layout/services/navigation/navigation.service'
     MatIconModule
   ],
   template: `
-    <div class="p-3 border-b border-opacity-20 border-gray-300 dark:border-gray-600 flex items-center justify-between">
+    <div class="sidebar-header">
       <h3 *ngIf="!navigationService.isSidebarCollapsed()"
-          class="text-xs font-bold uppercase tracking-wider text-on-surface-variant transition-opacity duration-300">
+          class="navigation-title">
         Navigation
       </h3>
       <button (click)="navigationService.toggleSidebarCollapsed()"
-              class="p-1.5 rounded-md hover:bg-surface-variant hover:bg-opacity-10 transition-colors duration-200"
+              class="collapse-button"
               [attr.aria-label]="navigationService.isSidebarCollapsed() ? 'Expand sidebar' : 'Collapse sidebar'">
-        <mat-icon class="text-on-surface-variant transition-all duration-200">
+        <mat-icon>
           {{ navigationService.isSidebarCollapsed() ? 'menu_open' : 'menu' }}
         </mat-icon>
       </button>
     </div>
-  `
+  `,
+  styleUrl: './sidebar-header.component.scss'
 })
 export class SidebarHeaderComponent {
   public navigationService = inject(NavigationService);

@@ -1,0 +1,45 @@
+.sidebar-navigation {
+  padding: 0.5rem 0;
+
+  .nav-item {
+    padding: 0 0.5rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .nav-item-collapsed {
+    position: relative;
+    
+    .nav-icon-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.5rem;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      transition: all 200ms;
+      color: var(--mat-sys-on-surface-variant);
+      
+      &:hover {
+        background-color: var(--mat-sys-surface-variant);
+      }
+
+      mat-icon {
+        font-size: 20px;
+        transition: color 200ms;
+      }
+    }
+  }
+}
+
+// Icon color classes for navigation items
+.nav-icon {
+  transition: color 200ms;
+  
+  &.active {
+    color: var(--mat-sys-primary);
+  }
+  
+  &.inactive {
+    color: var(--mat-sys-on-surface-variant);
+  }
+}

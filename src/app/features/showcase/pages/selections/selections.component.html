@@ -1,0 +1,162 @@
+<div class="p-6">
+  <!-- Header -->
+  <div class="mb-6">
+    <button mat-button (click)="goBack()" class="mb-4" style="color: var(--mat-sys-primary);">
+      <mat-icon class="mr-2">arrow_back</mat-icon>
+      Back to Showcase
+    </button>
+    <h1 class="text-3xl font-bold mb-2" style="color: var(--mat-sys-primary);">
+      🎛️ Selection Controls
+    </h1>
+    <p class="text-lg" style="color: var(--mat-sys-on-surface-variant);">
+      Slide toggles and button toggle groups for making selections
+    </p>
+  </div>
+
+  <!-- Slide Toggles -->
+  <mat-card class="mb-8 shadow-lg">
+    <mat-card-header>
+      <mat-card-title class="text-xl font-semibold">Slide Toggles</mat-card-title>
+      <mat-card-subtitle>Switch components for binary choices</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content class="p-6">
+      <div class="space-y-6">
+        <!-- Basic toggle -->
+        <div>
+          <h3 class="text-lg font-medium mb-3">Basic Slide Toggles</h3>
+          <div class="space-y-4">
+            <mat-slide-toggle [(ngModel)]="isToggled">Slide me!</mat-slide-toggle>
+            <mat-slide-toggle [checked]="true">Checked</mat-slide-toggle>
+            <mat-slide-toggle [disabled]="true">Disabled</mat-slide-toggle>
+            <mat-slide-toggle [checked]="true" [disabled]="true">Checked + Disabled</mat-slide-toggle>
+          </div>
+        </div>
+
+        <!-- Different colors -->
+        <div>
+          <h3 class="text-lg font-medium mb-3">Colors</h3>
+          <div class="space-y-4">
+            <mat-slide-toggle color="primary" [checked]="true">Primary</mat-slide-toggle>
+            <mat-slide-toggle color="accent" [checked]="true">Accent</mat-slide-toggle>
+            <mat-slide-toggle color="warn" [checked]="true">Warn</mat-slide-toggle>
+          </div>
+        </div>
+
+        <!-- With labels -->
+        <div>
+          <h3 class="text-lg font-medium mb-3">With Custom Labels</h3>
+          <div class="space-y-4">
+            <mat-slide-toggle>
+              Enable notifications
+              <small class="block text-sm" style="color: var(--mat-sys-on-surface-variant);">
+                Get notified about important updates
+              </small>
+            </mat-slide-toggle>
+            <mat-slide-toggle [checked]="true">
+              Dark mode
+              <small class="block text-sm" style="color: var(--mat-sys-on-surface-variant);">
+                Toggle between light and dark theme
+              </small>
+            </mat-slide-toggle>
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Button Toggle Groups -->
+  <mat-card class="mb-8 shadow-lg">
+    <mat-card-header>
+      <mat-card-title class="text-xl font-semibold">Button Toggle Groups</mat-card-title>
+      <mat-card-subtitle>Toggle buttons for single or multiple selections</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content class="p-6">
+      <div class="space-y-6">
+        <!-- Single selection -->
+        <div>
+          <h3 class="text-lg font-medium mb-3">Single Selection</h3>
+          <mat-button-toggle-group [(value)]="selectedFontStyle" aria-label="Font Style">
+            <mat-button-toggle value="bold">Bold</mat-button-toggle>
+            <mat-button-toggle value="italic">Italic</mat-button-toggle>
+            <mat-button-toggle value="underline">Underline</mat-button-toggle>
+          </mat-button-toggle-group>
+          <p class="mt-2 text-sm" style="color: var(--mat-sys-on-surface-variant);">
+            Selected: {{ selectedFontStyle }}
+          </p>
+        </div>
+
+        <!-- Multiple selection -->
+        <div>
+          <h3 class="text-lg font-medium mb-3">Multiple Selection</h3>
+          <mat-button-toggle-group multiple [(value)]="selectedItems" aria-label="Text Formatting">
+            <mat-button-toggle value="bold">
+              <mat-icon>format_bold</mat-icon>
+            </mat-button-toggle>
+            <mat-button-toggle value="italic">
+              <mat-icon>format_italic</mat-icon>
+            </mat-button-toggle>
+            <mat-button-toggle value="underline">
+              <mat-icon>format_underlined</mat-icon>
+            </mat-button-toggle>
+          </mat-button-toggle-group>
+          <p class="mt-2 text-sm" style="color: var(--mat-sys-on-surface-variant);">
+            Selected: {{ selectedItems.join(', ') }}
+          </p>
+        </div>
+
+        <!-- Vertical orientation -->
+        <div>
+          <h3 class="text-lg font-medium mb-3">Vertical Orientation</h3>
+          <mat-button-toggle-group vertical>
+            <mat-button-toggle value="option1">Option 1</mat-button-toggle>
+            <mat-button-toggle value="option2">Option 2</mat-button-toggle>
+            <mat-button-toggle value="option3">Option 3</mat-button-toggle>
+          </mat-button-toggle-group>
+        </div>
+
+        <!-- Disabled -->
+        <div>
+          <h3 class="text-lg font-medium mb-3">Disabled State</h3>
+          <mat-button-toggle-group [disabled]="true">
+            <mat-button-toggle value="left">Left</mat-button-toggle>
+            <mat-button-toggle value="center">Center</mat-button-toggle>
+            <mat-button-toggle value="right">Right</mat-button-toggle>
+          </mat-button-toggle-group>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Code Example -->
+  <mat-card class="mb-8">
+    <mat-card-header>
+      <mat-card-title class="text-lg font-semibold">Code Example</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="p-4 rounded-lg" style="background-color: var(--mat-sys-surface-variant);">
+        <pre class="text-sm overflow-x-auto" style="color: var(--mat-sys-on-surface-variant);">
+<span style="color: var(--mat-sys-primary);">// Basic slide toggle</span>
+&lt;mat-slide-toggle [(ngModel)]="isToggled"&gt;
+  Slide me!
+&lt;/mat-slide-toggle&gt;
+
+<span style="color: var(--mat-sys-primary);">// Button toggle group (single selection)</span>
+&lt;mat-button-toggle-group [(value)]="selectedFontStyle"&gt;
+  &lt;mat-button-toggle value="bold"&gt;Bold&lt;/mat-button-toggle&gt;
+  &lt;mat-button-toggle value="italic"&gt;Italic&lt;/mat-button-toggle&gt;
+  &lt;mat-button-toggle value="underline"&gt;Underline&lt;/mat-button-toggle&gt;
+&lt;/mat-button-toggle-group&gt;
+
+<span style="color: var(--mat-sys-primary);">// Multiple selection with icons</span>
+&lt;mat-button-toggle-group multiple [(value)]="selectedItems"&gt;
+  &lt;mat-button-toggle value="bold"&gt;
+    &lt;mat-icon&gt;format_bold&lt;/mat-icon&gt;
+  &lt;/mat-button-toggle&gt;
+  &lt;mat-button-toggle value="italic"&gt;
+    &lt;mat-icon&gt;format_italic&lt;/mat-icon&gt;
+  &lt;/mat-button-toggle&gt;
+&lt;/mat-button-toggle-group&gt;</pre>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

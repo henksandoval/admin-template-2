@@ -44,6 +44,33 @@ export const routes: AppRoute[] = [
               level: 2
             }
           },
+          {
+            path: 'selections',
+            loadComponent: () => import('./features/showcase/pages/selections/selections.component').then(m => m.SelectionsComponent),
+            data: {
+              label: 'Selection Controls',
+              icon: 'radio_button_checked',
+              level: 2
+            }
+          },
+          {
+            path: 'checkboxes',
+            loadComponent: () => import('./features/showcase/pages/checkboxes/checkboxes.component').then(m => m.CheckboxesComponent),
+            data: {
+              label: 'Checkboxes & Radio',
+              icon: 'check_box',
+              level: 2
+            }
+          },
+          {
+            path: 'buttons',
+            loadComponent: () => import('./features/showcase/pages/buttons/buttons.component').then(m => m.ButtonsComponent),
+            data: {
+              label: 'Buttons & Toggles',
+              icon: 'smart_button',
+              level: 2
+            }
+          },
         ]
       },
       {

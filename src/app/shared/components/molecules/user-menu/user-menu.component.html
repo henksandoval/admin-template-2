@@ -1,0 +1,44 @@
+<button
+  mat-icon-button
+  [matMenuTriggerFor]="userMenu"
+  class="transition-transform hover:scale-110"
+  [attr.aria-label]="'User menu'"
+>
+  @if (authService.currentUser()?.avatar) {
+    <img
+      [src]="authService.currentUser()!.avatar"
+      [alt]="authService.currentUser()!.name"
+      class="w-8 h-8 rounded-full object-cover"
+    />
+  } @else {
+    <mat-icon>account_circle</mat-icon>
+  }
+</button>
+
+<mat-menu #userMenu="matMenu" class="user-menu">
+  <div class="px-4 py-3 border-b border-gray-200 dark:border-gray-700">
+    <div class="text-sm font-medium text-gray-900 dark:text-white">
+      {{ authService.currentUser()?.name }}
+    </div>
+    <div class="text-sm text-gray-500 dark:text-gray-400 truncate">
+      {{ authService.currentUser()?.email }}
+    </div>
+  </div>
+  
+  <button mat-menu-item>
+    <mat-icon>person</mat-icon>
+    <span>Profile</span>
+  </button>
+  
+  <button mat-menu-item>
+    <mat-icon>settings</mat-icon>
+    <span>Settings</span>
+  </button>
+  
+  <mat-divider></mat-divider>
+  
+  <button mat-menu-item (click)="onLogout()" class="text-red-600 dark:text-red-400">
+    <mat-icon>logout</mat-icon>
+    <span>Sign Out</span>
+  </button>
+</mat-menu>

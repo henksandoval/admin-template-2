@@ -1,0 +1,13 @@
+::ng-deep .user-menu {
+  .mat-mdc-menu-content {
+    @apply min-w-48;
+  }
+  
+  .mat-mdc-menu-item {
+    @apply flex items-center gap-3 px-4 py-3;
+    
+    .mat-icon {
+      @apply text-lg;
+    }
+  }
+}

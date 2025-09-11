@@ -1,36 +1,60 @@
+@use 'sass:map';
 @use '@angular/material' as mat;
 @use 'theme_colors' as theme-colors;
 
-// Crear tema claro JobMagnetic usando las paletas generadas
-$light-theme: mat.define-theme((
-  color: (
-    theme-type: light,
-    primary: theme-colors.$primary-palette,
-    tertiary: theme-colors.$tertiary-palette,
-  ),
-  typography: (
-    // Sistema tipográfico JobMagnetic (solo propiedades válidas de Material Design 3)
-    brand-family: 'Poppins, Inter, sans-serif',     // Para títulos principales y elementos destacados
-    plain-family: 'Plus Jakarta Sans, Inter, sans-serif', // Para contenido general
-  ),
-  density: (
-    scale: 0,
-  )
-));
+// ================================================
+// TYPOGRAPHY CONFIGURATION (Shared across all themes)
+// ================================================
 
-// Crear tema oscuro JobMagnetic
-$dark-theme: mat.define-theme((
-  color: (
-    theme-type: dark,
-    primary: theme-colors.$primary-palette,
-    tertiary: theme-colors.$tertiary-palette,
-  ),
-  typography: (
-    // Sistema tipográfico JobMagnetic (consistente en ambos temas)
-    brand-family: 'Poppins, Inter, sans-serif',     // Para títulos principales y elementos destacados
-    plain-family: 'Plus Jakarta Sans, Inter, sans-serif', // Para contenido general
-  ),
-  density: (
-    scale: 0,
-  )
-));
+$jobmagnetic-typography: (
+  // Sistema tipográfico JobMagnetic (solo propiedades válidas de Material Design 3)
+  brand-family: 'Poppins, Inter, sans-serif',     // Para títulos principales y elementos destacados
+  plain-family: 'Plus Jakarta Sans, Inter, sans-serif', // Para contenido general
+);
+
+$density-config: (
+  scale: 0,
+);
+
+// ================================================
+// GENERATE ALL THEME COMBINATIONS
+// ================================================
+
+$themes: ();
+
+@each $color-name, $color-palette in theme-colors.$primary-color-options {
+  // Create light theme for this color
+  $light-theme: mat.define-theme((
+    color: (
+      theme-type: light,
+      primary: $color-palette,
+      tertiary: theme-colors.$tertiary-palette,
+    ),
+    typography: $jobmagnetic-typography,
+    density: $density-config,
+  ));
+  
+  // Create dark theme for this color
+  $dark-theme: mat.define-theme((
+    color: (
+      theme-type: dark,
+      primary: $color-palette,
+      tertiary: theme-colors.$tertiary-palette,
+    ),
+    typography: $jobmagnetic-typography,
+    density: $density-config,
+  ));
+  
+  // Store both themes in the central map
+  $themes: map.set($themes, $color-name, (
+    'light': $light-theme,
+    'dark': $dark-theme
+  ));
+}
+
+// ================================================
+// BACKWARD COMPATIBILITY (Default themes)
+// ================================================
+
+$light-theme: map.get(map.get($themes, 'jobmagnetic-blue'), 'light');
+$dark-theme: map.get(map.get($themes, 'jobmagnetic-blue'), 'dark');

@@ -1,11 +1,12 @@
 import { Injectable, signal, effect } from '@angular/core';
 
 export type ThemeMode = 'light' | 'dark' | 'auto';
+export type ThemeColor = 'jobmagnetic-blue' | 'royal-blue' | 'purple' | 'indigo' | 'deep-purple' | 'blue';
 
 interface ThemeConfig {
   mode: ThemeMode;
-  primaryColor: string;
-  accentColor: string;
+  primaryColor: ThemeColor;
+  accentColor: string; // Keep for future use
 }
 
 @Injectable({
@@ -17,7 +18,7 @@ export class ThemeService {
 
   private _currentTheme = signal<ThemeConfig>({
     mode: 'light',
-    primaryColor: '#4758B8',
+    primaryColor: 'jobmagnetic-blue',
     accentColor: '#00D58A'
   });
 
@@ -74,63 +75,18 @@ export class ThemeService {
     const theme = this._currentTheme();
     const isDark = this._isDarkMode();
 
+    // Apply theme mode classes
     document.documentElement.classList.remove('light-theme', 'dark-theme');
     document.documentElement.classList.add(isDark ? 'dark-theme' : 'light-theme');
 
     document.body.classList.remove('light-theme', 'dark-theme');
     document.body.classList.add(isDark ? 'dark-theme' : 'light-theme');
 
-    document.documentElement.style.setProperty('--jobmagnetic-primary', theme.primaryColor);
-    document.documentElement.style.setProperty('--jobmagnetic-accent', theme.accentColor);
+    // Apply theme color data attribute
+    document.body.setAttribute('data-theme-color', theme.primaryColor);
 
-    this.applyMaterialTheme(isDark, theme);
-
+    // Save theme configuration
     localStorage.setItem(this.STORAGE_KEY, JSON.stringify(theme));
-  }
-
-  private applyMaterialTheme(isDark: boolean, theme: ThemeConfig): void {
-    const root = document.documentElement;
-
-    if (isDark) {
-      root.style.setProperty('--mat-sys-surface', '#121212');
-      root.style.setProperty('--mat-sys-surface-container', '#1e1e1e');
-      root.style.setProperty('--mat-sys-surface-container-low', '#1a1a1a');
-      root.style.setProperty('--mat-sys-surface-container-high', '#242424');
-      root.style.setProperty('--mat-sys-on-surface', '#e1e1e1');
-      root.style.setProperty('--mat-sys-on-surface-variant', '#c1c1c1');
-      root.style.setProperty('--mat-sys-outline', '#444444');
-      root.style.setProperty('--mat-sys-outline-variant', '#333333');
-
-      root.style.setProperty('--mat-sys-primary', '#8FA7FF');
-      root.style.setProperty('--mat-sys-on-primary', '#1A1A1A');
-      root.style.setProperty('--mat-sys-primary-container', '#2D3748');
-      root.style.setProperty('--mat-sys-on-primary-container', '#E2E8F0');
-
-      root.style.setProperty('--mat-sys-tertiary', '#4DFFB8');
-      root.style.setProperty('--mat-sys-on-tertiary', '#1A1A1A');
-      root.style.setProperty('--mat-sys-tertiary-container', '#1A4D3A');
-      root.style.setProperty('--mat-sys-on-tertiary-container', '#E0FFF4');
-
-    } else {
-      root.style.setProperty('--mat-sys-surface', '#FEFBFF');
-      root.style.setProperty('--mat-sys-surface-container', '#F3F0F4');
-      root.style.setProperty('--mat-sys-surface-container-low', '#F7F4F8');
-      root.style.setProperty('--mat-sys-surface-container-high', '#EDE8EC');
-      root.style.setProperty('--mat-sys-on-surface', '#1D1B20');
-      root.style.setProperty('--mat-sys-on-surface-variant', '#49454F');
-      root.style.setProperty('--mat-sys-outline', '#79747E');
-      root.style.setProperty('--mat-sys-outline-variant', '#CAC4D0');
-
-      root.style.setProperty('--mat-sys-primary', theme.primaryColor);
-      root.style.setProperty('--mat-sys-on-primary', '#FFFFFF');
-      root.style.setProperty('--mat-sys-primary-container', '#E0E7FF');
-      root.style.setProperty('--mat-sys-on-primary-container', '#001A41');
-
-      root.style.setProperty('--mat-sys-tertiary', theme.accentColor);
-      root.style.setProperty('--mat-sys-on-tertiary', '#FFFFFF');
-      root.style.setProperty('--mat-sys-tertiary-container', '#A6F4CD');
-      root.style.setProperty('--mat-sys-on-tertiary-container', '#002114');
-    }
   }
 
   setThemeMode(mode: ThemeMode): void {
@@ -138,7 +94,7 @@ export class ThemeService {
     this.updateDarkModeState();
   }
 
-  setPrimaryColor(color: string): void {
+  setPrimaryColor(color: ThemeColor): void {
     this._currentTheme.update(theme => ({ ...theme, primaryColor: color }));
   }
 
@@ -156,7 +112,7 @@ export class ThemeService {
   resetToJobMagneticDefaults(): void {
     this._currentTheme.set({
       mode: 'light',
-      primaryColor: '#4758B8',
+      primaryColor: 'jobmagnetic-blue',
       accentColor: '#00D58A'
     });
     this.updateDarkModeState();

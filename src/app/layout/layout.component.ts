@@ -1,4 +1,4 @@
-import { Component, Renderer2, effect, inject } from '@angular/core';
+import { Component, Renderer2, effect, inject, computed } from '@angular/core';
 import { CommonModule, DOCUMENT } from '@angular/common';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import {HeaderComponent} from '@layout/components/header/header.component';
@@ -33,6 +33,17 @@ export class AppLayoutComponent {
   public layoutService = inject(LayoutService);
   public navigationService = inject(NavigationService);
   private themeService = inject(ThemeService);
+
+  // Computed properties for Tailwind classes based on sidebar state
+  sidebarWidthClass = computed(() => {
+    if (!this.navigationService.isSidebarVisible()) return 'w-0';
+    return this.navigationService.isSidebarCollapsed() ? 'w-16' : 'w-60';
+  });
+
+  mainContentMarginClass = computed(() => {
+    if (!this.navigationService.isSidebarVisible()) return 'ml-0';
+    return this.navigationService.isSidebarCollapsed() ? 'ml-16' : 'ml-60';
+  });
 
   constructor() {
     effect(() => {

@@ -213,6 +213,207 @@ a:hover {
   color: var(--mat-sys-primary);
 }
 
+// ================================================
+// PREMIUM SCROLLBAR UTILITIES
+// ================================================
+
+/* Scrollbar principal premium para sidebars y contenedores especiales */
+.scrollbar-premium {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(var(--mat-sys-primary-rgb), 0.2) transparent;
+  scroll-behavior: smooth;
+  
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 4px;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: linear-gradient(
+      135deg,
+      rgba(var(--mat-sys-primary-rgb), 0.3) 0%,
+      rgba(var(--mat-sys-primary-rgb), 0.5) 50%,
+      rgba(var(--mat-sys-primary-rgb), 0.3) 100%
+    );
+    border-radius: 4px;
+    border: 1px solid rgba(var(--mat-sys-primary-rgb), 0.1);
+    transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  
+  &::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(
+      135deg,
+      rgba(var(--mat-sys-primary-rgb), 0.5) 0%,
+      rgba(var(--mat-sys-primary-rgb), 0.7) 50%,
+      rgba(var(--mat-sys-primary-rgb), 0.5) 100%
+    );
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    transform: scaleY(1.1);
+  }
+  
+  &::-webkit-scrollbar-thumb:active {
+    background: linear-gradient(
+      135deg,
+      rgba(var(--mat-sys-primary-rgb), 0.6) 0%,
+      rgba(var(--mat-sys-primary-rgb), 0.8) 50%,
+      rgba(var(--mat-sys-primary-rgb), 0.6) 100%
+    );
+  }
+  
+  &:hover {
+    box-shadow: inset 2px 0 4px rgba(var(--mat-sys-primary-rgb), 0.1);
+  }
+  
+  &:active {
+    animation: scrollGlow 0.6s ease-in-out;
+  }
+}
+
+/* Scrollbar con gradientes fade para sidebars */
+.scrollbar-sidebar {
+  @extend .scrollbar-premium;
+  
+  &::before,
+  &::after {
+    content: '';
+    position: sticky;
+    display: block;
+    height: 20px;
+    z-index: 10;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+  
+  &::before {
+    top: 0;
+    background: linear-gradient(
+      to bottom,
+      var(--mat-sys-surface) 0%,
+      rgba(var(--mat-sys-surface-rgb), 0.8) 50%,
+      transparent 100%
+    );
+    margin-bottom: -20px;
+  }
+  
+  &::after {
+    bottom: 0;
+    background: linear-gradient(
+      to top,
+      var(--mat-sys-surface) 0%,
+      rgba(var(--mat-sys-surface-rgb), 0.8) 50%,
+      transparent 100%
+    );
+    margin-top: -20px;
+  }
+}
+
+/* Scrollbar estándar global */
+:global(html) {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(var(--mat-sys-outline-rgb), 0.3) transparent;
+  scroll-behavior: smooth;
+}
+
+:global(body)::-webkit-scrollbar {
+  width: 10px;
+}
+
+:global(body)::-webkit-scrollbar-track {
+  background: var(--mat-sys-surface-container-lowest);
+  border-radius: 5px;
+}
+
+:global(body)::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    180deg,
+    rgba(var(--mat-sys-outline-rgb), 0.3) 0%,
+    rgba(var(--mat-sys-outline-rgb), 0.5) 50%,
+    rgba(var(--mat-sys-outline-rgb), 0.3) 100%
+  );
+  border-radius: 5px;
+  border: 1px solid rgba(var(--mat-sys-outline-rgb), 0.1);
+  transition: all 0.3s ease;
+}
+
+:global(body)::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(
+    180deg,
+    rgba(var(--mat-sys-outline-rgb), 0.4) 0%,
+    rgba(var(--mat-sys-outline-rgb), 0.6) 50%,
+    rgba(var(--mat-sys-outline-rgb), 0.4) 100%
+  );
+  transform: scaleX(1.2);
+}
+
+/* Adaptaciones móviles para scrollbars */
+@media (max-width: 768px) {
+  .scrollbar-premium::-webkit-scrollbar,
+  .scrollbar-sidebar::-webkit-scrollbar {
+    width: 4px;
+  }
+}
+
+/* Mejoras para tema oscuro */
+:host-context(.dark) .scrollbar-premium::-webkit-scrollbar-thumb,
+:host-context(.dark) .scrollbar-sidebar::-webkit-scrollbar-thumb {
+  border: 1px solid rgba(var(--mat-sys-primary-rgb), 0.2);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+:host-context(.dark) :global(body)::-webkit-scrollbar-track {
+  background: var(--mat-sys-surface-container-high);
+}
+
+/* Animación de resplandor para scrollbars activos */
+@keyframes scrollGlow {
+  0% { box-shadow: inset 2px 0 4px rgba(var(--mat-sys-primary-rgb), 0.1); }
+  50% { box-shadow: inset 2px 0 8px rgba(var(--mat-sys-primary-rgb), 0.2); }
+  100% { box-shadow: inset 2px 0 4px rgba(var(--mat-sys-primary-rgb), 0.1); }
+}
+
+// ================================================
+// CARD AND INTERACTION UTILITIES
+// ================================================
+
+/* Hover lift effect para cards */
+.card-hover-lift {
+  transition: transform 0.2s ease-in-out;
+  
+  &:hover {
+    transform: translateY(-2px);
+  }
+}
+
+/* Avatar circular con icono centrado */
+.avatar-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  
+  mat-icon {
+    font-size: 24px;
+    width: 24px;
+    height: 24px;
+  }
+}
+
+/* Hover scale effect para elementos interactivos */
+.hover-scale {
+  transition: all 0.3s ease;
+  
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+
 // Custom utilities that complement Tailwind and Angular Material
 // (mantener solo utilidades específicas que no proporciona Tailwind)
 

@@ -75,14 +75,17 @@ export class ThemeService {
     const theme = this._currentTheme();
     const isDark = this._isDarkMode();
 
-    // Apply theme mode classes
+    // Apply theme mode classes and data attributes consistently to both elements
+    const themeClass = isDark ? 'dark-theme' : 'light-theme';
+    
+    // Apply to document.documentElement (html element)
     document.documentElement.classList.remove('light-theme', 'dark-theme');
-    document.documentElement.classList.add(isDark ? 'dark-theme' : 'light-theme');
+    document.documentElement.classList.add(themeClass);
+    document.documentElement.setAttribute('data-theme-color', theme.primaryColor);
 
+    // Apply to document.body for consistency
     document.body.classList.remove('light-theme', 'dark-theme');
-    document.body.classList.add(isDark ? 'dark-theme' : 'light-theme');
-
-    // Apply theme color data attribute
+    document.body.classList.add(themeClass);
     document.body.setAttribute('data-theme-color', theme.primaryColor);
 
     // Save theme configuration

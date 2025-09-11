@@ -7,14 +7,17 @@
 @tailwind components;
 @tailwind utilities;
 
-// Incluir core de Material
+// ================================================
+// BASE THEMING (NO DUPLICATES)
+// ================================================
+
+// Generate base theme styles only once for the default theme
+$default-light-theme: map.get(map.get(theme.$themes, 'jobmagnetic-blue'), 'light');
+
+// Apply base Material styles
 @include mat.core();
 
-// ================================================
-// GENERATE ALL THEME COMBINATIONS WITH DATA ATTRIBUTES
-// ================================================
-
-// Iterar sobre todos los temas generados
+// Generate base themes (only color styles, no typography)
 @each $color-name, $theme-variants in theme.$themes {
   $light-theme: map.get($theme-variants, 'light');
   $dark-theme: map.get($theme-variants, 'dark');
@@ -25,11 +28,11 @@
     :root,
     .light-theme,
     .light-theme[data-theme-color="#{$color-name}"] {
-      @include mat.all-component-themes($light-theme);
+      @include mat.all-component-colors($light-theme);
     }
   } @else {
     .light-theme[data-theme-color="#{$color-name}"] {
-      @include mat.all-component-themes($light-theme);
+      @include mat.all-component-colors($light-theme);
     }
   }
 
@@ -37,11 +40,11 @@
   @if $color-name == 'jobmagnetic-blue' {
     .dark-theme,
     .dark-theme[data-theme-color="#{$color-name}"] {
-      @include mat.all-component-themes($dark-theme);
+      @include mat.all-component-colors($dark-theme);
     }
   } @else {
     .dark-theme[data-theme-color="#{$color-name}"] {
-      @include mat.all-component-themes($dark-theme);
+      @include mat.all-component-colors($dark-theme);
     }
   }
 }

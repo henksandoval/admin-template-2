@@ -1,1 +1,219 @@
-<p>tabs works!</p>
+<div class="p-6">
+  <!-- Header -->
+  <div class="mb-6">
+    <button mat-button (click)="goBack()" class="mb-4" style="color: var(--mat-sys-primary);">
+      <mat-icon class="mr-2">arrow_back</mat-icon>
+      Back to Showcase
+    </button>
+    <h1 class="text-3xl font-bold mb-2" style="color: var(--mat-sys-primary);">
+      📑 Tabs
+    </h1>
+    <p class="text-lg" style="color: var(--mat-sys-on-surface-variant);">
+      Organize content into separate views using tabbed navigation
+    </p>
+  </div>
+
+  <!-- Basic Tabs -->
+  <mat-card class="mb-8 shadow-lg">
+    <mat-card-header>
+      <mat-card-title class="text-xl font-semibold">Basic Tabs</mat-card-title>
+      <mat-card-subtitle>Simple tab navigation</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content class="p-6">
+      <mat-tab-group>
+        <mat-tab label="First"> 
+          <div class="p-4">
+            <h3 class="text-lg font-medium mb-2">First Tab Content</h3>
+            <p>This is the content of the first tab. You can put any HTML content here including forms, lists, or other components.</p>
+          </div>
+        </mat-tab>
+        <mat-tab label="Second"> 
+          <div class="p-4">
+            <h3 class="text-lg font-medium mb-2">Second Tab Content</h3>
+            <p>This is the content of the second tab. Each tab can have completely different content and layout.</p>
+          </div>
+        </mat-tab>
+        <mat-tab label="Third"> 
+          <div class="p-4">
+            <h3 class="text-lg font-medium mb-2">Third Tab Content</h3>
+            <p>This is the content of the third tab. Tabs are useful for organizing related information.</p>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Tabs with Icons -->
+  <mat-card class="mb-8 shadow-lg">
+    <mat-card-header>
+      <mat-card-title class="text-xl font-semibold">Tabs with Icons</mat-card-title>
+      <mat-card-subtitle>Enhanced tab labels with icons</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content class="p-6">
+      <mat-tab-group>
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <mat-icon class="mr-2">home</mat-icon>
+            Home
+          </ng-template>
+          <div class="p-4">
+            <h3 class="text-lg font-medium mb-2">Home Dashboard</h3>
+            <p>Welcome to your dashboard. Here you can see an overview of your activities.</p>
+          </div>
+        </mat-tab>
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <mat-icon class="mr-2">person</mat-icon>
+            Profile
+          </ng-template>
+          <div class="p-4">
+            <h3 class="text-lg font-medium mb-2">User Profile</h3>
+            <p>Manage your profile information and account settings here.</p>
+          </div>
+        </mat-tab>
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <mat-icon class="mr-2">settings</mat-icon>
+            Settings
+          </ng-template>
+          <div class="p-4">
+            <h3 class="text-lg font-medium mb-2">Application Settings</h3>
+            <p>Configure your application preferences and system settings.</p>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Dynamic Tabs -->
+  <mat-card class="mb-8 shadow-lg">
+    <mat-card-header>
+      <mat-card-title class="text-xl font-semibold">Dynamic Tabs</mat-card-title>
+      <mat-card-subtitle>Add and remove tabs dynamically</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content class="p-6">
+      <div class="mb-4">
+        <button mat-raised-button color="primary" (click)="addTab()" class="mr-2">Add Tab</button>
+        <span class="text-sm" style="color: var(--mat-sys-on-surface-variant);">
+          Total tabs: {{ dynamicTabs.length }}
+        </span>
+      </div>
+      
+      <mat-tab-group [(selectedIndex)]="selectedTabIndex">
+        <mat-tab *ngFor="let tab of dynamicTabs; let index = index" [label]="tab.label">
+          <div class="p-4">
+            <div class="flex justify-between items-start mb-4">
+              <h3 class="text-lg font-medium">{{ tab.label }}</h3>
+              <button mat-icon-button color="warn" (click)="removeTab(index)" [disabled]="dynamicTabs.length === 1">
+                <mat-icon>close</mat-icon>
+              </button>
+            </div>
+            <p>{{ tab.content }}</p>
+            <p class="mt-2 text-sm" style="color: var(--mat-sys-on-surface-variant);">
+              Tab index: {{ index }}
+            </p>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Tab Group Variations -->
+  <mat-card class="mb-8 shadow-lg">
+    <mat-card-header>
+      <mat-card-title class="text-xl font-semibold">Tab Group Variations</mat-card-title>
+      <mat-card-subtitle>Different configurations and styles</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content class="p-6">
+      <div class="space-y-8">
+        <!-- Background color -->
+        <div>
+          <h3 class="text-lg font-medium mb-4">Colored Background</h3>
+          <mat-tab-group backgroundColor="primary">
+            <mat-tab label="Primary Tab 1">
+              <div class="p-4">Content for primary colored tab 1</div>
+            </mat-tab>
+            <mat-tab label="Primary Tab 2">
+              <div class="p-4">Content for primary colored tab 2</div>
+            </mat-tab>
+          </mat-tab-group>
+        </div>
+
+        <!-- Accent color -->
+        <div>
+          <h3 class="text-lg font-medium mb-4">Accent Color</h3>
+          <mat-tab-group color="accent">
+            <mat-tab label="Accent Tab 1">
+              <div class="p-4">Content for accent colored tab 1</div>
+            </mat-tab>
+            <mat-tab label="Accent Tab 2">
+              <div class="p-4">Content for accent colored tab 2</div>
+            </mat-tab>
+          </mat-tab-group>
+        </div>
+
+        <!-- Disabled tab -->
+        <div>
+          <h3 class="text-lg font-medium mb-4">With Disabled Tab</h3>
+          <mat-tab-group>
+            <mat-tab label="Enabled Tab">
+              <div class="p-4">This tab is enabled and can be clicked</div>
+            </mat-tab>
+            <mat-tab label="Disabled Tab" [disabled]="true">
+              <div class="p-4">This content won't be shown</div>
+            </mat-tab>
+            <mat-tab label="Another Enabled">
+              <div class="p-4">This tab is also enabled</div>
+            </mat-tab>
+          </mat-tab-group>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Code Example -->
+  <mat-card class="mb-8">
+    <mat-card-header>
+      <mat-card-title class="text-lg font-semibold">Code Example</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="p-4 rounded-lg" style="background-color: var(--mat-sys-surface-variant);">
+        <pre class="text-sm overflow-x-auto" style="color: var(--mat-sys-on-surface-variant);">
+<span style="color: var(--mat-sys-primary);">// Basic tab group</span>
+&lt;mat-tab-group&gt;
+  &lt;mat-tab label="First"&gt;
+    &lt;div class="p-4"&gt;
+      &lt;h3&gt;First Tab Content&lt;/h3&gt;
+      &lt;p&gt;Content goes here&lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/mat-tab&gt;
+  &lt;mat-tab label="Second"&gt;
+    &lt;div class="p-4"&gt;Second tab content&lt;/div&gt;
+  &lt;/mat-tab&gt;
+&lt;/mat-tab-group&gt;
+
+<span style="color: var(--mat-sys-primary);">// Tab with icon</span>
+&lt;mat-tab&gt;
+  &lt;ng-template mat-tab-label&gt;
+    &lt;mat-icon&gt;home&lt;/mat-icon&gt;
+    Home
+  &lt;/ng-template&gt;
+  &lt;div&gt;Tab content&lt;/div&gt;
+&lt;/mat-tab&gt;
+
+<span style="color: var(--mat-sys-primary);">// Colored tab group</span>
+&lt;mat-tab-group backgroundColor="primary" color="accent"&gt;
+  &lt;mat-tab label="Tab 1"&gt;Content 1&lt;/mat-tab&gt;
+  &lt;mat-tab label="Tab 2" [disabled]="true"&gt;Content 2&lt;/mat-tab&gt;
+&lt;/mat-tab-group&gt;
+
+<span style="color: var(--mat-sys-primary);">// Dynamic tabs</span>
+&lt;mat-tab-group [(selectedIndex)]="selectedTabIndex"&gt;
+  &lt;mat-tab *ngFor="let tab of dynamicTabs" [label]="tab.label"&gt;
+    &#123;&#123;tab.content&#125;&#125;
+  &lt;/mat-tab&gt;
+&lt;/mat-tab-group&gt;</pre>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

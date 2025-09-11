@@ -98,6 +98,51 @@ export const routes: AppRoute[] = [
               level: 2
             }
           },
+          {
+            path: 'expansion',
+            loadComponent: () => import('./features/showcase/pages/expansion/expansion.component').then(m => m.ExpansionComponent),
+            data: {
+              label: 'Expansion Panels',
+              icon: 'expand_more',
+              level: 2
+            }
+          },
+          {
+            path: 'tabs',
+            loadComponent: () => import('./features/showcase/pages/tabs/tabs.component').then(m => m.TabsComponent),
+            data: {
+              label: 'Tabs',
+              icon: 'tab',
+              level: 2
+            }
+          },
+          {
+            path: 'lists',
+            loadComponent: () => import('./features/showcase/pages/lists/lists.component').then(m => m.ListsComponent),
+            data: {
+              label: 'Lists',
+              icon: 'list',
+              level: 2
+            }
+          },
+          {
+            path: 'interactive',
+            loadComponent: () => import('./features/showcase/pages/interactive/interactive.component').then(m => m.InteractiveComponent),
+            data: {
+              label: 'Interactive Elements',
+              icon: 'touch_app',
+              level: 2
+            }
+          },
+          {
+            path: 'jobmagnetic',
+            loadComponent: () => import('./features/showcase/pages/jobmagnetic/jobmagnetic.component').then(m => m.JobmagneticComponent),
+            data: {
+              label: 'JobMagnetic Variables',
+              icon: 'palette',
+              level: 2
+            }
+          },
         ]
       },
       {

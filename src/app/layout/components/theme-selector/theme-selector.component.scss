@@ -1,45 +1,30 @@
-.theme-toggle {
-  transition: all 0.3s ease;
-}
-
-.theme-toggle:hover {
-  transform: scale(1.1);
-}
+/* Theme menu specific styles - only styles that cannot be achieved with Tailwind */
 
 .theme-menu {
-  min-width: 280px;
+  min-width: 17.5rem; /* 280px - convert to rem */
 }
 
 .theme-menu-header {
-  display: flex;
-  align-items: center;
-  padding: 16px;
-  gap: 12px;
+  @apply flex items-center gap-3;
+  padding: 1rem; /* 16px - convert to rem */
   color: var(--mat-sys-primary);
 }
 
 .theme-icon {
-  font-size: 24px;
-  width: 24px;
-  height: 24px;
+  @apply text-2xl w-6 h-6; /* Use Tailwind classes */
 }
 
 .theme-title {
-  font-weight: 600;
-  font-size: 16px;
+  @apply font-semibold text-base; /* Use Tailwind classes */
 }
 
 .theme-section {
-  padding: 12px 16px;
+  @apply p-4; /* 12px 16px - use Tailwind padding */
 }
 
 .section-title {
-  font-weight: 500;
-  font-size: 14px;
+  @apply font-medium text-sm mb-2 uppercase tracking-wider; /* Use Tailwind classes */
   color: var(--mat-sys-on-surface-variant);
-  margin-bottom: 8px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
 }
 
 .mat-mdc-menu-item.active {
@@ -48,44 +33,30 @@
 }
 
 .check-icon {
+  @apply ml-auto; /* Use Tailwind classes */
   color: var(--mat-sys-primary);
-  margin-left: auto;
 }
 
 .color-label {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 8px;
-  font-size: 14px;
+  @apply flex items-center justify-between mb-2 text-sm; /* Use Tailwind classes */
 }
 
 .color-preview {
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  border: 2px solid var(--mat-sys-outline);
+  @apply w-6 h-6 rounded-full border-2; /* Use Tailwind classes */
+  border-color: var(--mat-sys-outline);
   box-shadow: var(--mat-sys-level1-shadow);
 }
 
 .color-presets {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
+  @apply flex gap-2 flex-wrap; /* Use Tailwind classes */
 }
 
 .color-preset {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  border: 2px solid transparent;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  position: relative;
+  @apply w-8 h-8 rounded-full border-2 border-transparent cursor-pointer transition-all duration-200 relative; /* Use Tailwind classes */
 }
 
 .color-preset:hover {
-  transform: scale(1.1);
+  @apply scale-110; /* Use Tailwind classes */
   border-color: var(--mat-sys-outline);
 }
 
@@ -94,15 +65,10 @@
   box-shadow: 0 0 0 2px var(--mat-sys-primary-container);
 }
 
+/* Custom pseudo-element for checkmark - cannot be done with Tailwind */
 .color-preset.active::after {
   content: '✓';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: white;
-  font-size: 14px;
-  font-weight: bold;
+  @apply absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-sm font-bold;
   text-shadow: var(--mat-sys-level1-shadow);
 }
 

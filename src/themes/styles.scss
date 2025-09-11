@@ -213,6 +213,110 @@ a:hover {
   color: var(--mat-sys-primary);
 }
 
+// ================================================
+// GLOBAL SCROLLBAR STYLES (Application-wide)
+// ================================================
+
+/* Standard global scrollbar for the main document */
+:global(html) {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(var(--mat-sys-outline-rgb), 0.3) transparent;
+  scroll-behavior: smooth;
+}
+
+:global(body)::-webkit-scrollbar {
+  width: 0.625rem; /* 10px */
+}
+
+:global(body)::-webkit-scrollbar-track {
+  background: var(--mat-sys-surface-container-lowest);
+  border-radius: 0.3125rem; /* 5px */
+}
+
+:global(body)::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    180deg,
+    rgba(var(--mat-sys-outline-rgb), 0.3) 0%,
+    rgba(var(--mat-sys-outline-rgb), 0.5) 50%,
+    rgba(var(--mat-sys-outline-rgb), 0.3) 100%
+  );
+  border-radius: 0.3125rem; /* 5px */
+  border: 1px solid rgba(var(--mat-sys-outline-rgb), 0.1);
+  transition: all 0.3s ease;
+}
+
+:global(body)::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(
+    180deg,
+    rgba(var(--mat-sys-outline-rgb), 0.4) 0%,
+    rgba(var(--mat-sys-outline-rgb), 0.6) 50%,
+    rgba(var(--mat-sys-outline-rgb), 0.4) 100%
+  );
+  transform: scaleX(1.2);
+}
+
+/* Dark theme adaptations for global scrollbar */
+:host-context(.dark) :global(body)::-webkit-scrollbar-track {
+  background: var(--mat-sys-surface-container-high);
+}
+
+// ================================================
+// SASS MIXINS FOR DRY PRINCIPLES
+// ================================================
+
+// Base transition mixin
+@mixin smooth-transition($properties: all, $duration: 0.3s, $easing: ease) {
+  transition: $properties $duration $easing;
+}
+
+// Hover transform mixin
+@mixin hover-transform($transform: translateY(-0.125rem)) {
+  @include smooth-transition(transform, 0.2s, ease-in-out);
+  
+  &:hover {
+    transform: $transform;
+  }
+}
+
+// Centered flex mixin
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// ================================================
+// REUSABLE INTERACTION UTILITIES
+// ================================================
+
+/* Hover lift effect for cards - truly reusable across multiple components */
+.card-hover-lift {
+  @include hover-transform(translateY(-0.125rem)); /* -2px */
+}
+
+/* Circular avatar with centered icon - reusable pattern */
+.avatar-icon {
+  @include flex-center;
+  width: 2.5rem; /* 40px */
+  height: 2.5rem; /* 40px */
+  border-radius: 50%;
+  
+  mat-icon {
+    font-size: 1.5rem; /* 24px */
+    width: 1.5rem; /* 24px */
+    height: 1.5rem; /* 24px */
+  }
+}
+
+/* Hover scale effect for interactive elements - truly reusable */
+.hover-scale {
+  @include smooth-transition(all, 0.3s, ease);
+  
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+
 // Custom utilities that complement Tailwind and Angular Material
 // (mantener solo utilidades específicas que no proporciona Tailwind)
 

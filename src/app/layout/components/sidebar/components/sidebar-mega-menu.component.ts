@@ -56,6 +56,10 @@ export class SidebarMegaMenuComponent {
     return `${parentLabel}-${itemLabel}`;
   }
 
+  getCursorClass(hasRoute: boolean): string {
+    return hasRoute ? 'cursor-pointer' : 'cursor-default';
+  }
+
   getItemClasses(item: NavigationItem): string {
     const isActive = item.route && this.navigationService.isActiveRoute(item.route.substring(1));
     let baseClasses = 'transition-all duration-200';

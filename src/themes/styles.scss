@@ -17,11 +17,23 @@ $dark-theme: theme.$dark-theme;
 :root,
 .light-theme {
   @include mat.all-component-themes($light-theme);
+  
+  // Override primary and tertiary colors with dynamic custom properties
+  & {
+    --mat-sys-primary: var(--jobmagnetic-primary, #4758B8);
+    --mat-sys-tertiary: var(--jobmagnetic-accent, #00D58A);
+  }
 }
 
 // Tema oscuro
 .dark-theme {
   @include mat.all-component-themes($dark-theme);
+  
+  // Override primary and tertiary colors with dynamic custom properties
+  & {
+    --mat-sys-primary: var(--jobmagnetic-primary, #4758B8);
+    --mat-sys-tertiary: var(--jobmagnetic-accent, #00D58A);
+  }
 }
 
 // Aplicar colores globales al body

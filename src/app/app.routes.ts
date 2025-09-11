@@ -71,6 +71,33 @@ export const routes: AppRoute[] = [
               level: 2
             }
           },
+          {
+            path: 'chips',
+            loadComponent: () => import('./features/showcase/pages/chips/chips.component').then(m => m.ChipsComponent),
+            data: {
+              label: 'Chips',
+              icon: 'label',
+              level: 2
+            }
+          },
+          {
+            path: 'sliders',
+            loadComponent: () => import('./features/showcase/pages/sliders/sliders.component').then(m => m.SlidersComponent),
+            data: {
+              label: 'Sliders',
+              icon: 'tune',
+              level: 2
+            }
+          },
+          {
+            path: 'progress',
+            loadComponent: () => import('./features/showcase/pages/progress/progress.component').then(m => m.ProgressComponent),
+            data: {
+              label: 'Progress Indicators',
+              icon: 'progress_activity',
+              level: 2
+            }
+          },
         ]
       },
       {

@@ -1,0 +1,232 @@
+<div class="p-6">
+  <!-- Header -->
+  <div class="mb-6">
+    <button mat-button (click)="goBack()" class="mb-4" style="color: var(--mat-sys-primary);">
+      <mat-icon class="mr-2">arrow_back</mat-icon>
+      Back to Showcase
+    </button>
+    <h1 class="text-3xl font-bold mb-2" style="color: var(--mat-sys-primary);">
+      🎯 Interactive Elements
+    </h1>
+    <p class="text-lg" style="color: var(--mat-sys-on-surface-variant);">
+      Tooltips, menus, and dialogs for enhanced user interaction
+    </p>
+  </div>
+
+  <!-- Tooltips -->
+  <mat-card class="mb-8 shadow-lg">
+    <mat-card-header>
+      <mat-card-title class="text-xl font-semibold">Tooltips</mat-card-title>
+      <mat-card-subtitle>Helpful hints and information on hover</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content class="p-6">
+      <div class="space-y-6">
+        <!-- Basic tooltips -->
+        <div>
+          <h3 class="text-lg font-medium mb-4">Basic Tooltips</h3>
+          <div class="flex flex-wrap gap-4">
+            <button mat-raised-button matTooltip="This is a basic tooltip">Basic Tooltip</button>
+            <button mat-raised-button color="primary" matTooltip="Tooltip with primary color" matTooltipClass="custom-tooltip">Primary Button</button>
+            <button mat-icon-button matTooltip="Icon button tooltip" aria-label="Settings">
+              <mat-icon>settings</mat-icon>
+            </button>
+          </div>
+        </div>
+
+        <!-- Tooltip positions -->
+        <div>
+          <h3 class="text-lg font-medium mb-4">Tooltip Positions</h3>
+          <div class="flex flex-wrap gap-4">
+            <button mat-raised-button matTooltip="Above tooltip" matTooltipPosition="above">Above</button>
+            <button mat-raised-button matTooltip="Below tooltip" matTooltipPosition="below">Below</button>
+            <button mat-raised-button matTooltip="Left tooltip" matTooltipPosition="left">Left</button>
+            <button mat-raised-button matTooltip="Right tooltip" matTooltipPosition="right">Right</button>
+          </div>
+        </div>
+
+        <!-- Custom delay -->
+        <div>
+          <h3 class="text-lg font-medium mb-4">Custom Delay</h3>
+          <div class="flex flex-wrap gap-4">
+            <button mat-raised-button matTooltip="Fast tooltip (500ms)" [matTooltipShowDelay]="500">Fast</button>
+            <button mat-raised-button matTooltip="Normal tooltip (1000ms)" [matTooltipShowDelay]="1000">Normal</button>
+            <button mat-raised-button matTooltip="Slow tooltip (2000ms)" [matTooltipShowDelay]="2000">Slow</button>
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Menus -->
+  <mat-card class="mb-8 shadow-lg">
+    <mat-card-header>
+      <mat-card-title class="text-xl font-semibold">Menus</mat-card-title>
+      <mat-card-subtitle>Contextual actions and navigation</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content class="p-6">
+      <div class="space-y-6">
+        <!-- Basic menu -->
+        <div>
+          <h3 class="text-lg font-medium mb-4">Basic Menu</h3>
+          <button mat-raised-button [matMenuTriggerFor]="basicMenu">Open Menu</button>
+          <mat-menu #basicMenu="matMenu">
+            <button mat-menu-item>
+              <mat-icon>save</mat-icon>
+              Save
+            </button>
+            <button mat-menu-item>
+              <mat-icon>edit</mat-icon>
+              Edit
+            </button>
+            <button mat-menu-item disabled>
+              <mat-icon>delete</mat-icon>
+              Delete (disabled)
+            </button>
+          </mat-menu>
+        </div>
+
+        <!-- Menu with nested submenu -->
+        <div>
+          <h3 class="text-lg font-medium mb-4">Nested Menu</h3>
+          <button mat-raised-button [matMenuTriggerFor]="nestedMenu">File Menu</button>
+          <mat-menu #nestedMenu="matMenu">
+            <button mat-menu-item [matMenuTriggerFor]="newSubmenu">
+              <mat-icon>add</mat-icon>
+              New
+            </button>
+            <button mat-menu-item>
+              <mat-icon>folder_open</mat-icon>
+              Open
+            </button>
+            <button mat-menu-item>
+              <mat-icon>save</mat-icon>
+              Save
+            </button>
+          </mat-menu>
+
+          <mat-menu #newSubmenu="matMenu">
+            <button mat-menu-item>
+              <mat-icon>description</mat-icon>
+              Document
+            </button>
+            <button mat-menu-item>
+              <mat-icon>folder</mat-icon>
+              Folder
+            </button>
+            <button mat-menu-item>
+              <mat-icon>image</mat-icon>
+              Image
+            </button>
+          </mat-menu>
+        </div>
+
+        <!-- Icon menu -->
+        <div>
+          <h3 class="text-lg font-medium mb-4">Icon Menu</h3>
+          <button mat-icon-button [matMenuTriggerFor]="iconMenu" aria-label="More options">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #iconMenu="matMenu">
+            <button mat-menu-item>
+              <mat-icon>share</mat-icon>
+              Share
+            </button>
+            <button mat-menu-item>
+              <mat-icon>favorite</mat-icon>
+              Add to Favorites
+            </button>
+            <button mat-menu-item>
+              <mat-icon>report</mat-icon>
+              Report Issue
+            </button>
+          </mat-menu>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Dialogs -->
+  <mat-card class="mb-8 shadow-lg">
+    <mat-card-header>
+      <mat-card-title class="text-xl font-semibold">Dialogs</mat-card-title>
+      <mat-card-subtitle>Modal overlays for important actions</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content class="p-6">
+      <div class="space-y-6">
+        <!-- Dialog buttons -->
+        <div>
+          <h3 class="text-lg font-medium mb-4">Dialog Examples</h3>
+          <div class="flex flex-wrap gap-4">
+            <button mat-raised-button color="primary" (click)="openDialog()">Basic Dialog</button>
+            <button mat-raised-button color="accent" (click)="openDialog()">Confirmation Dialog</button>
+            <button mat-raised-button color="warn" (click)="openDialog()">Alert Dialog</button>
+          </div>
+          <p class="mt-4 text-sm" style="color: var(--mat-sys-on-surface-variant);">
+            Note: Dialog functionality would require creating separate dialog components. 
+            This is a simplified example showing the trigger buttons.
+          </p>
+        </div>
+
+        <!-- Info about dialogs -->
+        <div class="bg-blue-50 p-4 rounded-lg">
+          <h4 class="font-medium text-blue-900 mb-2">Dialog Implementation Notes</h4>
+          <p class="text-sm text-blue-800">
+            Dialogs in Angular Material require creating separate components for the dialog content. 
+            You would use <code>MatDialog.open()</code> to display them. Each dialog can have custom 
+            content, actions, and can return data when closed.
+          </p>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Code Example -->
+  <mat-card class="mb-8">
+    <mat-card-header>
+      <mat-card-title class="text-lg font-semibold">Code Example</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="p-4 rounded-lg" style="background-color: var(--mat-sys-surface-variant);">
+        <pre class="text-sm overflow-x-auto" style="color: var(--mat-sys-on-surface-variant);">
+<span style="color: var(--mat-sys-primary);">// Basic tooltip</span>
+&lt;button mat-raised-button 
+        matTooltip="This is a tooltip"
+        matTooltipPosition="above"&gt;
+  Hover me
+&lt;/button&gt;
+
+<span style="color: var(--mat-sys-primary);">// Basic menu</span>
+&lt;button mat-raised-button [matMenuTriggerFor]="menu"&gt;
+  Open Menu
+&lt;/button&gt;
+&lt;mat-menu #menu="matMenu"&gt;
+  &lt;button mat-menu-item&gt;
+    &lt;mat-icon&gt;save&lt;/mat-icon&gt;
+    Save
+  &lt;/button&gt;
+  &lt;button mat-menu-item&gt;Edit&lt;/button&gt;
+&lt;/mat-menu&gt;
+
+<span style="color: var(--mat-sys-primary);">// Nested menu</span>
+&lt;mat-menu #parentMenu="matMenu"&gt;
+  &lt;button mat-menu-item [matMenuTriggerFor]="childMenu"&gt;
+    Submenu
+  &lt;/button&gt;
+&lt;/mat-menu&gt;
+&lt;mat-menu #childMenu="matMenu"&gt;
+  &lt;button mat-menu-item&gt;Option 1&lt;/button&gt;
+&lt;/mat-menu&gt;
+
+<span style="color: var(--mat-sys-primary);">// Dialog (in component)</span>
+constructor(private dialog: MatDialog) &#123;&#125;
+
+openDialog() &#123;
+  this.dialog.open(MyDialogComponent, &#123;
+    width: '400px',
+    data: &#123; message: 'Hello!' &#125;
+  &#125;);
+&#125;</pre>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

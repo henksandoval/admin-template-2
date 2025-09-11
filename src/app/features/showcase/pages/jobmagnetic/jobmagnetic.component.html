@@ -1,0 +1,250 @@
+<div class="p-6">
+  <!-- Header -->
+  <div class="mb-6">
+    <button mat-button (click)="goBack()" class="mb-4" style="color: var(--mat-sys-primary);">
+      <mat-icon class="mr-2">arrow_back</mat-icon>
+      Back to Showcase
+    </button>
+    <h1 class="text-3xl font-bold mb-2" style="color: var(--mat-sys-primary);">
+      🎨 JobMagnetic Design System
+    </h1>
+    <p class="text-lg" style="color: var(--mat-sys-on-surface-variant);">
+      Visual guide to the custom CSS variables and design tokens used in this project
+    </p>
+  </div>
+
+  <!-- Color Palette -->
+  <mat-card class="mb-8 shadow-lg">
+    <mat-card-header>
+      <mat-card-title class="text-xl font-semibold">Color Palette</mat-card-title>
+      <mat-card-subtitle>Material Design 3 color tokens</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content class="p-6">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <!-- Primary Colors -->
+        <div class="text-center">
+          <div class="w-full h-16 rounded-lg mb-2" style="background-color: var(--mat-sys-primary);"></div>
+          <p class="text-sm font-medium">Primary</p>
+          <p class="text-xs" style="color: var(--mat-sys-on-surface-variant);">var(--mat-sys-primary)</p>
+        </div>
+        
+        <div class="text-center">
+          <div class="w-full h-16 rounded-lg mb-2" style="background-color: var(--mat-sys-on-primary);"></div>
+          <p class="text-sm font-medium">On Primary</p>
+          <p class="text-xs" style="color: var(--mat-sys-on-surface-variant);">var(--mat-sys-on-primary)</p>
+        </div>
+
+        <div class="text-center">
+          <div class="w-full h-16 rounded-lg mb-2" style="background-color: var(--mat-sys-secondary);"></div>
+          <p class="text-sm font-medium">Secondary</p>
+          <p class="text-xs" style="color: var(--mat-sys-on-surface-variant);">var(--mat-sys-secondary)</p>
+        </div>
+
+        <div class="text-center">
+          <div class="w-full h-16 rounded-lg mb-2" style="background-color: var(--mat-sys-tertiary);"></div>
+          <p class="text-sm font-medium">Tertiary</p>
+          <p class="text-xs" style="color: var(--mat-sys-on-surface-variant);">var(--mat-sys-tertiary)</p>
+        </div>
+
+        <!-- Surface Colors -->
+        <div class="text-center">
+          <div class="w-full h-16 rounded-lg mb-2 border" style="background-color: var(--mat-sys-surface);"></div>
+          <p class="text-sm font-medium">Surface</p>
+          <p class="text-xs" style="color: var(--mat-sys-on-surface-variant);">var(--mat-sys-surface)</p>
+        </div>
+
+        <div class="text-center">
+          <div class="w-full h-16 rounded-lg mb-2" style="background-color: var(--mat-sys-surface-variant);"></div>
+          <p class="text-sm font-medium">Surface Variant</p>
+          <p class="text-xs" style="color: var(--mat-sys-on-surface-variant);">var(--mat-sys-surface-variant)</p>
+        </div>
+
+        <div class="text-center">
+          <div class="w-full h-16 rounded-lg mb-2" style="background-color: var(--mat-sys-error);"></div>
+          <p class="text-sm font-medium">Error</p>
+          <p class="text-xs" style="color: var(--mat-sys-on-surface-variant);">var(--mat-sys-error)</p>
+        </div>
+
+        <div class="text-center">
+          <div class="w-full h-16 rounded-lg mb-2" style="background-color: var(--mat-sys-outline);"></div>
+          <p class="text-sm font-medium">Outline</p>
+          <p class="text-xs" style="color: var(--mat-sys-on-surface-variant);">var(--mat-sys-outline)</p>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Typography -->
+  <mat-card class="mb-8 shadow-lg">
+    <mat-card-header>
+      <mat-card-title class="text-xl font-semibold">Typography Scale</mat-card-title>
+      <mat-card-subtitle>Material Design 3 typography system</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content class="p-6">
+      <div class="space-y-6">
+        <div>
+          <h1 class="text-6xl font-light mb-2" style="color: var(--mat-sys-on-surface);">Display Large</h1>
+          <p class="text-sm" style="color: var(--mat-sys-on-surface-variant);">text-6xl font-light - For hero sections and major headings</p>
+        </div>
+
+        <div>
+          <h2 class="text-4xl font-normal mb-2" style="color: var(--mat-sys-on-surface);">Headline Large</h2>
+          <p class="text-sm" style="color: var(--mat-sys-on-surface-variant);">text-4xl font-normal - For page titles and section headers</p>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-medium mb-2" style="color: var(--mat-sys-on-surface);">Title Large</h3>
+          <p class="text-sm" style="color: var(--mat-sys-on-surface-variant);">text-2xl font-medium - For card titles and component headers</p>
+        </div>
+
+        <div>
+          <h4 class="text-xl font-medium mb-2" style="color: var(--mat-sys-on-surface);">Title Medium</h4>
+          <p class="text-sm" style="color: var(--mat-sys-on-surface-variant);">text-xl font-medium - For subsection titles</p>
+        </div>
+
+        <div>
+          <h5 class="text-lg font-medium mb-2" style="color: var(--mat-sys-on-surface);">Title Small</h5>
+          <p class="text-sm" style="color: var(--mat-sys-on-surface-variant);">text-lg font-medium - For smaller section headers</p>
+        </div>
+
+        <div>
+          <p class="text-base font-normal mb-2" style="color: var(--mat-sys-on-surface);">Body Large - Regular paragraph text</p>
+          <p class="text-sm" style="color: var(--mat-sys-on-surface-variant);">text-base font-normal - Main content text</p>
+        </div>
+
+        <div>
+          <p class="text-sm font-normal mb-2" style="color: var(--mat-sys-on-surface);">Body Medium - Smaller body text</p>
+          <p class="text-xs" style="color: var(--mat-sys-on-surface-variant);">text-sm font-normal - Secondary content, captions</p>
+        </div>
+
+        <div>
+          <p class="text-xs font-medium mb-2" style="color: var(--mat-sys-on-surface);">Label Small - Button text and labels</p>
+          <p class="text-xs" style="color: var(--mat-sys-on-surface-variant);">text-xs font-medium - UI labels, button text</p>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Spacing Scale -->
+  <mat-card class="mb-8 shadow-lg">
+    <mat-card-header>
+      <mat-card-title class="text-xl font-semibold">Spacing Scale</mat-card-title>
+      <mat-card-subtitle>Consistent spacing using Tailwind CSS utilities</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content class="p-6">
+      <div class="space-y-4">
+        <div class="flex items-center">
+          <div class="w-1 h-4 bg-blue-500 mr-4"></div>
+          <span class="text-sm font-medium w-16">0.25rem</span>
+          <span class="text-xs" style="color: var(--mat-sys-on-surface-variant);">p-1, m-1 (4px)</span>
+        </div>
+        
+        <div class="flex items-center">
+          <div class="w-2 h-4 bg-blue-500 mr-4"></div>
+          <span class="text-sm font-medium w-16">0.5rem</span>
+          <span class="text-xs" style="color: var(--mat-sys-on-surface-variant);">p-2, m-2 (8px)</span>
+        </div>
+
+        <div class="flex items-center">
+          <div class="w-3 h-4 bg-blue-500 mr-4"></div>
+          <span class="text-sm font-medium w-16">0.75rem</span>
+          <span class="text-xs" style="color: var(--mat-sys-on-surface-variant);">p-3, m-3 (12px)</span>
+        </div>
+
+        <div class="flex items-center">
+          <div class="w-4 h-4 bg-blue-500 mr-4"></div>
+          <span class="text-sm font-medium w-16">1rem</span>
+          <span class="text-xs" style="color: var(--mat-sys-on-surface-variant);">p-4, m-4 (16px)</span>
+        </div>
+
+        <div class="flex items-center">
+          <div class="w-6 h-4 bg-blue-500 mr-4"></div>
+          <span class="text-sm font-medium w-16">1.5rem</span>
+          <span class="text-xs" style="color: var(--mat-sys-on-surface-variant);">p-6, m-6 (24px)</span>
+        </div>
+
+        <div class="flex items-center">
+          <div class="w-8 h-4 bg-blue-500 mr-4"></div>
+          <span class="text-sm font-medium w-16">2rem</span>
+          <span class="text-xs" style="color: var(--mat-sys-on-surface-variant);">p-8, m-8 (32px)</span>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Border Radius -->
+  <mat-card class="mb-8 shadow-lg">
+    <mat-card-header>
+      <mat-card-title class="text-xl font-semibold">Border Radius</mat-card-title>
+      <mat-card-subtitle>Consistent corner rounding</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content class="p-6">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="text-center">
+          <div class="w-16 h-16 bg-gray-300 mx-auto mb-2 rounded-none"></div>
+          <p class="text-sm font-medium">None</p>
+          <p class="text-xs" style="color: var(--mat-sys-on-surface-variant);">rounded-none</p>
+        </div>
+
+        <div class="text-center">
+          <div class="w-16 h-16 bg-gray-300 mx-auto mb-2 rounded-sm"></div>
+          <p class="text-sm font-medium">Small</p>
+          <p class="text-xs" style="color: var(--mat-sys-on-surface-variant);">rounded-sm</p>
+        </div>
+
+        <div class="text-center">
+          <div class="w-16 h-16 bg-gray-300 mx-auto mb-2 rounded-md"></div>
+          <p class="text-sm font-medium">Medium</p>
+          <p class="text-xs" style="color: var(--mat-sys-on-surface-variant);">rounded-md</p>
+        </div>
+
+        <div class="text-center">
+          <div class="w-16 h-16 bg-gray-300 mx-auto mb-2 rounded-lg"></div>
+          <p class="text-sm font-medium">Large</p>
+          <p class="text-xs" style="color: var(--mat-sys-on-surface-variant);">rounded-lg</p>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Usage Guidelines -->
+  <mat-card class="mb-8 shadow-lg">
+    <mat-card-header>
+      <mat-card-title class="text-xl font-semibold">Usage Guidelines</mat-card-title>
+      <mat-card-subtitle>Best practices for using the design system</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content class="p-6">
+      <div class="space-y-6">
+        <div>
+          <h3 class="text-lg font-medium mb-3">Color Usage</h3>
+          <ul class="space-y-2 text-sm">
+            <li>• Use <code class="px-2 py-1 bg-gray-100 rounded text-xs">var(--mat-sys-primary)</code> for main actions and key elements</li>
+            <li>• Use <code class="px-2 py-1 bg-gray-100 rounded text-xs">var(--mat-sys-on-surface-variant)</code> for secondary text</li>
+            <li>• Always ensure sufficient contrast between text and background colors</li>
+            <li>• Use semantic colors consistently (error for destructive actions, etc.)</li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-medium mb-3">Typography</h3>
+          <ul class="space-y-2 text-sm">
+            <li>• Use the typography scale consistently for hierarchy</li>
+            <li>• Combine Tailwind classes: <code class="px-2 py-1 bg-gray-100 rounded text-xs">text-2xl font-medium</code></li>
+            <li>• Maintain consistent line height and spacing</li>
+            <li>• Use font weights to establish visual hierarchy</li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-medium mb-3">Spacing</h3>
+          <ul class="space-y-2 text-sm">
+            <li>• Use consistent spacing multiples (4px base unit)</li>
+            <li>• Apply <code class="px-2 py-1 bg-gray-100 rounded text-xs">p-6</code> for card content padding</li>
+            <li>• Use <code class="px-2 py-1 bg-gray-100 rounded text-xs">space-y-*</code> utilities for vertical rhythm</li>
+            <li>• Maintain consistent margins between components</li>
+          </ul>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

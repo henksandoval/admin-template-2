@@ -1,0 +1,207 @@
+<div class="p-6">
+  <!-- Header -->
+  <div class="mb-6">
+    <button mat-button (click)="goBack()" class="mb-4" style="color: var(--mat-sys-primary);">
+      <mat-icon class="mr-2">arrow_back</mat-icon>
+      Back to Showcase
+    </button>
+    <h1 class="text-3xl font-bold mb-2" style="color: var(--mat-sys-primary);">
+      📋 Lists
+    </h1>
+    <p class="text-lg" style="color: var(--mat-sys-on-surface-variant);">
+      Display collections of items in organized lists with various layouts
+    </p>
+  </div>
+
+  <!-- Basic Lists -->
+  <mat-card class="mb-8 shadow-lg">
+    <mat-card-header>
+      <mat-card-title class="text-xl font-semibold">Basic Lists</mat-card-title>
+      <mat-card-subtitle>Simple list layouts</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content class="p-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Simple list -->
+        <div>
+          <h3 class="text-lg font-medium mb-4">Simple List</h3>
+          <mat-list>
+            <mat-list-item>Item 1</mat-list-item>
+            <mat-list-item>Item 2</mat-list-item>
+            <mat-list-item>Item 3</mat-list-item>
+          </mat-list>
+        </div>
+
+        <!-- List with icons -->
+        <div>
+          <h3 class="text-lg font-medium mb-4">List with Icons</h3>
+          <mat-list>
+            <mat-list-item>
+              <mat-icon matListItemIcon>home</mat-icon>
+              Home
+            </mat-list-item>
+            <mat-list-item>
+              <mat-icon matListItemIcon>person</mat-icon>
+              Profile
+            </mat-list-item>
+            <mat-list-item>
+              <mat-icon matListItemIcon>settings</mat-icon>
+              Settings
+            </mat-list-item>
+          </mat-list>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Navigation Lists -->
+  <mat-card class="mb-8 shadow-lg">
+    <mat-card-header>
+      <mat-card-title class="text-xl font-semibold">Navigation Lists</mat-card-title>
+      <mat-card-subtitle>Lists for navigation purposes</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content class="p-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Navigation list -->
+        <div>
+          <h3 class="text-lg font-medium mb-4">Navigation List</h3>
+          <mat-nav-list>
+            <mat-list-item>
+              <mat-icon matListItemIcon>dashboard</mat-icon>
+              <span matListItemTitle>Dashboard</span>
+            </mat-list-item>
+            <mat-list-item>
+              <mat-icon matListItemIcon>shopping_cart</mat-icon>
+              <span matListItemTitle>Orders</span>
+            </mat-list-item>
+            <mat-list-item>
+              <mat-icon matListItemIcon>people</mat-icon>
+              <span matListItemTitle>Customers</span>
+            </mat-list-item>
+          </mat-nav-list>
+        </div>
+
+        <!-- Action list -->
+        <div>
+          <h3 class="text-lg font-medium mb-4">Action List</h3>
+          <mat-action-list>
+            <mat-list-item (click)="goBack()">
+              <mat-icon matListItemIcon>save</mat-icon>
+              <span matListItemTitle>Save Document</span>
+            </mat-list-item>
+            <mat-list-item>
+              <mat-icon matListItemIcon>share</mat-icon>
+              <span matListItemTitle>Share</span>
+            </mat-list-item>
+            <mat-list-item>
+              <mat-icon matListItemIcon>delete</mat-icon>
+              <span matListItemTitle>Delete</span>
+            </mat-list-item>
+          </mat-action-list>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Advanced Lists -->
+  <mat-card class="mb-8 shadow-lg">
+    <mat-card-header>
+      <mat-card-title class="text-xl font-semibold">Advanced Lists</mat-card-title>
+      <mat-card-subtitle>Multi-line lists and avatars</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content class="p-6">
+      <!-- Contact list -->
+      <div>
+        <h3 class="text-lg font-medium mb-4">Contact List</h3>
+        <mat-list>
+          <mat-list-item *ngFor="let contact of contacts">
+            <img matListItemAvatar src="https://material.angular.io/assets/img/examples/shiba1.jpg" alt="Avatar">
+            <span matListItemTitle>{{ contact.name }}</span>
+            <span matListItemLine>{{ contact.email }}</span>
+            <span matListItemLine>{{ contact.phone }}</span>
+            <button mat-icon-button matListItemMeta>
+              <mat-icon>more_vert</mat-icon>
+            </button>
+          </mat-list-item>
+        </mat-list>
+      </div>
+
+      <mat-divider class="my-6"></mat-divider>
+
+      <!-- List with secondary actions -->
+      <div>
+        <h3 class="text-lg font-medium mb-4">List with Secondary Actions</h3>
+        <mat-list>
+          <mat-list-item>
+            <mat-icon matListItemIcon>folder</mat-icon>
+            <span matListItemTitle>Photos</span>
+            <span matListItemLine>Jan 9, 2014</span>
+            <button mat-icon-button matListItemMeta aria-label="Info about Photos">
+              <mat-icon>info</mat-icon>
+            </button>
+          </mat-list-item>
+          
+          <mat-list-item>
+            <mat-icon matListItemIcon>folder</mat-icon>
+            <span matListItemTitle>Recipes</span>
+            <span matListItemLine>Jan 17, 2014</span>
+            <button mat-icon-button matListItemMeta aria-label="Info about Recipes">
+              <mat-icon>info</mat-icon>
+            </button>
+          </mat-list-item>
+          
+          <mat-list-item>
+            <mat-icon matListItemIcon>folder</mat-icon>
+            <span matListItemTitle>Work</span>
+            <span matListItemLine>Jan 28, 2014</span>
+            <button mat-icon-button matListItemMeta aria-label="Info about Work">
+              <mat-icon>info</mat-icon>
+            </button>
+          </mat-list-item>
+        </mat-list>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Code Example -->
+  <mat-card class="mb-8">
+    <mat-card-header>
+      <mat-card-title class="text-lg font-semibold">Code Example</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="p-4 rounded-lg" style="background-color: var(--mat-sys-surface-variant);">
+        <pre class="text-sm overflow-x-auto" style="color: var(--mat-sys-on-surface-variant);">
+<span style="color: var(--mat-sys-primary);">// Simple list</span>
+&lt;mat-list&gt;
+  &lt;mat-list-item&gt;Item 1&lt;/mat-list-item&gt;
+  &lt;mat-list-item&gt;Item 2&lt;/mat-list-item&gt;
+&lt;/mat-list&gt;
+
+<span style="color: var(--mat-sys-primary);">// List with icons</span>
+&lt;mat-list&gt;
+  &lt;mat-list-item&gt;
+    &lt;mat-icon matListItemIcon&gt;home&lt;/mat-icon&gt;
+    Home
+  &lt;/mat-list-item&gt;
+&lt;/mat-list&gt;
+
+<span style="color: var(--mat-sys-primary);">// Multi-line list with avatar</span>
+&lt;mat-list&gt;
+  &lt;mat-list-item&gt;
+    &lt;img matListItemAvatar src="avatar.jpg" alt="Avatar"&gt;
+    &lt;span matListItemTitle&gt;John Doe&lt;/span&gt;
+    &lt;span matListItemLine&gt;john.doe&#64;example.com&lt;/span&gt;
+    &lt;span matListItemLine&gt;+1 234 567 8900&lt;/span&gt;
+  &lt;/mat-list-item&gt;
+&lt;/mat-list&gt;
+
+<span style="color: var(--mat-sys-primary);">// Navigation list</span>
+&lt;mat-nav-list&gt;
+  &lt;mat-list-item&gt;
+    &lt;mat-icon matListItemIcon&gt;dashboard&lt;/mat-icon&gt;
+    &lt;span matListItemTitle&gt;Dashboard&lt;/span&gt;
+  &lt;/mat-list-item&gt;
+&lt;/mat-nav-list&gt;</pre>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

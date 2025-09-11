@@ -44,6 +44,105 @@ export const routes: AppRoute[] = [
               level: 2
             }
           },
+          {
+            path: 'selections',
+            loadComponent: () => import('./features/showcase/pages/selections/selections.component').then(m => m.SelectionsComponent),
+            data: {
+              label: 'Selection Controls',
+              icon: 'radio_button_checked',
+              level: 2
+            }
+          },
+          {
+            path: 'checkboxes',
+            loadComponent: () => import('./features/showcase/pages/checkboxes/checkboxes.component').then(m => m.CheckboxesComponent),
+            data: {
+              label: 'Checkboxes & Radio',
+              icon: 'check_box',
+              level: 2
+            }
+          },
+          {
+            path: 'buttons',
+            loadComponent: () => import('./features/showcase/pages/buttons/buttons.component').then(m => m.ButtonsComponent),
+            data: {
+              label: 'Buttons & Toggles',
+              icon: 'smart_button',
+              level: 2
+            }
+          },
+          {
+            path: 'chips',
+            loadComponent: () => import('./features/showcase/pages/chips/chips.component').then(m => m.ChipsComponent),
+            data: {
+              label: 'Chips',
+              icon: 'label',
+              level: 2
+            }
+          },
+          {
+            path: 'sliders',
+            loadComponent: () => import('./features/showcase/pages/sliders/sliders.component').then(m => m.SlidersComponent),
+            data: {
+              label: 'Sliders',
+              icon: 'tune',
+              level: 2
+            }
+          },
+          {
+            path: 'progress',
+            loadComponent: () => import('./features/showcase/pages/progress/progress.component').then(m => m.ProgressComponent),
+            data: {
+              label: 'Progress Indicators',
+              icon: 'progress_activity',
+              level: 2
+            }
+          },
+          {
+            path: 'expansion',
+            loadComponent: () => import('./features/showcase/pages/expansion/expansion.component').then(m => m.ExpansionComponent),
+            data: {
+              label: 'Expansion Panels',
+              icon: 'expand_more',
+              level: 2
+            }
+          },
+          {
+            path: 'tabs',
+            loadComponent: () => import('./features/showcase/pages/tabs/tabs.component').then(m => m.TabsComponent),
+            data: {
+              label: 'Tabs',
+              icon: 'tab',
+              level: 2
+            }
+          },
+          {
+            path: 'lists',
+            loadComponent: () => import('./features/showcase/pages/lists/lists.component').then(m => m.ListsComponent),
+            data: {
+              label: 'Lists',
+              icon: 'list',
+              level: 2
+            }
+          },
+          {
+            path: 'interactive',
+            loadComponent: () => import('./features/showcase/pages/interactive/interactive.component').then(m => m.InteractiveComponent),
+            data: {
+              label: 'Interactive Elements',
+              icon: 'touch_app',
+              level: 2
+            }
+          },
+          {
+            path: 'jobmagnetic',
+            loadComponent: () => import('./features/showcase/pages/jobmagnetic/jobmagnetic.component').then(m => m.JobmagneticComponent),
+            data: {
+              label: 'JobMagnetic Variables',
+              icon: 'palette',
+              level: 2
+            }
+          },
         ]
       },
       {

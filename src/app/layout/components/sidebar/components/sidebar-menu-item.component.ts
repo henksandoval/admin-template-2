@@ -19,17 +19,26 @@ export class SidebarMenuItemComponent {
 
   public navigationService = inject(NavigationService);
 
-  getExtraPadding(level: number): number {
-    return (level - 1) * 12;
+  getPaddingClass(level: number): string {
+    switch (level) {
+      case 1: return 'pl-0';      // 0px
+      case 2: return 'pl-3';      // 12px
+      case 3: return 'pl-6';      // 24px
+      default: return 'pl-0';
+    }
   }
 
-  getIconSize(level: number): number {
+  getIconSizeClass(level: number): string {
     switch (level) {
-      case 1: return 20;
-      case 2: return 18;
-      case 3: return 16;
-      default: return 16;
+      case 1: return 'text-xl';   // 20px
+      case 2: return 'text-lg';   // 18px
+      case 3: return 'text-base'; // 16px
+      default: return 'text-base';
     }
+  }
+
+  getCursorClass(hasRoute: boolean): string {
+    return hasRoute ? 'cursor-pointer' : 'cursor-default';
   }
 
   getItemClasses(item: NavigationItem): string {

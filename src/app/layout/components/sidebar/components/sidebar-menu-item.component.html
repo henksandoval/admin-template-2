@@ -2,11 +2,11 @@
   <div *ngIf="!item.children"
        [routerLink]="item.route"
        [class]="getItemClasses(item)"
-       class="rounded-lg transition-all duration-200 cursor-pointer p-2 group hover:bg-surface-variant hover:bg-opacity-10"
-       [style.cursor]="item.route ? 'pointer' : 'default'">
+       class="rounded-lg transition-all duration-200 p-2 group hover:bg-surface-variant hover:bg-opacity-10"
+       [class]="getCursorClass(!!item.route)">
 
-    <div class="flex items-center space-x-3" [style.padding-left.px]="getExtraPadding(item.level || 1)">
-      <mat-icon [class]="getIconClasses(item)" [style.font-size.px]="getIconSize(item.level || 1)">
+    <div class="flex items-center space-x-3" [class]="getPaddingClass(item.level || 1)">
+      <mat-icon [class]="getIconClasses(item)" [class]="getIconSizeClass(item.level || 1)">
         {{ item.icon }}
       </mat-icon>
 
@@ -19,9 +19,9 @@
          [class]="getItemClasses(item)"
          class="rounded-lg transition-all duration-200 cursor-pointer p-2 group hover:bg-surface-variant hover:bg-opacity-10">
 
-      <div class="flex items-center justify-between" [style.padding-left.px]="getExtraPadding(item.level || 1)">
+      <div class="flex items-center justify-between" [class]="getPaddingClass(item.level || 1)">
         <div class="flex items-center space-x-3">
-          <mat-icon [class]="getIconClasses(item)" [style.font-size.px]="getIconSize(item.level || 1)">
+          <mat-icon [class]="getIconClasses(item)" [class]="getIconSizeClass(item.level || 1)">
             {{ item.icon }}
           </mat-icon>
 

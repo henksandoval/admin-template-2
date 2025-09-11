@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {NavigationService} from '@layout/services/navigation/navigation.service';
 
@@ -24,5 +24,5 @@ import {NavigationService} from '@layout/services/navigation/navigation.service'
   `
 })
 export class SidebarFooterComponent {
-  constructor(public navigationService: NavigationService) {}
+  public navigationService = inject(NavigationService);
 }

@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-import { DashboardComponent } from './features/dashboard/dashboard.component';
 import { AppLayoutComponent } from '@layout/layout.component';
 import { AppRoute } from '@core/models/app-route.model';
 
@@ -10,7 +9,7 @@ export const routes: AppRoute[] = [
     children: [
       {
         path: 'dashboard',
-        component: DashboardComponent,
+        loadComponent: () => import('./features/dashboard/dashboard.component').then(m => m.DashboardComponent),
         data: {
           label: 'Dashboard',
           icon: 'dashboard',
@@ -76,18 +75,6 @@ export const routes: AppRoute[] = [
           },
         ]
       },
-      // Example: Adding a new menu item is now this simple!
-      // Just add a route with data.label and it appears in the menu
-      // {
-      //   path: 'settings',
-      //   component: SettingsComponent,
-      //   data: {
-      //     label: 'Settings',
-      //     icon: 'settings',
-      //     level: 1,
-      //     order: 4
-      //   }
-      // },
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
     ]
   },

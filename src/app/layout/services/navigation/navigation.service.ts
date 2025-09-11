@@ -37,7 +37,6 @@ export class NavigationService {
   }
 
   private initializeNavigation() {
-    // Generate navigation items from routes
     const menuItems = this._routeMenuService.generateMenuFromRoutes(routes);
     this._navigationItems.set(menuItems);
   }
@@ -66,15 +65,14 @@ export class NavigationService {
     const currentRoute = this._currentRoute().toLowerCase();
     const targetRoute = route.toLowerCase();
 
-    // Exact match or starts with the route
     return currentRoute === `/${targetRoute}` ||
       currentRoute.startsWith(`/${targetRoute}/`) ||
       (targetRoute === 'dashboard' && (currentRoute === '/' || currentRoute === ''));
   }
 
   readonly sidebarWidth = computed(() => {
-    if (!this._isSidebarVisible()) return 0; // Si está oculto, ancho = 0
-    return this._isSidebarCollapsed() ? 64 : 240; // Si está visible, normal o colapsado
+    if (!this._isSidebarVisible()) return 0;
+    return this._isSidebarCollapsed() ? 64 : 240;
   });
 
   isSidebarVisible = computed(() => this._isSidebarVisible());
@@ -114,9 +112,5 @@ export class NavigationService {
 
   isMenuExpanded(itemId: string): boolean {
     return this._expandedMenus().has(itemId);
-  }
-
-  navigateTo(route: string) {
-    this._router.navigate([route]);
   }
 }

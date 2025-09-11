@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterOutlet } from '@angular/router';
+import { RouterOutlet, RouterModule } from '@angular/router';
 import {LayoutService} from '@layout/services/layout.service';
 
 @Component({
@@ -8,14 +8,15 @@ import {LayoutService} from '@layout/services/layout.service';
   standalone: true,
   imports: [
     CommonModule,
-    RouterOutlet
+    RouterOutlet,
+    RouterModule
   ],
   template: `
     <main class="flex-1 p-4 md:p-6 lg:p-8 max-w-full overflow-x-hidden">
       <div class="max-w-7xl mx-auto">
         <nav class="mb-6">
           <ol class="flex items-center space-x-2 text-sm mat-caption">
-            <li><a (click)="layoutService.navigateTo('/dashboard')" class="hover:text-primary transition-colors cursor-pointer">Home</a></li>
+            <li><a [routerLink]="['/dashboard']" class="hover:text-primary transition-colors cursor-pointer">Home</a></li>
             <li>/</li>
             <li class="font-medium mat-body-strong">
               {{ layoutService.currentPageTitle() }}
@@ -37,5 +38,5 @@ import {LayoutService} from '@layout/services/layout.service';
   `]
 })
 export class MainContentComponent {
-  constructor(public layoutService: LayoutService) {}
+  public layoutService = inject(LayoutService);
 }

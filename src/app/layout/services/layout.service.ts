@@ -1,17 +1,18 @@
-import { Injectable, signal, computed } from '@angular/core';
+import { Injectable, signal, computed, OnDestroy, inject } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
-import { filter } from 'rxjs/operators';
-import { NavigationItem } from '@layout/services/navigation/navigation.service';
+import { filter, takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class LayoutService {
-  // Signals para el estado del layout
+export class LayoutService implements OnDestroy {
+  private destroy$ = new Subject<void>();
+  private router = inject(Router);
+  
   private _isDarkTheme = signal(false);
   private _currentRoute = signal('');
 
-  // Computed signals para información derivada
   readonly currentPageTitle = computed(() => {
     const route = this._currentRoute();
     if (route.includes('dashboard')) {
@@ -22,14 +23,9 @@ export class LayoutService {
     return 'Dashboard';
   });
 
-  constructor(private router: Router) {
+  constructor() {
     this.initializeTheme();
     this.listenToRouteChanges();
-  }
-
-  // Navegación
-  navigateTo(route: string) {
-    this.router.navigate([route]);
   }
 
   private initializeTheme() {
@@ -43,9 +39,15 @@ export class LayoutService {
 
   private listenToRouteChanges() {
     this.router.events.pipe(
-      filter(event => event instanceof NavigationEnd)
+      filter(event => event instanceof NavigationEnd),
+      takeUntil(this.destroy$)
     ).subscribe((event: NavigationEnd) => {
       this._currentRoute.set(event.url);
     });
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

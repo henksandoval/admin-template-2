@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -17,14 +17,12 @@ import { NavigationItem, NavigationService } from '@layout/services/navigation/n
     SidebarMegaMenuComponent
   ],
   template: `
-    <!-- Navigation Items - Expanded -->
     <div class="py-2" *ngIf="!navigationService.isSidebarCollapsed()">
       <div *ngFor="let item of navigationService.navigationItems()" class="px-2 mb-1">
         <app-sidebar-menu-item [item]="item"></app-sidebar-menu-item>
       </div>
     </div>
 
-    <!-- Navigation Items - Collapsed (Solo iconos de nivel 1 con mega menús) -->
     <div class="py-2" *ngIf="navigationService.isSidebarCollapsed()">
       <div *ngFor="let item of navigationService.navigationItems(); let i = index" class="px-2 mb-1">
         <div class="relative">
@@ -38,7 +36,6 @@ import { NavigationItem, NavigationService } from '@layout/services/navigation/n
               {{ item.icon }}
             </mat-icon>
 
-            <!-- Mega Menu - Solo para items con children -->
             <app-sidebar-mega-menu
               *ngIf="item.children && showMegaMenu === i"
               [item]="item"
@@ -57,7 +54,7 @@ export class SidebarNavigationComponent {
   megaMenuPosition = { left: 0, top: 0 };
   private megaMenuTimeout: any;
 
-  constructor(public navigationService: NavigationService) {}
+  public navigationService = inject(NavigationService);
 
   onItemHover(item: NavigationItem, index: number, event: MouseEvent) {
     if (!item.children || !this.navigationService.isSidebarCollapsed()) return;

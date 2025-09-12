@@ -1,34 +1,40 @@
 <div class="min-h-screen flex flex-col bg-surface text-on-surface">
-  <mat-sidenav-container class="flex-1">
+  
+  <!-- Header at top, always full width (100% viewport) -->
+  <div class="sticky top-0 z-50 transition-transform duration-300" appStickyHeader #stickyHeader>
+    <app-header (menuToggle)="onMenuToggle()"></app-header>
+  </div>
 
-    <!-- Sidebar managed by Angular Material -->
-    <mat-sidenav #sidenav 
-                 [mode]="(isHandset$ | async) ? 'over' : 'side'"
-                 [opened]="(isHandset$ | async) ? false : navigationService.isSidebarVisible()"
-                 [ngClass]="sidebarWidthClass()"
-                 class="border-r border-surface-variant bg-surface-container transition-all duration-300">
-      
-      <!-- The sidebar content remains the same -->
+  <!-- Main layout area with sidebar and content -->
+  <div class="flex flex-1 relative">
+    
+    <!-- Mobile overlay for handset -->
+    <div *ngIf="(isHandset$ | async) && mobileMenuOpen()" 
+         class="fixed inset-0 bg-black bg-opacity-50 z-40"
+         (click)="closeMobileMenu()"></div>
+    
+    <!-- Sidebar - responsive and state-aware -->
+    <aside 
+      *ngIf="shouldShowSidebar() | async"
+      [ngClass]="getSidebarClasses() | async"
+      class="bg-surface-container border-r border-surface-variant transition-all duration-300 overflow-hidden flex-shrink-0">
       <app-sidebar></app-sidebar>
+    </aside>
 
-    </mat-sidenav>
-
-    <!-- Main content that adjusts automatically -->
-    <mat-sidenav-content>
+    <!-- Main content area - width adjusts based on sidebar state -->
+    <main class="flex-1 flex flex-col transition-all duration-300">
       
-      <div class="sticky top-0 z-50 transition-transform duration-300" appStickyHeader #stickyHeader>
-        <app-header (menuToggle)="onMenuToggle(sidenav)"></app-header>
-      </div>
-
-      <main class="py-6">
+      <!-- Content area -->
+      <div class="flex-1 py-6">
         <div class="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
           <app-main-content></app-main-content>
         </div>
-        
-        <!-- Footer inside main content area as per requirements -->
-        <app-footer></app-footer>
-      </main>
+      </div>
+      
+      <!-- Footer - width adjusts with content area -->
+      <app-footer></app-footer>
+      
+    </main>
 
-    </mat-sidenav-content>
-  </mat-sidenav-container>
+  </div>
 </div>

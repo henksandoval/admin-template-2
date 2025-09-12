@@ -3,12 +3,12 @@
   <div class="mb-6">
     <button mat-button (click)="goBack()" class="mb-4" style="color: var(--mat-sys-primary);">
       <mat-icon class="mr-2">arrow_back</mat-icon>
-      Back to Showcase
+      <span i18n="@@showcase.navigation.backToShowcase">Back to Showcase</span>
     </button>
-    <h1 class="text-3xl font-bold mb-2" style="color: var(--mat-sys-primary);">
+    <h1 class="text-3xl font-bold mb-2" style="color: var(--mat-sys-primary);" i18n="@@showcase.buttons.title">
       🔘 Buttons & Toggles
     </h1>
-    <p class="text-lg" style="color: var(--mat-sys-on-surface-variant);">
+    <p class="text-lg" style="color: var(--mat-sys-on-surface-variant);" i18n="@@showcase.buttons.description">
       Various button styles including flat, raised, stroked, and floating action buttons
     </p>
   </div>
@@ -16,63 +16,63 @@
   <!-- Basic Buttons -->
   <mat-card class="mb-8 shadow-lg">
     <mat-card-header>
-      <mat-card-title class="text-xl font-semibold">Basic Buttons</mat-card-title>
-      <mat-card-subtitle>Standard button variants</mat-card-subtitle>
+      <mat-card-title class="text-xl font-semibold" i18n="@@showcase.buttons.basicButtons.title">Basic Buttons</mat-card-title>
+      <mat-card-subtitle i18n="@@showcase.buttons.basicButtons.subtitle">Standard button variants</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content class="p-6">
       <div class="space-y-6">
         <!-- Button Types -->
         <div>
-          <h3 class="text-lg font-medium mb-4">Button Types</h3>
+          <h3 class="text-lg font-medium mb-4" i18n="@@showcase.buttons.buttonTypes.title">Button Types</h3>
           <div class="flex flex-wrap gap-4">
-            <button mat-button (click)="onButtonClick('basic')">Basic</button>
-            <button mat-raised-button (click)="onButtonClick('raised')">Raised</button>
-            <button mat-stroked-button (click)="onButtonClick('stroked')">Stroked</button>
-            <button mat-flat-button (click)="onButtonClick('flat')">Flat</button>
+            <button mat-button (click)="onButtonClick('basic')" i18n="@@showcase.buttons.types.basic">Basic</button>
+            <button mat-raised-button (click)="onButtonClick('raised')" i18n="@@showcase.buttons.types.raised">Raised</button>
+            <button mat-stroked-button (click)="onButtonClick('stroked')" i18n="@@showcase.buttons.types.stroked">Stroked</button>
+            <button mat-flat-button (click)="onButtonClick('flat')" i18n="@@showcase.buttons.types.flat">Flat</button>
           </div>
         </div>
 
         <!-- Primary Color -->
         <div>
-          <h3 class="text-lg font-medium mb-4">Primary Color</h3>
+          <h3 class="text-lg font-medium mb-4" i18n="@@showcase.buttons.primaryColor.title">Primary Color</h3>
           <div class="flex flex-wrap gap-4">
-            <button mat-button color="primary">Basic</button>
-            <button mat-raised-button color="primary">Raised</button>
-            <button mat-stroked-button color="primary">Stroked</button>
-            <button mat-flat-button color="primary">Flat</button>
+            <button mat-button color="primary" i18n="@@showcase.buttons.types.basic">Basic</button>
+            <button mat-raised-button color="primary" i18n="@@showcase.buttons.types.raised">Raised</button>
+            <button mat-stroked-button color="primary" i18n="@@showcase.buttons.types.stroked">Stroked</button>
+            <button mat-flat-button color="primary" i18n="@@showcase.buttons.types.flat">Flat</button>
           </div>
         </div>
 
         <!-- Accent Color -->
         <div>
-          <h3 class="text-lg font-medium mb-4">Accent Color</h3>
+          <h3 class="text-lg font-medium mb-4" i18n="@@showcase.buttons.accentColor.title">Accent Color</h3>
           <div class="flex flex-wrap gap-4">
-            <button mat-button color="accent">Basic</button>
-            <button mat-raised-button color="accent">Raised</button>
-            <button mat-stroked-button color="accent">Stroked</button>
-            <button mat-flat-button color="accent">Flat</button>
+            <button mat-button color="accent" i18n="@@showcase.buttons.types.basic">Basic</button>
+            <button mat-raised-button color="accent" i18n="@@showcase.buttons.types.raised">Raised</button>
+            <button mat-stroked-button color="accent" i18n="@@showcase.buttons.types.stroked">Stroked</button>
+            <button mat-flat-button color="accent" i18n="@@showcase.buttons.types.flat">Flat</button>
           </div>
         </div>
 
         <!-- Warn Color -->
         <div>
-          <h3 class="text-lg font-medium mb-4">Warn Color</h3>
+          <h3 class="text-lg font-medium mb-4" i18n="@@showcase.buttons.warnColor.title">Warn Color</h3>
           <div class="flex flex-wrap gap-4">
-            <button mat-button color="warn">Basic</button>
-            <button mat-raised-button color="warn">Raised</button>
-            <button mat-stroked-button color="warn">Stroked</button>
-            <button mat-flat-button color="warn">Flat</button>
+            <button mat-button color="warn" i18n="@@showcase.buttons.types.basic">Basic</button>
+            <button mat-raised-button color="warn" i18n="@@showcase.buttons.types.raised">Raised</button>
+            <button mat-stroked-button color="warn" i18n="@@showcase.buttons.types.stroked">Stroked</button>
+            <button mat-flat-button color="warn" i18n="@@showcase.buttons.types.flat">Flat</button>
           </div>
         </div>
 
         <!-- Disabled State -->
         <div>
-          <h3 class="text-lg font-medium mb-4">Disabled State</h3>
+          <h3 class="text-lg font-medium mb-4" i18n="@@showcase.buttons.disabledState.title">Disabled State</h3>
           <div class="flex flex-wrap gap-4">
-            <button mat-button [disabled]="true">Basic Disabled</button>
-            <button mat-raised-button [disabled]="true">Raised Disabled</button>
-            <button mat-stroked-button [disabled]="true">Stroked Disabled</button>
-            <button mat-flat-button [disabled]="true">Flat Disabled</button>
+            <button mat-button [disabled]="true" i18n="@@showcase.buttons.disabled.basic">Basic Disabled</button>
+            <button mat-raised-button [disabled]="true" i18n="@@showcase.buttons.disabled.raised">Raised Disabled</button>
+            <button mat-stroked-button [disabled]="true" i18n="@@showcase.buttons.disabled.stroked">Stroked Disabled</button>
+            <button mat-flat-button [disabled]="true" i18n="@@showcase.buttons.disabled.flat">Flat Disabled</button>
           </div>
         </div>
       </div>
@@ -82,28 +82,28 @@
   <!-- Icon Buttons -->
   <mat-card class="mb-8 shadow-lg">
     <mat-card-header>
-      <mat-card-title class="text-xl font-semibold">Icon Buttons</mat-card-title>
-      <mat-card-subtitle>Buttons with icons for actions</mat-card-subtitle>
+      <mat-card-title class="text-xl font-semibold" i18n="@@showcase.buttons.iconButtons.title">Icon Buttons</mat-card-title>
+      <mat-card-subtitle i18n="@@showcase.buttons.iconButtons.subtitle">Buttons with icons for actions</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content class="p-6">
       <div class="space-y-6">
         <!-- Basic Icon Buttons -->
         <div>
-          <h3 class="text-lg font-medium mb-4">Basic Icon Buttons</h3>
+          <h3 class="text-lg font-medium mb-4" i18n="@@showcase.buttons.basicIconButtons.title">Basic Icon Buttons</h3>
           <div class="flex flex-wrap gap-4">
-            <button mat-icon-button aria-label="Favorite">
+            <button mat-icon-button aria-label="Favorite" i18n-aria-label="@@showcase.buttons.iconButtons.favorite">
               <mat-icon>favorite</mat-icon>
             </button>
-            <button mat-icon-button color="primary" aria-label="Home">
+            <button mat-icon-button color="primary" aria-label="Home" i18n-aria-label="@@showcase.buttons.iconButtons.home">
               <mat-icon>home</mat-icon>
             </button>
-            <button mat-icon-button color="accent" aria-label="Settings">
+            <button mat-icon-button color="accent" aria-label="Settings" i18n-aria-label="@@showcase.buttons.iconButtons.settings">
               <mat-icon>settings</mat-icon>
             </button>
-            <button mat-icon-button color="warn" aria-label="Delete">
+            <button mat-icon-button color="warn" aria-label="Delete" i18n-aria-label="@@showcase.buttons.iconButtons.delete">
               <mat-icon>delete</mat-icon>
             </button>
-            <button mat-icon-button [disabled]="true" aria-label="Disabled">
+            <button mat-icon-button [disabled]="true" aria-label="Disabled" i18n-aria-label="@@showcase.buttons.iconButtons.disabled">
               <mat-icon>block</mat-icon>
             </button>
           </div>
@@ -111,37 +111,37 @@
 
         <!-- Buttons with Text and Icons -->
         <div>
-          <h3 class="text-lg font-medium mb-4">Buttons with Icons and Text</h3>
+          <h3 class="text-lg font-medium mb-4" i18n="@@showcase.buttons.textIconButtons.title">Buttons with Icons and Text</h3>
           <div class="flex flex-wrap gap-4">
             <button mat-raised-button color="primary">
               <mat-icon>save</mat-icon>
-              Save
+              <span i18n="@@showcase.buttons.actions.save">Save</span>
             </button>
             <button mat-stroked-button>
               <mat-icon>download</mat-icon>
-              Download
+              <span i18n="@@showcase.buttons.actions.download">Download</span>
             </button>
             <button mat-flat-button color="accent">
               <mat-icon>share</mat-icon>
-              Share
+              <span i18n="@@showcase.buttons.actions.share">Share</span>
             </button>
             <button mat-button color="warn">
               <mat-icon>delete</mat-icon>
-              Delete
+              <span i18n="@@showcase.buttons.actions.delete">Delete</span>
             </button>
           </div>
         </div>
 
         <!-- Icons at End -->
         <div>
-          <h3 class="text-lg font-medium mb-4">Icons at End</h3>
+          <h3 class="text-lg font-medium mb-4" i18n="@@showcase.buttons.iconsAtEnd.title">Icons at End</h3>
           <div class="flex flex-wrap gap-4">
             <button mat-raised-button color="primary">
-              Open
+              <span i18n="@@showcase.buttons.actions.open">Open</span>
               <mat-icon iconPositionEnd>open_in_new</mat-icon>
             </button>
             <button mat-stroked-button>
-              Next
+              <span i18n="@@showcase.buttons.actions.next">Next</span>
               <mat-icon iconPositionEnd>arrow_forward</mat-icon>
             </button>
           </div>
@@ -153,28 +153,28 @@
   <!-- Floating Action Buttons -->
   <mat-card class="mb-8 shadow-lg">
     <mat-card-header>
-      <mat-card-title class="text-xl font-semibold">Floating Action Buttons (FAB)</mat-card-title>
-      <mat-card-subtitle>Prominent buttons for primary actions</mat-card-subtitle>
+      <mat-card-title class="text-xl font-semibold" i18n="@@showcase.buttons.fab.title">Floating Action Buttons (FAB)</mat-card-title>
+      <mat-card-subtitle i18n="@@showcase.buttons.fab.subtitle">Prominent buttons for primary actions</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content class="p-6">
       <div class="space-y-6">
         <!-- Regular FABs -->
         <div>
-          <h3 class="text-lg font-medium mb-4">Regular FABs</h3>
+          <h3 class="text-lg font-medium mb-4" i18n="@@showcase.buttons.regularFabs.title">Regular FABs</h3>
           <div class="flex flex-wrap gap-4 items-center">
-            <button mat-fab aria-label="Add">
+            <button mat-fab aria-label="Add" i18n-aria-label="@@showcase.buttons.fab.add">
               <mat-icon>add</mat-icon>
             </button>
-            <button mat-fab color="primary" aria-label="Edit">
+            <button mat-fab color="primary" aria-label="Edit" i18n-aria-label="@@showcase.buttons.fab.edit">
               <mat-icon>edit</mat-icon>
             </button>
-            <button mat-fab color="accent" aria-label="Favorite">
+            <button mat-fab color="accent" aria-label="Favorite" i18n-aria-label="@@showcase.buttons.fab.favorite">
               <mat-icon>favorite</mat-icon>
             </button>
-            <button mat-fab color="warn" aria-label="Delete">
+            <button mat-fab color="warn" aria-label="Delete" i18n-aria-label="@@showcase.buttons.fab.delete">
               <mat-icon>delete</mat-icon>
             </button>
-            <button mat-fab [disabled]="true" aria-label="Disabled">
+            <button mat-fab [disabled]="true" aria-label="Disabled" i18n-aria-label="@@showcase.buttons.fab.disabled">
               <mat-icon>block</mat-icon>
             </button>
           </div>
@@ -182,21 +182,21 @@
 
         <!-- Mini FABs -->
         <div>
-          <h3 class="text-lg font-medium mb-4">Mini FABs</h3>
+          <h3 class="text-lg font-medium mb-4" i18n="@@showcase.buttons.miniFabs.title">Mini FABs</h3>
           <div class="flex flex-wrap gap-4 items-center">
-            <button mat-mini-fab aria-label="Add">
+            <button mat-mini-fab aria-label="Add" i18n-aria-label="@@showcase.buttons.fab.add">
               <mat-icon>add</mat-icon>
             </button>
-            <button mat-mini-fab color="primary" aria-label="Remove">
+            <button mat-mini-fab color="primary" aria-label="Remove" i18n-aria-label="@@showcase.buttons.fab.remove">
               <mat-icon>remove</mat-icon>
             </button>
-            <button mat-mini-fab color="accent" aria-label="Star">
+            <button mat-mini-fab color="accent" aria-label="Star" i18n-aria-label="@@showcase.buttons.fab.star">
               <mat-icon>star</mat-icon>
             </button>
-            <button mat-mini-fab color="warn" aria-label="Close">
+            <button mat-mini-fab color="warn" aria-label="Close" i18n-aria-label="@@showcase.buttons.fab.close">
               <mat-icon>close</mat-icon>
             </button>
-            <button mat-mini-fab [disabled]="true" aria-label="Disabled">
+            <button mat-mini-fab [disabled]="true" aria-label="Disabled" i18n-aria-label="@@showcase.buttons.fab.disabled">
               <mat-icon>block</mat-icon>
             </button>
           </div>
@@ -204,15 +204,15 @@
 
         <!-- Extended FABs -->
         <div>
-          <h3 class="text-lg font-medium mb-4">Extended FABs</h3>
+          <h3 class="text-lg font-medium mb-4" i18n="@@showcase.buttons.extendedFabs.title">Extended FABs</h3>
           <div class="flex flex-wrap gap-4 items-center">
             <button mat-fab extended color="primary">
               <mat-icon>add</mat-icon>
-              Create New
+              <span i18n="@@showcase.buttons.fab.createNew">Create New</span>
             </button>
             <button mat-fab extended color="accent">
               <mat-icon>edit</mat-icon>
-              Edit Item
+              <span i18n="@@showcase.buttons.fab.editItem">Edit Item</span>
             </button>
           </div>
         </div>
@@ -223,7 +223,7 @@
   <!-- Code Example -->
   <mat-card class="mb-8">
     <mat-card-header>
-      <mat-card-title class="text-lg font-semibold">Code Example</mat-card-title>
+      <mat-card-title class="text-lg font-semibold" i18n="@@showcase.codeExample.title">Code Example</mat-card-title>
     </mat-card-header>
     <mat-card-content>
       <div class="p-4 rounded-lg" style="background-color: var(--mat-sys-surface-variant);">

@@ -8,47 +8,43 @@
 @tailwind utilities;
 
 // ================================================
-// BASE THEMING (AVOID DUPLICATES)
+// BASE THEMING (NO DUPLICATES)
 // ================================================
 
-// Apply base Material styles once
-@include mat.core();
-
-// Generate base typography and density styles once in root selector  
+// Generate base theme styles only once for the default theme
 $default-light-theme: map.get(map.get(theme.$themes, 'jobmagnetic-blue'), 'light');
 
-:root {
-  @include mat.all-component-typographies($default-light-theme);
-  @include mat.all-component-densities($default-light-theme);
-}
+// Apply base Material styles
+@include mat.core();
 
-// Generate color-only themes for each theme combination
+// Generate complete themes (all component styles including shape, typography, density)
 @each $color-name, $theme-variants in theme.$themes {
   $light-theme: map.get($theme-variants, 'light');
   $dark-theme: map.get($theme-variants, 'dark');
 
-  // Light theme color selectors
+  // Selector para tema claro con el color específico
+  // El color por defecto (jobmagnetic-blue) se aplica también a :root para compatibilidad
   @if $color-name == 'jobmagnetic-blue' {
     :root,
     .light-theme,
     .light-theme[data-theme-color="#{$color-name}"] {
-      @include mat.all-component-colors($light-theme);
+      @include mat.all-component-themes($light-theme);
     }
   } @else {
     .light-theme[data-theme-color="#{$color-name}"] {
-      @include mat.all-component-colors($light-theme);
+      @include mat.all-component-themes($light-theme);
     }
   }
 
-  // Dark theme color selectors  
+  // Selector para tema oscuro con el color específico
   @if $color-name == 'jobmagnetic-blue' {
     .dark-theme,
     .dark-theme[data-theme-color="#{$color-name}"] {
-      @include mat.all-component-colors($dark-theme);
+      @include mat.all-component-themes($dark-theme);
     }
   } @else {
     .dark-theme[data-theme-color="#{$color-name}"] {
-      @include mat.all-component-colors($dark-theme);
+      @include mat.all-component-themes($dark-theme);
     }
   }
 }
@@ -167,7 +163,7 @@ a:hover {
 // Hover transform mixin
 @mixin hover-transform($transform: translateY(-0.125rem)) {
   @include smooth-transition(transform, 0.2s, ease-in-out);
-  
+
   &:hover {
     transform: $transform;
   }
@@ -195,7 +191,7 @@ a:hover {
   width: 2.5rem; /* 40px */
   height: 2.5rem; /* 40px */
   border-radius: 50%;
-  
+
   mat-icon {
     font-size: 1.5rem; /* 24px */
     width: 1.5rem; /* 24px */
@@ -206,7 +202,7 @@ a:hover {
 /* Hover scale effect for interactive elements - truly reusable */
 .hover-scale {
   @include smooth-transition(all, 0.3s, ease);
-  
+
   &:hover {
     transform: scale(1.1);
   }

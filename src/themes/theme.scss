@@ -3,16 +3,12 @@
 @use 'theme_colors' as theme-colors;
 
 // ================================================
-// SHARED THEME CONFIGURATION 
+// SHARED THEME CONFIGURATION
 // ================================================
 
 $base-typography: (
   brand-family: 'Poppins, Inter, sans-serif',
   plain-family: 'Plus Jakarta Sans, Inter, sans-serif',
-);
-
-$base-density: (
-  scale: 0,
 );
 
 // ================================================
@@ -29,10 +25,9 @@ $themes: ();
       primary: $primary-palette,
       tertiary: theme-colors.$tertiary-palette,
     ),
-    typography: $base-typography,
-    density: $base-density,
+    typography: $base-typography
   ));
-  
+
   // Create dark theme - simplified structure
   $dark-theme: mat.define-theme((
     color: (
@@ -40,10 +35,9 @@ $themes: ();
       primary: $primary-palette,
       tertiary: theme-colors.$tertiary-palette,
     ),
-    typography: $base-typography,
-    density: $base-density,
+    typography: $base-typography
   ));
-  
+
   // Store themes in map
   $themes: map.set($themes, $color-name, (
     'light': $light-theme,

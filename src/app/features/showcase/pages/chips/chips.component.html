@@ -3,12 +3,12 @@
   <div class="mb-6">
     <button mat-button (click)="goBack()" class="mb-4" style="color: var(--mat-sys-primary);">
       <mat-icon class="mr-2">arrow_back</mat-icon>
-      Back to Showcase
+      <span i18n="@@showcase.backToShowcase">Back to Showcase</span>
     </button>
-    <h1 class="text-3xl font-bold mb-2" style="color: var(--mat-sys-primary);">
+    <h1 class="text-3xl font-bold mb-2" style="color: var(--mat-sys-primary);" i18n="@@showcase.chips.title">
       🏷️ Chips
     </h1>
-    <p class="text-lg" style="color: var(--mat-sys-on-surface-variant);">
+    <p class="text-lg" style="color: var(--mat-sys-on-surface-variant);" i18n="@@showcase.chips.description">
       Compact elements that represent an input, attribute, or action
     </p>
   </div>
@@ -16,50 +16,50 @@
   <!-- Basic Chips -->
   <mat-card class="mb-8 shadow-lg">
     <mat-card-header>
-      <mat-card-title class="text-xl font-semibold">Basic Chips</mat-card-title>
-      <mat-card-subtitle>Simple chip elements</mat-card-subtitle>
+      <mat-card-title class="text-xl font-semibold" i18n="@@showcase.chips.basic.title">Basic Chips</mat-card-title>
+      <mat-card-subtitle i18n="@@showcase.chips.basic.subtitle">Simple chip elements</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content class="p-6">
       <div class="space-y-6">
         <!-- Simple Chips -->
         <div>
-          <h3 class="text-lg font-medium mb-3">Simple Chips</h3>
+          <h3 class="text-lg font-medium mb-3" i18n="@@showcase.chips.simple.title">Simple Chips</h3>
           <mat-chip-set>
-            <mat-chip>One fish</mat-chip>
-            <mat-chip>Two fish</mat-chip>
-            <mat-chip color="accent">Accent fish</mat-chip>
-            <mat-chip color="warn">Alert fish</mat-chip>
+            <mat-chip i18n="@@showcase.chips.simple.oneFish">One fish</mat-chip>
+            <mat-chip i18n="@@showcase.chips.simple.twoFish">Two fish</mat-chip>
+            <mat-chip color="accent" i18n="@@showcase.chips.simple.accentFish">Accent fish</mat-chip>
+            <mat-chip color="warn" i18n="@@showcase.chips.simple.alertFish">Alert fish</mat-chip>
           </mat-chip-set>
         </div>
 
         <!-- Chips with Icons -->
         <div>
-          <h3 class="text-lg font-medium mb-3">Chips with Icons</h3>
+          <h3 class="text-lg font-medium mb-3" i18n="@@showcase.chips.withIcons.title">Chips with Icons</h3>
           <mat-chip-set>
             <mat-chip>
               <mat-icon matChipAvatar>home</mat-icon>
-              Home
+              <span i18n="@@showcase.chips.withIcons.home">Home</span>
             </mat-chip>
             <mat-chip>
               <mat-icon matChipAvatar>work</mat-icon>
-              Work
+              <span i18n="@@showcase.chips.withIcons.work">Work</span>
             </mat-chip>
             <mat-chip>
               <mat-icon matChipAvatar>school</mat-icon>
-              School
+              <span i18n="@@showcase.chips.withIcons.school">School</span>
             </mat-chip>
           </mat-chip-set>
         </div>
 
         <!-- Disabled Chips -->
         <div>
-          <h3 class="text-lg font-medium mb-3">Disabled Chips</h3>
+          <h3 class="text-lg font-medium mb-3" i18n="@@showcase.chips.disabled.title">Disabled Chips</h3>
           <mat-chip-set>
-            <mat-chip disabled>Disabled chip</mat-chip>
-            <mat-chip>Enabled chip</mat-chip>
+            <mat-chip disabled i18n="@@showcase.chips.disabled.disabledChip">Disabled chip</mat-chip>
+            <mat-chip i18n="@@showcase.chips.disabled.enabledChip">Enabled chip</mat-chip>
             <mat-chip disabled>
               <mat-icon matChipAvatar>block</mat-icon>
-              Disabled with icon
+              <span i18n="@@showcase.chips.disabled.disabledWithIcon">Disabled with icon</span>
             </mat-chip>
           </mat-chip-set>
         </div>
@@ -70,14 +70,14 @@
   <!-- Removable Chips -->
   <mat-card class="mb-8 shadow-lg">
     <mat-card-header>
-      <mat-card-title class="text-xl font-semibold">Removable Chips</mat-card-title>
-      <mat-card-subtitle>Chips that can be removed with interaction</mat-card-subtitle>
+      <mat-card-title class="text-xl font-semibold" i18n="@@showcase.chips.removable.title">Removable Chips</mat-card-title>
+      <mat-card-subtitle i18n="@@showcase.chips.removable.subtitle">Chips that can be removed with interaction</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content class="p-6">
       <div class="space-y-6">
         <!-- Removable List -->
         <div>
-          <h3 class="text-lg font-medium mb-3">Fruit List (Removable)</h3>
+          <h3 class="text-lg font-medium mb-3" i18n="@@showcase.chips.removable.fruitList.title">Fruit List (Removable)</h3>
           <mat-chip-set>
             <mat-chip *ngFor="let fruit of fruits" (removed)="removeChip(fruit)">
               {{fruit}}
@@ -87,24 +87,24 @@
             </mat-chip>
           </mat-chip-set>
           <p class="mt-3 text-sm" style="color: var(--mat-sys-on-surface-variant);">
-            Click the X icon to remove chips. Remaining: {{fruits.length}}
+            <span i18n="@@showcase.chips.removable.instructions">Click the X icon to remove chips. Remaining:</span> {{fruits.length}}
           </p>
         </div>
 
         <!-- Removable with Icons -->
         <div>
-          <h3 class="text-lg font-medium mb-3">Chips with Avatar and Remove</h3>
+          <h3 class="text-lg font-medium mb-3" i18n="@@showcase.chips.removable.withAvatar.title">Chips with Avatar and Remove</h3>
           <mat-chip-set>
             <mat-chip>
               <img matChipAvatar src="https://material.angular.io/assets/img/examples/shiba1.jpg" alt="Shiba">
-              Shiba Inu
+              <span i18n="@@showcase.chips.removable.shibaInu">Shiba Inu</span>
               <button matChipRemove>
                 <mat-icon>cancel</mat-icon>
               </button>
             </mat-chip>
             <mat-chip>
               <mat-icon matChipAvatar>person</mat-icon>
-              John Doe
+              <span i18n="@@showcase.chips.removable.johnDoe">John Doe</span>
               <button matChipRemove>
                 <mat-icon>cancel</mat-icon>
               </button>
@@ -118,37 +118,37 @@
   <!-- Selectable Chips -->
   <mat-card class="mb-8 shadow-lg">
     <mat-card-header>
-      <mat-card-title class="text-xl font-semibold">Selectable Chips</mat-card-title>
-      <mat-card-subtitle>Chips that can be selected and deselected</mat-card-subtitle>
+      <mat-card-title class="text-xl font-semibold" i18n="@@showcase.chips.selectable.title">Selectable Chips</mat-card-title>
+      <mat-card-subtitle i18n="@@showcase.chips.selectable.subtitle">Chips that can be selected and deselected</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content class="p-6">
       <div class="space-y-6">
         <!-- Single Selection -->
         <div>
-          <h3 class="text-lg font-medium mb-3">Single Selection</h3>
+          <h3 class="text-lg font-medium mb-3" i18n="@@showcase.chips.selectable.single.title">Single Selection</h3>
           <mat-chip-listbox>
-            <mat-chip-option>Extra small</mat-chip-option>
-            <mat-chip-option>Small</mat-chip-option>
-            <mat-chip-option selected>Medium</mat-chip-option>
-            <mat-chip-option>Large</mat-chip-option>
-            <mat-chip-option>Extra large</mat-chip-option>
+            <mat-chip-option i18n="@@showcase.chips.selectable.sizes.extraSmall">Extra small</mat-chip-option>
+            <mat-chip-option i18n="@@showcase.chips.selectable.sizes.small">Small</mat-chip-option>
+            <mat-chip-option selected i18n="@@showcase.chips.selectable.sizes.medium">Medium</mat-chip-option>
+            <mat-chip-option i18n="@@showcase.chips.selectable.sizes.large">Large</mat-chip-option>
+            <mat-chip-option i18n="@@showcase.chips.selectable.sizes.extraLarge">Extra large</mat-chip-option>
           </mat-chip-listbox>
         </div>
 
         <!-- Multiple Selection -->
         <div>
-          <h3 class="text-lg font-medium mb-3">Multiple Selection</h3>
+          <h3 class="text-lg font-medium mb-3" i18n="@@showcase.chips.selectable.multiple.title">Multiple Selection</h3>
           <mat-chip-listbox multiple>
-            <mat-chip-option selected>Bold</mat-chip-option>
-            <mat-chip-option>Italic</mat-chip-option>
-            <mat-chip-option selected>Underline</mat-chip-option>
-            <mat-chip-option>Strikethrough</mat-chip-option>
+            <mat-chip-option selected i18n="@@showcase.chips.selectable.formatting.bold">Bold</mat-chip-option>
+            <mat-chip-option i18n="@@showcase.chips.selectable.formatting.italic">Italic</mat-chip-option>
+            <mat-chip-option selected i18n="@@showcase.chips.selectable.formatting.underline">Underline</mat-chip-option>
+            <mat-chip-option i18n="@@showcase.chips.selectable.formatting.strikethrough">Strikethrough</mat-chip-option>
           </mat-chip-listbox>
         </div>
 
         <!-- Custom Selection Logic -->
         <div>
-          <h3 class="text-lg font-medium mb-3">Custom Selection</h3>
+          <h3 class="text-lg font-medium mb-3" i18n="@@showcase.chips.selectable.custom.title">Custom Selection</h3>
           <mat-chip-set>
             <mat-chip-option 
               *ngFor="let skill of ['Angular', 'React', 'Vue', 'Node.js']"
@@ -159,7 +159,7 @@
             </mat-chip-option>
           </mat-chip-set>
           <p class="mt-3 text-sm" style="color: var(--mat-sys-on-surface-variant);">
-            Selected skills: {{ Array.from(selectedChips).join(', ') || 'None' }}
+            <span i18n="@@showcase.chips.selectable.selectedSkills.label">Selected skills:</span> {{ Array.from(selectedChips).join(', ') || 'None' }}
           </p>
         </div>
       </div>
@@ -169,14 +169,14 @@
   <!-- Chip Input -->
   <mat-card class="mb-8 shadow-lg">
     <mat-card-header>
-      <mat-card-title class="text-xl font-semibold">Input Chips</mat-card-title>
-      <mat-card-subtitle>Interactive chips with input functionality</mat-card-subtitle>
+      <mat-card-title class="text-xl font-semibold" i18n="@@showcase.chips.input.title">Input Chips</mat-card-title>
+      <mat-card-subtitle i18n="@@showcase.chips.input.subtitle">Interactive chips with input functionality</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content class="p-6">
       <div class="space-y-6">
-        <!-- Grid Layout -->
+        <!-- Grid Layout -->  
         <div>
-          <h3 class="text-lg font-medium mb-3">Grid Layout</h3>
+          <h3 class="text-lg font-medium mb-3" i18n="@@showcase.chips.input.grid.title">Grid Layout</h3>
           <mat-chip-grid #chipGrid>
             <mat-chip-row *ngFor="let fruit of fruits" (removed)="removeChip(fruit)">
               {{ fruit }}
@@ -185,7 +185,7 @@
               </button>
             </mat-chip-row>
           </mat-chip-grid>
-          <p class="mt-3 text-sm" style="color: var(--mat-sys-on-surface-variant);">
+          <p class="mt-3 text-sm" style="color: var(--mat-sys-on-surface-variant);" i18n="@@showcase.chips.input.grid.description">
             Grid layout for better organization of chips
           </p>
         </div>
@@ -196,7 +196,7 @@
   <!-- Code Example -->
   <mat-card class="mb-8">
     <mat-card-header>
-      <mat-card-title class="text-lg font-semibold">Code Example</mat-card-title>
+      <mat-card-title class="text-lg font-semibold" i18n="@@showcase.codeExample.title">Code Example</mat-card-title>
     </mat-card-header>
     <mat-card-content>
       <div class="p-4 rounded-lg" style="background-color: var(--mat-sys-surface-variant);">

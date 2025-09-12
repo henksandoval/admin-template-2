@@ -3,12 +3,12 @@
   <div class="mb-6">
     <button mat-button (click)="goBack()" class="mb-4" style="color: var(--mat-sys-primary);">
       <mat-icon class="mr-2">arrow_back</mat-icon>
-      Back to Showcase
+      <span i18n="@@showcase.backToShowcase">Back to Showcase</span>
     </button>
-    <h1 class="text-3xl font-bold mb-2" style="color: var(--mat-sys-primary);">
+    <h1 class="text-3xl font-bold mb-2" style="color: var(--mat-sys-primary);" i18n="@@showcase.checkboxes.title">
       ☑️ Checkboxes & Radio Buttons
     </h1>
-    <p class="text-lg" style="color: var(--mat-sys-on-surface-variant);">
+    <p class="text-lg" style="color: var(--mat-sys-on-surface-variant);" i18n="@@showcase.checkboxes.description">
       Checkboxes for multiple selections and radio buttons for single choice
     </p>
   </div>
@@ -16,53 +16,53 @@
   <!-- Checkboxes -->
   <mat-card class="mb-8 shadow-lg">
     <mat-card-header>
-      <mat-card-title class="text-xl font-semibold">Checkboxes</mat-card-title>
-      <mat-card-subtitle>Multi-select input controls</mat-card-subtitle>
+      <mat-card-title class="text-xl font-semibold" i18n="@@showcase.checkboxes.checkboxes.title">Checkboxes</mat-card-title>
+      <mat-card-subtitle i18n="@@showcase.checkboxes.checkboxes.subtitle">Multi-select input controls</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content class="p-6">
       <div class="space-y-6">
         <!-- Basic checkboxes -->
         <div>
-          <h3 class="text-lg font-medium mb-3">Basic Checkboxes</h3>
+          <h3 class="text-lg font-medium mb-3" i18n="@@showcase.checkboxes.basic.title">Basic Checkboxes</h3>
           <div class="space-y-4">
-            <mat-checkbox [(ngModel)]="isChecked">Check me!</mat-checkbox>
-            <mat-checkbox [checked]="true">Checked</mat-checkbox>
-            <mat-checkbox [disabled]="true">Disabled</mat-checkbox>
-            <mat-checkbox [checked]="true" [disabled]="true">Checked + Disabled</mat-checkbox>
-            <mat-checkbox [indeterminate]="isIndeterminate">Indeterminate</mat-checkbox>
+            <mat-checkbox [(ngModel)]="isChecked" i18n="@@showcase.checkboxes.basic.checkMe">Check me!</mat-checkbox>
+            <mat-checkbox [checked]="true" i18n="@@showcase.checkboxes.basic.checked">Checked</mat-checkbox>
+            <mat-checkbox [disabled]="true" i18n="@@showcase.checkboxes.basic.disabled">Disabled</mat-checkbox>
+            <mat-checkbox [checked]="true" [disabled]="true" i18n="@@showcase.checkboxes.basic.checkedDisabled">Checked + Disabled</mat-checkbox>
+            <mat-checkbox [indeterminate]="isIndeterminate" i18n="@@showcase.checkboxes.basic.indeterminate">Indeterminate</mat-checkbox>
           </div>
         </div>
 
         <!-- Different colors -->
         <div>
-          <h3 class="text-lg font-medium mb-3">Colors</h3>
+          <h3 class="text-lg font-medium mb-3" i18n="@@showcase.checkboxes.colors.title">Colors</h3>
           <div class="space-y-4">
-            <mat-checkbox color="primary" [checked]="true">Primary</mat-checkbox>
-            <mat-checkbox color="accent" [checked]="true">Accent</mat-checkbox>
-            <mat-checkbox color="warn" [checked]="true">Warn</mat-checkbox>
+            <mat-checkbox color="primary" [checked]="true" i18n="@@showcase.checkboxes.colors.primary">Primary</mat-checkbox>
+            <mat-checkbox color="accent" [checked]="true" i18n="@@showcase.checkboxes.colors.accent">Accent</mat-checkbox>
+            <mat-checkbox color="warn" [checked]="true" i18n="@@showcase.checkboxes.colors.warn">Warn</mat-checkbox>
           </div>
         </div>
 
         <!-- Label positioning -->
         <div>
-          <h3 class="text-lg font-medium mb-3">Label Position</h3>
+          <h3 class="text-lg font-medium mb-3" i18n="@@showcase.checkboxes.labelPosition.title">Label Position</h3>
           <div class="space-y-4">
-            <mat-checkbox labelPosition="after" [checked]="true">Label after checkbox</mat-checkbox>
-            <mat-checkbox labelPosition="before" [checked]="true">Label before checkbox</mat-checkbox>
+            <mat-checkbox labelPosition="after" [checked]="true" i18n="@@showcase.checkboxes.labelPosition.after">Label after checkbox</mat-checkbox>
+            <mat-checkbox labelPosition="before" [checked]="true" i18n="@@showcase.checkboxes.labelPosition.before">Label before checkbox</mat-checkbox>
           </div>
         </div>
 
         <!-- Nested checkboxes example -->
         <div>
-          <h3 class="text-lg font-medium mb-3">Nested List Example</h3>
+          <h3 class="text-lg font-medium mb-3" i18n="@@showcase.checkboxes.nested.title">Nested List Example</h3>
           <div class="space-y-2">
-            <mat-checkbox [indeterminate]="true">
+            <mat-checkbox [indeterminate]="true" i18n="@@showcase.checkboxes.nested.selectAll">
               Select All
             </mat-checkbox>
             <div class="ml-6 space-y-2">
-              <mat-checkbox [checked]="true">Option 1</mat-checkbox>
-              <mat-checkbox>Option 2</mat-checkbox>
-              <mat-checkbox [checked]="true">Option 3</mat-checkbox>
+              <mat-checkbox [checked]="true" i18n="@@showcase.checkboxes.nested.option1">Option 1</mat-checkbox>
+              <mat-checkbox i18n="@@showcase.checkboxes.nested.option2">Option 2</mat-checkbox>
+              <mat-checkbox [checked]="true" i18n="@@showcase.checkboxes.nested.option3">Option 3</mat-checkbox>
             </div>
           </div>
         </div>
@@ -73,61 +73,61 @@
   <!-- Radio Buttons -->
   <mat-card class="mb-8 shadow-lg">
     <mat-card-header>
-      <mat-card-title class="text-xl font-semibold">Radio Buttons</mat-card-title>
-      <mat-card-subtitle>Single selection input controls</mat-card-subtitle>
+      <mat-card-title class="text-xl font-semibold" i18n="@@showcase.checkboxes.radio.title">Radio Buttons</mat-card-title>
+      <mat-card-subtitle i18n="@@showcase.checkboxes.radio.subtitle">Single selection input controls</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content class="p-6">
       <div class="space-y-6">
         <!-- Basic radio group -->
         <div>
-          <h3 class="text-lg font-medium mb-3">Basic Radio Group</h3>
+          <h3 class="text-lg font-medium mb-3" i18n="@@showcase.checkboxes.radioBasic.title">Basic Radio Group</h3>
           <mat-radio-group [(ngModel)]="selectedSeason" aria-label="Select your favorite season">
-            <mat-radio-button value="spring">Spring</mat-radio-button>
-            <mat-radio-button value="summer">Summer</mat-radio-button>
-            <mat-radio-button value="autumn">Autumn</mat-radio-button>
-            <mat-radio-button value="winter">Winter</mat-radio-button>
+            <mat-radio-button value="spring" i18n="@@showcase.checkboxes.seasons.spring">Spring</mat-radio-button>
+            <mat-radio-button value="summer" i18n="@@showcase.checkboxes.seasons.summer">Summer</mat-radio-button>
+            <mat-radio-button value="autumn" i18n="@@showcase.checkboxes.seasons.autumn">Autumn</mat-radio-button>
+            <mat-radio-button value="winter" i18n="@@showcase.checkboxes.seasons.winter">Winter</mat-radio-button>
           </mat-radio-group>
           <p class="mt-2 text-sm" style="color: var(--mat-sys-on-surface-variant);">
-            Selected: {{ selectedSeason }}
+            <span i18n="@@showcase.checkboxes.selected.label">Selected:</span> {{ selectedSeason }}
           </p>
         </div>
 
         <!-- Different colors -->
         <div>
-          <h3 class="text-lg font-medium mb-3">Colors</h3>
+          <h3 class="text-lg font-medium mb-3" i18n="@@showcase.checkboxes.radioColors.title">Colors</h3>
           <mat-radio-group [(ngModel)]="selectedColor" aria-label="Select color">
-            <mat-radio-button value="primary" color="primary">Primary</mat-radio-button>
-            <mat-radio-button value="accent" color="accent">Accent</mat-radio-button>
-            <mat-radio-button value="warn" color="warn">Warn</mat-radio-button>
+            <mat-radio-button value="primary" color="primary" i18n="@@showcase.checkboxes.colors.primary">Primary</mat-radio-button>
+            <mat-radio-button value="accent" color="accent" i18n="@@showcase.checkboxes.colors.accent">Accent</mat-radio-button>
+            <mat-radio-button value="warn" color="warn" i18n="@@showcase.checkboxes.colors.warn">Warn</mat-radio-button>
           </mat-radio-group>
         </div>
 
         <!-- Label positioning -->
         <div>
-          <h3 class="text-lg font-medium mb-3">Label Position</h3>
+          <h3 class="text-lg font-medium mb-3" i18n="@@showcase.checkboxes.radioLabelPosition.title">Label Position</h3>
           <mat-radio-group aria-label="Label position">
-            <mat-radio-button labelPosition="after" value="after">Label after radio</mat-radio-button>
-            <mat-radio-button labelPosition="before" value="before">Label before radio</mat-radio-button>
+            <mat-radio-button labelPosition="after" value="after" i18n="@@showcase.checkboxes.radioLabelPosition.after">Label after radio</mat-radio-button>
+            <mat-radio-button labelPosition="before" value="before" i18n="@@showcase.checkboxes.radioLabelPosition.before">Label before radio</mat-radio-button>
           </mat-radio-group>
         </div>
 
         <!-- Disabled states -->
         <div>
-          <h3 class="text-lg font-medium mb-3">Disabled States</h3>
+          <h3 class="text-lg font-medium mb-3" i18n="@@showcase.checkboxes.disabled.title">Disabled States</h3>
           <mat-radio-group [disabled]="true" aria-label="Disabled group">
-            <mat-radio-button value="option1">Disabled Option 1</mat-radio-button>
-            <mat-radio-button value="option2">Disabled Option 2</mat-radio-button>
+            <mat-radio-button value="option1" i18n="@@showcase.checkboxes.disabled.option1">Disabled Option 1</mat-radio-button>
+            <mat-radio-button value="option2" i18n="@@showcase.checkboxes.disabled.option2">Disabled Option 2</mat-radio-button>
           </mat-radio-group>
         </div>
 
         <!-- Dense layout -->
         <div>
-          <h3 class="text-lg font-medium mb-3">Dense Layout</h3>
+          <h3 class="text-lg font-medium mb-3" i18n="@@showcase.checkboxes.dense.title">Dense Layout</h3>
           <mat-radio-group class="radio-group-dense" aria-label="Dense layout">
-            <mat-radio-button class="radio-button" value="1">Dense Option 1</mat-radio-button>
-            <mat-radio-button class="radio-button" value="2">Dense Option 2</mat-radio-button>
-            <mat-radio-button class="radio-button" value="3">Dense Option 3</mat-radio-button>
-            <mat-radio-button class="radio-button" value="4">Dense Option 4</mat-radio-button>
+            <mat-radio-button class="radio-button" value="1" i18n="@@showcase.checkboxes.dense.option1">Dense Option 1</mat-radio-button>
+            <mat-radio-button class="radio-button" value="2" i18n="@@showcase.checkboxes.dense.option2">Dense Option 2</mat-radio-button>
+            <mat-radio-button class="radio-button" value="3" i18n="@@showcase.checkboxes.dense.option3">Dense Option 3</mat-radio-button>
+            <mat-radio-button class="radio-button" value="4" i18n="@@showcase.checkboxes.dense.option4">Dense Option 4</mat-radio-button>
           </mat-radio-group>
         </div>
       </div>
@@ -137,7 +137,7 @@
   <!-- Code Example -->
   <mat-card class="mb-8">
     <mat-card-header>
-      <mat-card-title class="text-lg font-semibold">Code Example</mat-card-title>
+      <mat-card-title class="text-lg font-semibold" i18n="@@showcase.codeExample.title">Code Example</mat-card-title>
     </mat-card-header>
     <mat-card-content>
       <div class="p-4 rounded-lg" style="background-color: var(--mat-sys-surface-variant);">

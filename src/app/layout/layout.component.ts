@@ -1,4 +1,4 @@
-import { Component, Renderer2, effect, inject } from '@angular/core';
+import { Component, Renderer2, effect, inject, computed } from '@angular/core';
 import { CommonModule, DOCUMENT } from '@angular/common';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
@@ -10,6 +10,7 @@ import {SidebarComponent} from '@layout/components/sidebar/sidebar.component';
 import {FooterComponent} from '@layout/components/footer/footer.component';
 import {MainContentComponent} from '@layout/components/main-content/main-content.component';
 import {LayoutService} from '@layout/services/layout.service';
+import {NavigationService} from '@layout/services/navigation/navigation.service';
 import {ThemeService} from '@layout/services/theme/theme.service';
 import { StickyHeaderDirective } from '@shared/directives/sticky-header.directive';
 
@@ -36,6 +37,7 @@ export class AppLayoutComponent {
   private overlayContainer = inject(OverlayContainer);
   private breakpointObserver = inject(BreakpointObserver);
   public layoutService = inject(LayoutService);
+  public navigationService = inject(NavigationService);
   private themeService = inject(ThemeService);
 
   // Responsive breakpoint observable for MatSidenav
@@ -45,10 +47,27 @@ export class AppLayoutComponent {
       shareReplay()
     );
 
+  // Computed sidebar width class based on collapse state
+  sidebarWidthClass = computed(() => {
+    return this.navigationService.isSidebarCollapsed() ? 'w-16' : 'w-64';
+  });
+
   constructor() {
     effect(() => {
       this.updateOverlayTheme();
     });
+  }
+
+  onMenuToggle(sidenav: any) {
+    // For mobile (handset), toggle the sidenav open/close
+    this.isHandset$.subscribe(isHandset => {
+      if (isHandset) {
+        sidenav.toggle();
+      } else {
+        // For desktop, toggle the collapse state
+        this.navigationService.toggleSidebarCollapsed();
+      }
+    }).unsubscribe();
   }
 
   private updateOverlayTheme() {

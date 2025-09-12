@@ -5,7 +5,8 @@
     <mat-sidenav #sidenav 
                  [mode]="(isHandset$ | async) ? 'over' : 'side'"
                  [opened]="!(isHandset$ | async)"
-                 class="w-64 border-r border-surface-variant bg-surface-container">
+                 [ngClass]="sidebarWidthClass()"
+                 class="border-r border-surface-variant bg-surface-container transition-all duration-300">
       
       <!-- The sidebar content remains the same -->
       <app-sidebar></app-sidebar>
@@ -16,7 +17,7 @@
     <mat-sidenav-content>
       
       <div class="sticky top-0 z-50 transition-transform duration-300" appStickyHeader #stickyHeader>
-        <app-header (menuToggle)="sidenav.toggle()"></app-header>
+        <app-header (menuToggle)="onMenuToggle(sidenav)"></app-header>
       </div>
 
       <main class="py-6">

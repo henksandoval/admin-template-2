@@ -47,9 +47,9 @@ export class AppLayoutComponent {
       shareReplay()
     );
 
-  // Computed sidebar width class based on collapse state
-  sidebarWidthClass = computed(() => {
-    return this.navigationService.isSidebarCollapsed() ? 'w-16' : 'w-64';
+  // Computed sidebar width in pixels based on visibility and collapse state
+  sidebarWidthPx = computed(() => {
+    return this.navigationService.sidebarWidth();
   });
 
   constructor() {

@@ -42,10 +42,6 @@
     .menu-icon {
       transition: color 200ms;
       
-      &.level-1 { font-size: 1.25rem; }
-      &.level-2 { font-size: 1.125rem; }
-      &.level-3 { font-size: 1rem; }
-      
       &.active {
         color: var(--mat-sys-primary);
       }
@@ -75,7 +71,6 @@
     .expand-icon {
       color: var(--mat-sys-on-surface-variant);
       transition: transform 200ms;
-      font-size: 1.125rem;
       
       &.expanded {
         transform: rotate(90deg);

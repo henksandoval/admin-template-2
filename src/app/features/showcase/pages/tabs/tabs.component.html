@@ -3,40 +3,40 @@
   <div class="mb-6">
     <button mat-button (click)="goBack()" class="mb-4" style="color: var(--mat-sys-primary);">
       <mat-icon class="mr-2">arrow_back</mat-icon>
-      Back to Showcase
+      <span i18n="@@showcase.backToShowcase">Back to Showcase</span>
     </button>
-    <h1 class="text-3xl font-bold mb-2" style="color: var(--mat-sys-primary);">
+    <h1 class="text-3xl font-bold mb-2" style="color: var(--mat-sys-primary);" i18n="@@showcase.tabs.title">
       📑 Tabs
     </h1>
-    <p class="text-lg" style="color: var(--mat-sys-on-surface-variant);">
-      Organize content into separate views using tabbed navigation
+    <p class="text-lg" style="color: var(--mat-sys-on-surface-variant);" i18n="@@showcase.tabs.description">
+      Organize content into separate views using tabbed navigation  
     </p>
   </div>
 
   <!-- Basic Tabs -->
   <mat-card class="mb-8 shadow-lg">
     <mat-card-header>
-      <mat-card-title class="text-xl font-semibold">Basic Tabs</mat-card-title>
-      <mat-card-subtitle>Simple tab navigation</mat-card-subtitle>
+      <mat-card-title class="text-xl font-semibold" i18n="@@showcase.tabs.basic.title">Basic Tabs</mat-card-title>
+      <mat-card-subtitle i18n="@@showcase.tabs.basic.subtitle">Simple tab navigation</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content class="p-6">
       <mat-tab-group>
-        <mat-tab label="First"> 
+        <mat-tab label="First" i18n-label="@@showcase.tabs.basic.first.label"> 
           <div class="p-4">
-            <h3 class="text-lg font-medium mb-2">First Tab Content</h3>
-            <p>This is the content of the first tab. You can put any HTML content here including forms, lists, or other components.</p>
+            <h3 class="text-lg font-medium mb-2" i18n="@@showcase.tabs.basic.first.title">First Tab Content</h3>
+            <p i18n="@@showcase.tabs.basic.first.content">This is the content of the first tab. You can put any HTML content here including forms, lists, or other components.</p>
           </div>
         </mat-tab>
-        <mat-tab label="Second"> 
+        <mat-tab label="Second" i18n-label="@@showcase.tabs.basic.second.label"> 
           <div class="p-4">
-            <h3 class="text-lg font-medium mb-2">Second Tab Content</h3>
-            <p>This is the content of the second tab. Each tab can have completely different content and layout.</p>
+            <h3 class="text-lg font-medium mb-2" i18n="@@showcase.tabs.basic.second.title">Second Tab Content</h3>
+            <p i18n="@@showcase.tabs.basic.second.content">This is the content of the second tab. Each tab can have completely different content and layout.</p>
           </div>
         </mat-tab>
-        <mat-tab label="Third"> 
+        <mat-tab label="Third" i18n-label="@@showcase.tabs.basic.third.label"> 
           <div class="p-4">
-            <h3 class="text-lg font-medium mb-2">Third Tab Content</h3>
-            <p>This is the content of the third tab. Tabs are useful for organizing related information.</p>
+            <h3 class="text-lg font-medium mb-2" i18n="@@showcase.tabs.basic.third.title">Third Tab Content</h3>
+            <p i18n="@@showcase.tabs.basic.third.content">This is the content of the third tab. Tabs are useful for organizing related information.</p>
           </div>
         </mat-tab>
       </mat-tab-group>
@@ -46,39 +46,39 @@
   <!-- Tabs with Icons -->
   <mat-card class="mb-8 shadow-lg">
     <mat-card-header>
-      <mat-card-title class="text-xl font-semibold">Tabs with Icons</mat-card-title>
-      <mat-card-subtitle>Enhanced tab labels with icons</mat-card-subtitle>
+      <mat-card-title class="text-xl font-semibold" i18n="@@showcase.tabs.withIcons.title">Tabs with Icons</mat-card-title>
+      <mat-card-subtitle i18n="@@showcase.tabs.withIcons.subtitle">Enhanced tab labels with icons</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content class="p-6">
       <mat-tab-group>
         <mat-tab>
           <ng-template mat-tab-label>
             <mat-icon class="mr-2">home</mat-icon>
-            Home
+            <span i18n="@@showcase.tabs.withIcons.home.label">Home</span>
           </ng-template>
           <div class="p-4">
-            <h3 class="text-lg font-medium mb-2">Home Dashboard</h3>
-            <p>Welcome to your dashboard. Here you can see an overview of your activities.</p>
+            <h3 class="text-lg font-medium mb-2" i18n="@@showcase.tabs.withIcons.home.title">Home Dashboard</h3>
+            <p i18n="@@showcase.tabs.withIcons.home.content">Welcome to your dashboard. Here you can see an overview of your activities.</p>
           </div>
         </mat-tab>
         <mat-tab>
           <ng-template mat-tab-label>
             <mat-icon class="mr-2">person</mat-icon>
-            Profile
+            <span i18n="@@showcase.tabs.withIcons.profile.label">Profile</span>
           </ng-template>
           <div class="p-4">
-            <h3 class="text-lg font-medium mb-2">User Profile</h3>
-            <p>Manage your profile information and account settings here.</p>
+            <h3 class="text-lg font-medium mb-2" i18n="@@showcase.tabs.withIcons.profile.title">User Profile</h3>
+            <p i18n="@@showcase.tabs.withIcons.profile.content">Manage your profile information and account settings here.</p>
           </div>
         </mat-tab>
         <mat-tab>
           <ng-template mat-tab-label>
             <mat-icon class="mr-2">settings</mat-icon>
-            Settings
+            <span i18n="@@showcase.tabs.withIcons.settings.label">Settings</span>
           </ng-template>
           <div class="p-4">
-            <h3 class="text-lg font-medium mb-2">Application Settings</h3>
-            <p>Configure your application preferences and system settings.</p>
+            <h3 class="text-lg font-medium mb-2" i18n="@@showcase.tabs.withIcons.settings.title">Application Settings</h3>
+            <p i18n="@@showcase.tabs.withIcons.settings.content">Configure your application preferences and system settings.</p>
           </div>
         </mat-tab>
       </mat-tab-group>
@@ -88,14 +88,14 @@
   <!-- Dynamic Tabs -->
   <mat-card class="mb-8 shadow-lg">
     <mat-card-header>
-      <mat-card-title class="text-xl font-semibold">Dynamic Tabs</mat-card-title>
-      <mat-card-subtitle>Add and remove tabs dynamically</mat-card-subtitle>
+      <mat-card-title class="text-xl font-semibold" i18n="@@showcase.tabs.dynamic.title">Dynamic Tabs</mat-card-title>
+      <mat-card-subtitle i18n="@@showcase.tabs.dynamic.subtitle">Add and remove tabs dynamically</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content class="p-6">
       <div class="mb-4">
-        <button mat-raised-button color="primary" (click)="addTab()" class="mr-2">Add Tab</button>
+        <button mat-raised-button color="primary" (click)="addTab()" class="mr-2" i18n="@@showcase.tabs.dynamic.addTab">Add Tab</button>
         <span class="text-sm" style="color: var(--mat-sys-on-surface-variant);">
-          Total tabs: {{ dynamicTabs.length }}
+          <span i18n="@@showcase.tabs.dynamic.totalTabs">Total tabs:</span> {{ dynamicTabs.length }}
         </span>
       </div>
       
@@ -110,7 +110,7 @@
             </div>
             <p>{{ tab.content }}</p>
             <p class="mt-2 text-sm" style="color: var(--mat-sys-on-surface-variant);">
-              Tab index: {{ index }}
+              <span i18n="@@showcase.tabs.dynamic.tabIndex">Tab index:</span> {{ index }}
             </p>
           </div>
         </mat-tab>

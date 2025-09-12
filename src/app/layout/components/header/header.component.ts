@@ -6,7 +6,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatBadgeModule } from '@angular/material/badge';
 import { ThemeSelectorComponent } from '@layout/components/theme-selector/theme-selector.component';
 import { UserMenuComponent } from '@shared/components/molecules/user-menu/user-menu.component';
+import { LanguageSelectorComponent } from '@shared/components/atoms/language-selector/language-selector.component';
 import { AuthService } from '@core/services/auth.service';
+import { CommonTranslationsService } from '@core/services/common-translations.service';
 
 @Component({
   selector: 'app-header',
@@ -19,6 +21,7 @@ import { AuthService } from '@core/services/auth.service';
     MatBadgeModule,
     ThemeSelectorComponent,
     UserMenuComponent,
+    LanguageSelectorComponent,
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
@@ -26,7 +29,8 @@ import { AuthService } from '@core/services/auth.service';
 export class HeaderComponent {
   @Output() menuToggle = new EventEmitter<void>();
   
-  authService = inject(AuthService);
+  protected readonly authService = inject(AuthService);
+  protected readonly commonTranslations = inject(CommonTranslationsService);
 
   onMenuToggle() {
     this.menuToggle.emit();

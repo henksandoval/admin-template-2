@@ -13,7 +13,11 @@
     "test": "ng test",
     "lint": "ng lint",
     "clean": "rm -rf node_modules package-lock.json dist .angular",
-    "fresh-install": "npm run clean && npm install"
+    "fresh-install": "npm run clean && npm install",
+    "extract-i18n": "ng extract-i18n --output-path src/locale",
+    "build:i18n": "ng build --configuration production --localize",
+    "serve:es": "ng serve --configuration=es",
+    "serve:en": "ng serve --configuration=en-US"
   },
   "private": true,
   "dependencies": {
@@ -23,6 +27,7 @@
     "@angular/compiler": "^19.2.15",
     "@angular/core": "^19.2.15",
     "@angular/forms": "^19.2.15",
+    "@angular/localize": "^19.2.15",
     "@angular/material": "^19.2.19",
     "@angular/platform-browser": "^19.2.15",
     "@angular/platform-browser-dynamic": "^19.2.15",

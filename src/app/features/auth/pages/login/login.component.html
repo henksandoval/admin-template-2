@@ -3,10 +3,10 @@
     <mat-card class="shadow-lg">
       <mat-card-header class="pb-4">
         <div class="w-full text-center">
-          <mat-card-title class="text-2xl font-bold text-primary mb-2">
+          <mat-card-title class="text-2xl font-bold text-primary mb-2" i18n="@@auth.login.welcomeBack">
             Welcome Back
           </mat-card-title>
-          <mat-card-subtitle class="text-gray-600 dark:text-gray-400">
+          <mat-card-subtitle class="text-gray-600 dark:text-gray-400" i18n="@@auth.login.signInPrompt">
             Sign in to your account
           </mat-card-subtitle>
         </div>
@@ -16,12 +16,13 @@
         <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="space-y-4">
           <!-- Email Field -->
           <mat-form-field appearance="outline" class="w-full">
-            <mat-label>Email Address</mat-label>
+            <mat-label i18n="@@auth.login.emailLabel">Email Address</mat-label>
             <input
               matInput
               type="email"
               formControlName="email"
               placeholder="Enter your email"
+              i18n-placeholder="@@auth.login.emailPlaceholder"
               autocomplete="email"
             />
             <mat-icon matSuffix>email</mat-icon>
@@ -32,12 +33,13 @@
 
           <!-- Password Field -->
           <mat-form-field appearance="outline" class="w-full">
-            <mat-label>Password</mat-label>
+            <mat-label i18n="@@auth.login.passwordLabel">Password</mat-label>
             <input
               matInput
               [type]="hidePassword() ? 'password' : 'text'"
               formControlName="password"
               placeholder="Enter your password"
+              i18n-placeholder="@@auth.login.passwordPlaceholder"
               autocomplete="current-password"
             />
             <button
@@ -46,6 +48,7 @@
               type="button"
               (click)="togglePasswordVisibility()"
               [attr.aria-label]="'Toggle password visibility'"
+              i18n-aria-label="@@auth.login.togglePasswordVisibility"
             >
               <mat-icon>{{ hidePassword() ? 'visibility_off' : 'visibility' }}</mat-icon>
             </button>
@@ -59,9 +62,9 @@
             <div class="flex items-start space-x-2">
               <mat-icon class="text-blue-600 dark:text-blue-400 text-base mt-0.5">info</mat-icon>
               <div class="text-blue-800 dark:text-blue-300">
-                <div class="font-medium mb-1">Demo Credentials:</div>
-                <div>Email: admin&#64;example.com</div>
-                <div>Password: password</div>
+                <div class="font-medium mb-1" i18n="@@auth.login.demoCredentialsTitle">Demo Credentials:</div>
+                <div i18n="@@auth.login.demoEmail">Email: admin&#64;example.com</div>
+                <div i18n="@@auth.login.demoPassword">Password: password</div>
               </div>
             </div>
           </div>
@@ -74,10 +77,10 @@
             [disabled]="isLoading()"
             class="w-full !py-3 !text-base font-medium"
           >
-            <span *ngIf="!isLoading()">Sign In</span>
+            <span *ngIf="!isLoading()" i18n="@@auth.login.signInButton">Sign In</span>
             <span *ngIf="isLoading()" class="flex items-center justify-center">
               <mat-spinner diameter="20" class="mr-2"></mat-spinner>
-              Signing In...
+              <span i18n="@@auth.login.signingIn">Signing In...</span>
             </span>
           </button>
         </form>
@@ -85,7 +88,7 @@
 
       <mat-card-footer class="pt-4">
         <div class="text-center text-sm text-gray-600 dark:text-gray-400">
-          <a href="#" class="text-primary hover:underline">
+          <a href="#" class="text-primary hover:underline" i18n="@@auth.login.forgotPassword">
             Forgot your password?
           </a>
         </div>

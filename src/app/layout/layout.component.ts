@@ -64,8 +64,8 @@ export class AppLayoutComponent {
       if (isHandset) {
         sidenav.toggle();
       } else {
-        // For desktop, toggle the collapse state
-        this.navigationService.toggleSidebarCollapsed();
+        // For desktop, toggle the sidebar visibility (hide/show completely)
+        this.navigationService.toggleSidebarVisible();
       }
     }).unsubscribe();
   }

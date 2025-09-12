@@ -4,7 +4,7 @@
     <!-- Sidebar managed by Angular Material -->
     <mat-sidenav #sidenav 
                  [mode]="(isHandset$ | async) ? 'over' : 'side'"
-                 [opened]="!(isHandset$ | async)"
+                 [opened]="(isHandset$ | async) ? false : navigationService.isSidebarVisible()"
                  [ngClass]="sidebarWidthClass()"
                  class="border-r border-surface-variant bg-surface-container transition-all duration-300">
       

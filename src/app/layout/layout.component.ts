@@ -1,7 +1,8 @@
-import { Component, Renderer2, effect, inject, signal } from '@angular/core';
+import { Component, Renderer2, effect, inject, signal, ViewChild } from '@angular/core';
 import { CommonModule, DOCUMENT } from '@angular/common';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { MatSidenavModule, MatSidenav } from '@angular/material/sidenav';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import {HeaderComponent} from '@layout/components/header/header.component';
@@ -18,6 +19,7 @@ import { StickyHeaderDirective } from '@shared/directives/sticky-header.directiv
   standalone: true,
   imports: [
     CommonModule,
+    MatSidenavModule,
     HeaderComponent,
     SidebarComponent,
     MainContentComponent,
@@ -28,6 +30,8 @@ import { StickyHeaderDirective } from '@shared/directives/sticky-header.directiv
   styleUrls: ['./layout.component.scss']
 })
 export class AppLayoutComponent {
+  @ViewChild('sidenav') sidenav!: MatSidenav;
+  
   headerHeight = 64;
 
   private renderer = inject(Renderer2);
@@ -58,44 +62,56 @@ export class AppLayoutComponent {
   onMenuToggle() {
     this.isHandset$.subscribe(isHandset => {
       if (isHandset) {
-        // Mobile: Toggle overlay menu
-        this.mobileMenuOpen.set(!this.mobileMenuOpen());
+        // Mobile: Toggle mat-sidenav
+        this.sidenav.toggle();
       } else {
         // Desktop: Toggle sidebar visibility (show/hide completely)
         this.navigationService.toggleSidebarVisible();
+        if (this.navigationService.isSidebarVisible()) {
+          this.sidenav.open();
+        } else {
+          this.sidenav.close();
+        }
       }
     }).unsubscribe();
   }
 
   // Close mobile menu
   closeMobileMenu() {
-    this.mobileMenuOpen.set(false);
+    this.sidenav.close();
   }
 
-  // Determine if sidebar should be shown
-  shouldShowSidebar(): Observable<boolean> {
+  // Get sidenav mode based on screen size
+  getSidenavMode(): Observable<'over' | 'side'> {
+    return this.isHandset$.pipe(
+      map(isHandset => isHandset ? 'over' : 'side')
+    );
+  }
+
+  // Get sidenav opened state
+  getSidenavOpened(): Observable<boolean> {
     return this.isHandset$.pipe(
       map(isHandset => {
         if (isHandset) {
-          // Mobile: show sidebar only if menu is open
-          return this.mobileMenuOpen();
+          // Mobile: closed by default, opened via toggle
+          return false;
         } else {
-          // Desktop: show sidebar if visible
+          // Desktop: opened based on visibility state
           return this.navigationService.isSidebarVisible();
         }
       })
     );
   }
 
-  // Get sidebar CSS classes
+  // Get sidebar CSS classes for width based on collapse state
   getSidebarClasses(): Observable<string> {
     return this.isHandset$.pipe(
       map(isHandset => {
         if (isHandset) {
-          // Mobile: overlay behavior
-          return 'fixed left-0 top-16 bottom-0 w-64 z-50';
+          // Mobile: standard width
+          return 'w-64';
         } else {
-          // Desktop: inline behavior based on collapse state
+          // Desktop: width based on collapse state
           const isCollapsed = this.navigationService.isSidebarCollapsed();
           return isCollapsed ? 'w-16' : 'w-64';
         }

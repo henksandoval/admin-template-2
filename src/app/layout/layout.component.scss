@@ -5,13 +5,14 @@
   color: var(--mat-sys-on-background);
 }
 
-// Material Sidenav handles responsive behavior, so we only need basic styling
-mat-sidenav-container {
+// Material Sidenav Container styling
+.sidenav-container {
   background-color: var(--mat-sys-background);
   color: var(--mat-sys-on-background);
 }
 
+// Material Sidenav styling - inherits theme colors from template classes
 mat-sidenav {
-  background-color: var(--mat-sys-surface-container);
-  color: var(--mat-sys-on-surface);
+  // Let the template classes handle theming
+  // Angular Material will handle the overlay backdrop automatically
 }

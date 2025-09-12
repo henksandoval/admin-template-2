@@ -9,7 +9,7 @@
       🎛️ Selection Controls
     </h1>
     <p class="text-lg" style="color: var(--mat-sys-on-surface-variant);">
-      Slide toggles and button toggle groups for making selections
+      Dropdowns, autocomplete, date pickers, multi-select components, and toggle controls
     </p>
   </div>
 
@@ -58,6 +58,178 @@
                 Toggle between light and dark theme
               </small>
             </mat-slide-toggle>
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Select Dropdowns -->
+  <mat-card class="mb-8 shadow-lg">
+    <mat-card-header>
+      <mat-card-title class="text-xl font-semibold">Select Dropdowns</mat-card-title>
+      <mat-card-subtitle>Single and multiple selection dropdowns</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content class="p-6">
+      <div class="space-y-6">
+        <!-- Basic select -->
+        <div>
+          <h3 class="text-lg font-medium mb-3">Basic Select</h3>
+          <mat-form-field appearance="outline" class="w-full max-w-sm">
+            <mat-label>Favorite food</mat-label>
+            <mat-select [(value)]="selectedFood">
+              <mat-option *ngFor="let food of foods" [value]="food.value">
+                {{food.viewValue}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <p class="mt-2 text-sm" style="color: var(--mat-sys-on-surface-variant);">
+            Selected: {{ selectedFood }}
+          </p>
+        </div>
+
+        <!-- Multiple select -->
+        <div>
+          <h3 class="text-lg font-medium mb-3">Multiple Selection</h3>
+          <mat-form-field appearance="outline" class="w-full max-w-sm">
+            <mat-label>Choose countries</mat-label>
+            <mat-select [(value)]="selectedCountries" multiple>
+              <mat-option *ngFor="let country of countries" [value]="country.value">
+                {{country.viewValue}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <p class="mt-2 text-sm" style="color: var(--mat-sys-on-surface-variant);">
+            Selected: {{ selectedCountries.join(', ') }}
+          </p>
+        </div>
+
+        <!-- Select with form field variations -->
+        <div>
+          <h3 class="text-lg font-medium mb-3">Form Field Appearances</h3>
+          <div class="space-y-4">
+            <mat-form-field appearance="fill" class="w-full max-w-sm">
+              <mat-label>Fill appearance</mat-label>
+              <mat-select [value]="selectedFood">
+                <mat-option *ngFor="let food of foods" [value]="food.value">
+                  {{food.viewValue}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="w-full max-w-sm">
+              <mat-label>Outline appearance</mat-label>
+              <mat-select [value]="selectedFood">
+                <mat-option *ngFor="let food of foods" [value]="food.value">
+                  {{food.viewValue}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Autocomplete -->
+  <mat-card class="mb-8 shadow-lg">
+    <mat-card-header>
+      <mat-card-title class="text-xl font-semibold">Autocomplete</mat-card-title>
+      <mat-card-subtitle>Searchable input fields with suggestions</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content class="p-6">
+      <div class="space-y-6">
+        <!-- Basic autocomplete -->
+        <div>
+          <h3 class="text-lg font-medium mb-3">Basic Autocomplete</h3>
+          <mat-form-field appearance="outline" class="w-full max-w-sm">
+            <mat-label>Choose option</mat-label>
+            <input matInput [formControl]="myControl" [matAutocomplete]="auto">
+            <mat-autocomplete #auto="matAutocomplete">
+              <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                {{option}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </div>
+
+        <!-- Autocomplete with larger dataset -->
+        <div>
+          <h3 class="text-lg font-medium mb-3">Cities Autocomplete</h3>
+          <mat-form-field appearance="outline" class="w-full max-w-sm">
+            <mat-label>Search city</mat-label>
+            <input matInput [formControl]="cityControl" [matAutocomplete]="cityAuto" placeholder="Type to search...">
+            <mat-icon matPrefix>search</mat-icon>
+            <mat-autocomplete #cityAuto="matAutocomplete">
+              <mat-option *ngFor="let city of filteredCities | async" [value]="city">
+                <mat-icon>location_city</mat-icon>
+                <span class="ml-2">{{city}}</span>
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Date Pickers -->
+  <mat-card class="mb-8 shadow-lg">
+    <mat-card-header>
+      <mat-card-title class="text-xl font-semibold">Date Pickers</mat-card-title>
+      <mat-card-subtitle>Date selection components with various configurations</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content class="p-6">
+      <div class="space-y-6">
+        <!-- Basic datepicker -->
+        <div>
+          <h3 class="text-lg font-medium mb-3">Basic Date Picker</h3>
+          <mat-form-field appearance="outline" class="w-full max-w-sm">
+            <mat-label>Choose a date</mat-label>
+            <input matInput [matDatepicker]="picker" [(ngModel)]="selectedDate">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+          <p class="mt-2 text-sm" style="color: var(--mat-sys-on-surface-variant);">
+            Selected: {{ selectedDate | date:'mediumDate' }}
+          </p>
+        </div>
+
+        <!-- Date range picker -->
+        <div>
+          <h3 class="text-lg font-medium mb-3">Date Range Picker</h3>
+          <mat-form-field appearance="outline" class="w-full max-w-sm">
+            <mat-label>Enter a date range</mat-label>
+            <mat-date-range-input [rangePicker]="rangePicker">
+              <input matStartDate placeholder="Start date" [(ngModel)]="startDate">
+              <input matEndDate placeholder="End date" [(ngModel)]="endDate">
+            </mat-date-range-input>
+            <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="rangePicker"></mat-datepicker-toggle>
+            <mat-date-range-picker #rangePicker></mat-date-range-picker>
+          </mat-form-field>
+          <p class="mt-2 text-sm" style="color: var(--mat-sys-on-surface-variant);">
+            Range: {{ startDate | date:'shortDate' }} - {{ endDate | date:'shortDate' }}
+          </p>
+        </div>
+
+        <!-- Different appearances -->
+        <div>
+          <h3 class="text-lg font-medium mb-3">Form Field Appearances</h3>
+          <div class="space-y-4">
+            <mat-form-field appearance="fill" class="w-full max-w-sm">
+              <mat-label>Fill appearance</mat-label>
+              <input matInput [matDatepicker]="picker2" [value]="selectedDate">
+              <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
+              <mat-datepicker #picker2></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="w-full max-w-sm">
+              <mat-label>Outline appearance</mat-label>
+              <input matInput [matDatepicker]="picker3" [value]="selectedDate">
+              <mat-datepicker-toggle matIconSuffix [for]="picker3"></mat-datepicker-toggle>
+              <mat-datepicker #picker3></mat-datepicker>
+            </mat-form-field>
           </div>
         </div>
       </div>
@@ -130,32 +302,11 @@
   <!-- Code Example -->
   <mat-card class="mb-8">
     <mat-card-header>
-      <mat-card-title class="text-lg font-semibold">Code Example</mat-card-title>
+      <mat-card-title class="text-lg font-semibold">Code Examples</mat-card-title>
     </mat-card-header>
     <mat-card-content>
       <div class="p-4 rounded-lg" style="background-color: var(--mat-sys-surface-variant);">
-        <pre class="text-sm overflow-x-auto" style="color: var(--mat-sys-on-surface-variant);">
-<span style="color: var(--mat-sys-primary);">// Basic slide toggle</span>
-&lt;mat-slide-toggle [(ngModel)]="isToggled"&gt;
-  Slide me!
-&lt;/mat-slide-toggle&gt;
-
-<span style="color: var(--mat-sys-primary);">// Button toggle group (single selection)</span>
-&lt;mat-button-toggle-group [(value)]="selectedFontStyle"&gt;
-  &lt;mat-button-toggle value="bold"&gt;Bold&lt;/mat-button-toggle&gt;
-  &lt;mat-button-toggle value="italic"&gt;Italic&lt;/mat-button-toggle&gt;
-  &lt;mat-button-toggle value="underline"&gt;Underline&lt;/mat-button-toggle&gt;
-&lt;/mat-button-toggle-group&gt;
-
-<span style="color: var(--mat-sys-primary);">// Multiple selection with icons</span>
-&lt;mat-button-toggle-group multiple [(value)]="selectedItems"&gt;
-  &lt;mat-button-toggle value="bold"&gt;
-    &lt;mat-icon&gt;format_bold&lt;/mat-icon&gt;
-  &lt;/mat-button-toggle&gt;
-  &lt;mat-button-toggle value="italic"&gt;
-    &lt;mat-icon&gt;format_italic&lt;/mat-icon&gt;
-  &lt;/mat-button-toggle&gt;
-&lt;/mat-button-toggle-group&gt;</pre>
+        <pre class="text-sm overflow-x-auto whitespace-pre-wrap" style="color: var(--mat-sys-on-surface-variant);">{{ codeExample }}</pre>
       </div>
     </mat-card-content>
   </mat-card>

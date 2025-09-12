@@ -203,6 +203,9 @@
     "showcase.forms.outline.label": "Apariencia contorneada",
     "showcase.forms.outline.placeholder": "Marcador de posición",
 
-    "showcase.codeExample.title": "Ejemplo de Código"
+    "showcase.codeExample.title": "Ejemplo de Código",
+
+    "showcase.cards.title": "🃏 Tarjetas",
+    "showcase.cards.description": "Contenedores versátiles para organizar contenido y acciones"
   }
 }

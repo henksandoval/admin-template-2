@@ -185,6 +185,8 @@
     "showcase.buttons.extendedFabs.title": "Extended FABs",
     "showcase.buttons.fab.createNew": "Create New",
     "showcase.buttons.fab.editItem": "Edit Item",
+    "showcase.cards.title": " 🃏 Cards ",
+    "showcase.cards.description": " Versatile containers for organizing content and actions ",
     "header.title": " Admin Dashboard ",
     "common.form.minlength": "The value is too short",
     "common.form.maxlength": "The value is too long",

@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { CommonTranslationsService } from '@core/services/common-translations.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,4 +17,6 @@ import { MatButtonModule } from '@angular/material/button';
   templateUrl: './dashboard.component.html',
   styles: []
 })
-export class DashboardComponent {}
+export class DashboardComponent {
+  protected readonly commonTranslations = inject(CommonTranslationsService);
+}

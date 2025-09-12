@@ -9,7 +9,7 @@
         <mat-icon>menu</mat-icon>
       </button>
 
-      <span class="jobmagnetic-title text-lg whitespace-nowrap">
+      <span class="jobmagnetic-title text-lg whitespace-nowrap" i18n="@@header.title">
         Admin Dashboard
       </span>
     </div>
@@ -25,6 +25,9 @@
               class="transition-transform hover:scale-110">
         <mat-icon>notifications</mat-icon>
       </button>
+
+      <!-- Language Selector -->
+      <app-language-selector></app-language-selector>
 
       <!-- User Menu - only show when authenticated -->
       @if (authService.isAuthenticated()) {

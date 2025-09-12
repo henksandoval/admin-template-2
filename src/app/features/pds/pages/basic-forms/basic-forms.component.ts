@@ -28,58 +28,58 @@ export class BasicFormsComponent implements OnInit {
   public form!: FormGroup;
 
   public basicFieldConfig: FormFieldInputOptions = {
-    label: 'Campo Básico',
-    placeholder: 'Introduce un valor cualquiera'
+    label: $localize`:@@pds.forms.basicField.label:Basic Field`,
+    placeholder: $localize`:@@pds.forms.basicField.placeholder:Enter any value`
   };
 
   public fullFeatureConfig: FormFieldInputOptions = {
     appearance: 'outline',
-    label: 'Campo con Extras',
-    placeholder: 'Ej: texto',
-    hint: 'Este campo muestra todas las características visuales.',
+    label: $localize`:@@pds.forms.fullFeature.label:Field with Extras`,
+    placeholder: $localize`:@@pds.forms.fullFeature.placeholder:E.g: text`,
+    hint: $localize`:@@pds.forms.fullFeature.hint:This field shows all visual features`,
     icon: 'star',
     prefix: 'PRE-',
     suffix: '-SUF',
-    ariaLabel: 'Campo de demostración con todas las características'
+    ariaLabel: $localize`:@@pds.forms.fullFeature.ariaLabel:Demo field with all features`
   };
 
   public emailConfig: FormFieldInputOptions = {
     type: 'email',
-    label: 'Correo Electrónico',
-    placeholder: 'tu@correo.com',
+    label: $localize`:@@common.form.email:Email`,
+    placeholder: $localize`:@@pds.forms.email.placeholder:your@email.com`,
     icon: 'email',
     appearance: 'outline',
     errorMessages: {
-      required: 'El correo electrónico es obligatorio.',
+      required: $localize`:@@pds.forms.email.required:Email address is required`,
     }
   };
 
   public passwordConfig: FormFieldInputOptions = {
     type: 'password',
-    label: 'Contraseña',
-    placeholder: 'Mínimo 8 caracteres',
+    label: $localize`:@@common.form.password:Password`,
+    placeholder: $localize`:@@pds.forms.password.placeholder:Minimum 8 characters`,
     icon: 'lock',
     errorMessages: {
-      required: 'La contraseña no puede estar vacía.',
-      minlength: 'La contraseña debe tener al menos 8 caracteres.'
+      required: $localize`:@@pds.forms.password.required:Password cannot be empty`,
+      minlength: $localize`:@@pds.forms.password.minlength:Password must be at least 8 characters long`
     }
   };
 
   public ageConfig: FormFieldInputOptions = {
     type: 'number',
-    label: 'Edad',
-    placeholder: '18-99',
-    hint: 'Debe ser mayor de 18 años.',
+    label: $localize`:@@common.form.age:Age`,
+    placeholder: $localize`:@@pds.forms.age.placeholder:18-99`,
+    hint: $localize`:@@pds.forms.age.hint:Must be over 18 years old`,
     errorMessages: {
-      required: 'La edad es requerida.',
-      min: 'Debes ser mayor de 18 años para registrarte.',
-      max: 'La edad parece ser demasiado alta.'
+      required: $localize`:@@pds.forms.age.required:Age is required`,
+      min: $localize`:@@pds.forms.age.min:You must be over 18 years old to register`,
+      max: $localize`:@@pds.forms.age.max:Age seems too high`
     }
   };
 
   public disabledConfig: FormFieldInputOptions = {
-    label: 'Campo Deshabilitado',
-    hint: 'Este campo no se puede editar.'
+    label: $localize`:@@pds.forms.disabled.label:Disabled Field`,
+    hint: $localize`:@@pds.forms.disabled.hint:This field cannot be edited`
   };
 
   private router = inject(Router);

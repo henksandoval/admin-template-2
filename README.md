@@ -35,6 +35,74 @@ npm start
 - ✅ **Responsive Design**: Mobile-first approach with Tailwind CSS
 - ✅ **Lazy Loading**: Optimized feature modules
 - ✅ **TypeScript**: Full type safety and modern Angular patterns
+- ✅ **Multi-language Support (i18n)**: English and Spanish locales
+
+## Internationalization (i18n)
+
+The application supports multiple languages using Angular's native `@angular/localize` package:
+
+### Supported Languages
+- **English (en-US)** - Default source language
+- **Spanish (es)** - Complete translation available
+
+### Building for Different Locales
+
+```bash
+# Build for English (default)
+npx ng build --configuration=en-US
+
+# Build for Spanish  
+npx ng build --configuration=es
+
+# Build all locales
+npm run build:i18n
+```
+
+### Adding New Translations
+
+1. **Mark text for translation** in templates:
+```html
+<p i18n="@@unique.id">Text to translate</p>
+```
+
+2. **Use common translations** in components:
+```typescript
+// Inject the service
+protected readonly commonTranslations = inject(CommonTranslationsService);
+
+// Use in template
+{{ commonTranslations.buttons.save }}
+```
+
+3. **Extract translation messages**:
+```bash
+npm run extract-i18n
+```
+
+4. **Update translation files** in `src/locale/messages.es.json`
+
+5. **Test locale builds**:
+```bash
+npx ng build --configuration=es
+```
+
+### Translation File Structure
+
+- `src/locale/messages.xlf` - Extracted source messages (auto-generated)
+- `src/locale/messages.es.json` - Spanish translations (manually maintained)
+
+### Common Translations Service
+
+The `CommonTranslationsService` provides centralized translations for frequently used strings:
+
+- **Buttons**: Save, Cancel, Edit, Delete, etc.
+- **Forms**: Field labels, validation messages
+- **Navigation**: Menu items, breadcrumbs
+- **Tables**: Headers, actions, search
+- **Status**: Loading, error, success messages
+- **Time**: Relative time expressions
+
+This ensures consistency and reduces duplication across the application.
 
 ## Development server
 

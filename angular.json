@@ -13,6 +13,14 @@
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
+      "i18n": {
+        "sourceLocale": "en-US",
+        "locales": {
+          "es": {
+            "translation": "src/locale/messages.es.json"
+          }
+        }
+      },
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:application",
@@ -34,7 +42,8 @@
             "styles": [
               "src/themes/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "localize": true
           },
           "configurations": {
             "production": {
@@ -55,7 +64,24 @@
             "development": {
               "optimization": false,
               "extractLicenses": false,
-              "sourceMap": true
+              "sourceMap": true,
+              "localize": false
+            },
+            "es": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "outputPath": "dist/admin-template/es/",
+              "baseHref": "/es/",
+              "localize": ["es"]
+            },
+            "en-US": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "outputPath": "dist/admin-template/en-US/",
+              "baseHref": "/en-US/",
+              "localize": ["en-US"]
             }
           },
           "defaultConfiguration": "production"
@@ -68,12 +94,21 @@
             },
             "development": {
               "buildTarget": "admin-template:build:development"
+            },
+            "es": {
+              "buildTarget": "admin-template:build:es"
+            },
+            "en-US": {
+              "buildTarget": "admin-template:build:en-US"
             }
           },
           "defaultConfiguration": "development"
         },
         "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n"
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "format": "json"
+          }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",

@@ -4,7 +4,7 @@
     <!-- Sidebar managed by Angular Material -->
     <mat-sidenav #sidenav 
                  [mode]="(isHandset$ | async) ? 'over' : 'side'"
-                 [opened]="!(isHandset$ | async)"
+                 [opened]="(isHandset$ | async) ? false : navigationService.isSidebarVisible()"
                  [ngClass]="sidebarWidthClass()"
                  class="border-r border-surface-variant bg-surface-container transition-all duration-300">
       
@@ -24,9 +24,10 @@
         <div class="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
           <app-main-content></app-main-content>
         </div>
+        
+        <!-- Footer inside main content area as per requirements -->
+        <app-footer></app-footer>
       </main>
-
-      <app-footer></app-footer>
 
     </mat-sidenav-content>
   </mat-sidenav-container>

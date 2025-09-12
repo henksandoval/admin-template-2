@@ -59,13 +59,14 @@ export class AppLayoutComponent {
   }
 
   onMenuToggle(sidenav: any) {
-    // For mobile (handset), toggle the sidenav open/close
+    // Header button should always toggle sidebar visibility (show/hide)
+    // For mobile (handset), use Angular Material sidenav toggle
     this.isHandset$.subscribe(isHandset => {
       if (isHandset) {
         sidenav.toggle();
       } else {
-        // For desktop, toggle the collapse state
-        this.navigationService.toggleSidebarCollapsed();
+        // For desktop, toggle sidebar visibility through service
+        this.navigationService.toggleSidebarVisible();
       }
     }).unsubscribe();
   }

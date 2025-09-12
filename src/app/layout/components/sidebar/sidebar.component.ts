@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {SidebarHeaderComponent} from '@layout/components/sidebar/components/sidebar-header.component';
 import {SidebarNavigationComponent} from '@layout/components/sidebar/components/sidebar-navigation.component';
-import {SidebarSettingsComponent} from '@layout/components/sidebar/components/sidebar-settings.component';
 import {SidebarFooterComponent} from '@layout/components/sidebar/components/sidebar-footer.component';
 import {LayoutService} from '@layout/services/layout.service';
 
@@ -13,7 +12,6 @@ import {LayoutService} from '@layout/services/layout.service';
     CommonModule,
     SidebarHeaderComponent,
     SidebarNavigationComponent,
-    SidebarSettingsComponent,
     SidebarFooterComponent
   ],
   template: `
@@ -22,7 +20,6 @@ import {LayoutService} from '@layout/services/layout.service';
       <div class="flex-1 overflow-y-auto">
         <app-sidebar-navigation></app-sidebar-navigation>
       </div>
-      <app-sidebar-settings></app-sidebar-settings>
       <app-sidebar-footer></app-sidebar-footer>
     </div>
   `,

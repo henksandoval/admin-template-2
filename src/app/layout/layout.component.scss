@@ -5,22 +5,13 @@
   color: var(--mat-sys-on-background);
 }
 
-.sidebar-wrapper {
-  background-color: var(--mat-sys-surface-container);
-  color: var(--mat-sys-on-surface);
+// Material Sidenav handles responsive behavior, so we only need basic styling
+mat-sidenav-container {
+  background-color: var(--mat-sys-background);
+  color: var(--mat-sys-on-background);
 }
 
-/* Responsive sidebar behavior - component-specific layout logic */
-@media (max-width: 768px) {
-  .fixed-sidebar {
-    position: fixed !important;
-    left: -100% !important;
-    transition: left 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
-    z-index: 50;
-    box-shadow: 2px 0 10px rgba(0,0,0,0.3);
-  }
-
-  .fixed-sidebar.mobile-open {
-    left: 0 !important;
-  }
+mat-sidenav {
+  background-color: var(--mat-sys-surface-container);
+  color: var(--mat-sys-on-surface);
 }

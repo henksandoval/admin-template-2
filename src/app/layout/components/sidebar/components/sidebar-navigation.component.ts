@@ -32,7 +32,7 @@ import { NavigationItem, NavigationService } from '@layout/services/navigation/n
                [matTooltip]="item.label"
                matTooltipPosition="right">
 
-            <mat-icon [class]="getIconClasses(item)">
+            <mat-icon [class]="getIconClasses(item)" class="text-xl">
               {{ item.icon }}
             </mat-icon>
 

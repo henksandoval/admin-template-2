@@ -13,7 +13,7 @@ import {NavigationService} from '@layout/services/navigation/navigation.service'
   template: `
     <div class="sidebar-header">
       <h3 *ngIf="!navigationService.isSidebarCollapsed()"
-          class="navigation-title">
+          class="navigation-title text-xs">
         Navigation
       </h3>
       <button (click)="navigationService.toggleSidebarCollapsed()"

@@ -6,7 +6,10 @@
        [class.no-cursor]="!item.route">
 
     <div class="menu-item-content" [class]="'level-' + (item.level || 1)">
-      <mat-icon [class]="getIconClasses(item)" [class]="'level-' + (item.level || 1)">
+      <mat-icon [class]="getIconClasses(item)" 
+                [class.text-xl]="(item.level || 1) === 1"
+                [class.text-lg]="(item.level || 1) === 2" 
+                [class.text-base]="(item.level || 1) === 3">
         {{ item.icon }}
       </mat-icon>
 
@@ -21,14 +24,17 @@
 
       <div class="menu-item-header" [class]="'level-' + (item.level || 1)">
         <div class="menu-item-content">
-          <mat-icon [class]="getIconClasses(item)" [class]="'level-' + (item.level || 1)">
+          <mat-icon [class]="getIconClasses(item)" 
+                    [class.text-xl]="(item.level || 1) === 1"
+                    [class.text-lg]="(item.level || 1) === 2" 
+                    [class.text-base]="(item.level || 1) === 3">
             {{ item.icon }}
           </mat-icon>
 
           <span [class]="getTextClasses(item)">{{ item.label }}</span>
         </div>
 
-        <mat-icon class="expand-icon" [class.expanded]="navigationService.isMenuExpanded(item.id)">
+        <mat-icon class="expand-icon text-lg" [class.expanded]="navigationService.isMenuExpanded(item.id)">
           chevron_right
         </mat-icon>
       </div>

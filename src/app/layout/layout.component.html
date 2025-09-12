@@ -1,25 +1,33 @@
-<div class="min-h-screen flex flex-col">
-  <div class="sticky top-0 z-50 transition-transform duration-300" appStickyHeader #stickyHeader>
-    <app-header (menuToggle)="navigationService.toggleSidebarVisible()"></app-header>
-  </div>
+<div class="min-h-screen flex flex-col bg-surface text-on-surface">
+  <mat-sidenav-container class="flex-1">
 
-  <div class="flex flex-1 relative">
-    <div *ngIf="navigationService.isSidebarVisible()"
-         class="fixed left-0 z-40 transition-all duration-300 ease-in-out fixed-sidebar top-16 h-[calc(100vh-4rem)]"
-         [class]="sidebarWidthClass()">
+    <!-- Sidebar managed by Angular Material -->
+    <mat-sidenav #sidenav 
+                 [mode]="(isHandset$ | async) ? 'over' : 'side'"
+                 [opened]="!(isHandset$ | async)"
+                 [ngClass]="sidebarWidthClass()"
+                 class="border-r border-surface-variant bg-surface-container transition-all duration-300">
+      
+      <!-- The sidebar content remains the same -->
+      <app-sidebar></app-sidebar>
 
-      <div class="sidebar-wrapper h-full overflow-y-auto overflow-x-hidden scrollbar-primary scrollbar-enhanced">
-        <app-sidebar></app-sidebar>
+    </mat-sidenav>
+
+    <!-- Main content that adjusts automatically -->
+    <mat-sidenav-content>
+      
+      <div class="sticky top-0 z-50 transition-transform duration-300" appStickyHeader #stickyHeader>
+        <app-header (menuToggle)="onMenuToggle(sidenav)"></app-header>
       </div>
-    </div>
 
-    <div class="flex-1 transition-all duration-300 ease-in-out mt-16"
-         [class]="mainContentMarginClass()">
+      <main class="py-6">
+        <div class="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
+          <app-main-content></app-main-content>
+        </div>
+      </main>
 
-      <div class="min-h-screen bg-surface">
-        <app-main-content></app-main-content>
-        <app-footer></app-footer>
-      </div>
-    </div>
-  </div>
+      <app-footer></app-footer>
+
+    </mat-sidenav-content>
+  </mat-sidenav-container>
 </div>

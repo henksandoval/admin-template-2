@@ -1,0 +1,70 @@
+:host {
+  display: block;
+}
+
+.grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.grid-cols-1 {
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
+@media (min-width: 768px) {
+  .md\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  
+  .md\:grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  
+  .md\:grid-cols-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+/* Global snackbar styles */
+:host ::ng-deep .snackbar-success {
+  background-color: #4caf50;
+  color: white;
+}
+
+:host ::ng-deep .snackbar-error {
+  background-color: #f44336;
+  color: white;
+}
+
+:host ::ng-deep .snackbar-warning {
+  background-color: #ff9800;
+  color: white;
+}
+
+:host ::ng-deep .snackbar-info {
+  background-color: #2196f3;
+  color: white;
+}
+
+:host ::ng-deep .custom-snackbar {
+  background: linear-gradient(45deg, #6366f1, #8b5cf6);
+  color: white;
+  font-weight: 500;
+}
+
+table {
+  width: 100%;
+}
+
+td, th {
+  text-align: left;
+  vertical-align: top;
+}
+
+.border-b {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.border-b-2 {
+  border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+}

@@ -123,6 +123,38 @@ export class IndexComponent {
       icon: 'palette',
       route: '/showcase/jobmagnetic',
       color: 'tertiary'
+    },
+    {
+      id: 'cards',
+      title: 'Cards',
+      description: 'Versatile containers for organizing content with headers, images, and actions.',
+      icon: 'credit_card',
+      route: '/showcase/cards',
+      color: 'primary'
+    },
+    {
+      id: 'tables',
+      title: 'Data Tables',
+      description: 'Advanced tables with sorting, pagination, filtering, and row selection.',
+      icon: 'table_view',
+      route: '/showcase/tables',
+      color: 'tertiary'
+    },
+    {
+      id: 'layout-components',
+      title: 'Layout Components',
+      description: 'Stepper, Tree, and Grid List components for complex layouts.',
+      icon: 'view_quilt',
+      route: '/showcase/layout-components',
+      color: 'primary'
+    },
+    {
+      id: 'popups-overlays',
+      title: 'Popups & Overlays',
+      description: 'Dialogs, snackbars, and bottom sheets for enhanced interactions.',
+      icon: 'layers',
+      route: '/showcase/popups-overlays',
+      color: 'tertiary'
     }
   ];
 

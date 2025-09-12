@@ -155,6 +155,42 @@ export const routes: AppRoute[] = [
               level: 2
             }
           },
+          {
+            path: 'cards',
+            loadComponent: () => import('./features/showcase/pages/cards/cards.component').then(m => m.CardsComponent),
+            data: {
+              label: 'Cards',
+              icon: 'credit_card',
+              level: 2
+            }
+          },
+          {
+            path: 'tables',
+            loadComponent: () => import('./features/showcase/pages/tables/tables.component').then(m => m.TablesComponent),
+            data: {
+              label: 'Data Tables',
+              icon: 'table_view',
+              level: 2
+            }
+          },
+          {
+            path: 'layout-components',
+            loadComponent: () => import('./features/showcase/pages/layout-components/layout-components.component').then(m => m.LayoutComponentsComponent),
+            data: {
+              label: 'Layout Components',
+              icon: 'view_quilt',
+              level: 2
+            }
+          },
+          {
+            path: 'popups-overlays',
+            loadComponent: () => import('./features/showcase/pages/popups-overlays/popups-overlays.component').then(m => m.PopupsOverlaysComponent),
+            data: {
+              label: 'Popups & Overlays',
+              icon: 'layers',
+              level: 2
+            }
+          },
         ]
       },
       {

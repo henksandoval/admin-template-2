@@ -1,0 +1,335 @@
+<div class="p-6">
+  <!-- Header -->
+  <div class="mb-6">
+    <button mat-button (click)="goBack()" class="mb-4" style="color: var(--mat-sys-primary);">
+      <mat-icon class="mr-2">arrow_back</mat-icon>
+      Back to Showcase
+    </button>
+    <h1 class="text-3xl font-bold mb-2" style="color: var(--mat-sys-primary);">
+      🎪 Popups & Overlays
+    </h1>
+    <p class="text-lg" style="color: var(--mat-sys-on-surface-variant);">
+      Dialogs, snackbars, and bottom sheets for enhanced user interactions
+    </p>
+  </div>
+
+  <!-- Dialogs -->
+  <mat-card class="mb-8 shadow-lg">
+    <mat-card-header>
+      <mat-card-title class="text-xl font-semibold">Dialogs</mat-card-title>
+      <mat-card-subtitle>Modal dialogs for important actions and information</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content class="p-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Basic Dialogs -->
+        <div>
+          <h3 class="text-lg font-medium mb-4">Basic Dialogs</h3>
+          <div class="space-y-3">
+            <button mat-raised-button color="primary" (click)="openBasicDialog()" class="w-full">
+              <mat-icon class="mr-2">info</mat-icon>
+              Basic Info Dialog
+            </button>
+            
+            <button mat-raised-button color="warn" (click)="openConfirmDialog()" class="w-full">
+              <mat-icon class="mr-2">warning</mat-icon>
+              Confirmation Dialog
+            </button>
+          </div>
+          
+          <div class="mt-4 p-3 bg-blue-50 rounded-lg">
+            <p class="text-sm text-blue-800">
+              <strong>Basic dialogs</strong> are perfect for simple confirmations, alerts, and information display.
+            </p>
+          </div>
+        </div>
+
+        <!-- Form Dialogs -->
+        <div>
+          <h3 class="text-lg font-medium mb-4">Form Dialogs</h3>
+          <div class="space-y-3">
+            <button mat-raised-button color="primary" (click)="openFormDialog()" class="w-full">
+              <mat-icon class="mr-2">person_add</mat-icon>
+              Create User Dialog
+            </button>
+            
+            <button mat-raised-button color="accent" (click)="openEditDialog()" class="w-full">
+              <mat-icon class="mr-2">edit</mat-icon>
+              Edit User Dialog
+            </button>
+          </div>
+          
+          <div class="mt-4 p-3 bg-green-50 rounded-lg">
+            <p class="text-sm text-green-800">
+              <strong>Form dialogs</strong> contain forms for data entry, editing, and complex user interactions.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dialog Features -->
+      <div class="mt-8">
+        <h3 class="text-lg font-medium mb-4">Dialog Features</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="flex items-start space-x-3">
+            <mat-icon class="text-blue-500 mt-1">open_in_new</mat-icon>
+            <div>
+              <h4 class="font-medium">Modal Overlay</h4>
+              <p class="text-sm text-gray-600">Blocks interaction with background content</p>
+            </div>
+          </div>
+          
+          <div class="flex items-start space-x-3">
+            <mat-icon class="text-green-500 mt-1">keyboard</mat-icon>
+            <div>
+              <h4 class="font-medium">Keyboard Navigation</h4>
+              <p class="text-sm text-gray-600">ESC to close, Tab navigation support</p>
+            </div>
+          </div>
+
+          <div class="flex items-start space-x-3">
+            <mat-icon class="text-purple-500 mt-1">accessibility</mat-icon>
+            <div>
+              <h4 class="font-medium">Accessibility</h4>
+              <p class="text-sm text-gray-600">Screen reader support and focus management</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Snackbars -->
+  <mat-card class="mb-8 shadow-lg">
+    <mat-card-header>
+      <mat-card-title class="text-xl font-semibold">Snackbars</mat-card-title>
+      <mat-card-subtitle>Brief messages and notifications at the bottom of the screen</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content class="p-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Basic Snackbars -->
+        <div>
+          <h3 class="text-lg font-medium mb-4">Basic Snackbars</h3>
+          <div class="space-y-3">
+            <button mat-raised-button (click)="showBasicSnackbar()" class="w-full">
+              <mat-icon class="mr-2">message</mat-icon>
+              Basic Message
+            </button>
+            
+            <button mat-raised-button color="primary" (click)="showSnackbar('Success! Operation completed.', 'success')" class="w-full">
+              <mat-icon class="mr-2">check_circle</mat-icon>
+              Success Message
+            </button>
+            
+            <button mat-raised-button color="warn" (click)="showSnackbar('Error! Something went wrong.', 'error')" class="w-full">
+              <mat-icon class="mr-2">error</mat-icon>
+              Error Message
+            </button>
+            
+            <button mat-raised-button color="accent" (click)="showSnackbar('Warning! Please check your input.', 'warning')" class="w-full">
+              <mat-icon class="mr-2">warning</mat-icon>
+              Warning Message
+            </button>
+          </div>
+        </div>
+
+        <!-- Advanced Snackbars -->
+        <div>
+          <h3 class="text-lg font-medium mb-4">Advanced Snackbars</h3>
+          <div class="space-y-3">
+            <button mat-raised-button color="primary" (click)="showActionSnackbar()" class="w-full">
+              <mat-icon class="mr-2">undo</mat-icon>
+              With Action Button
+            </button>
+            
+            <button mat-raised-button color="accent" (click)="showCustomSnackbar()" class="w-full">
+              <mat-icon class="mr-2">star</mat-icon>
+              Custom Styled
+            </button>
+          </div>
+          
+          <div class="mt-4 p-3 bg-orange-50 rounded-lg">
+            <p class="text-sm text-orange-800">
+              <strong>Advanced snackbars</strong> can include action buttons and custom styling for enhanced functionality.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Snackbar Features -->
+      <div class="mt-8">
+        <h3 class="text-lg font-medium mb-4">Snackbar Features</h3>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+          <div class="text-center">
+            <mat-icon class="text-3xl text-blue-500 mb-2">schedule</mat-icon>
+            <h4 class="font-medium">Auto-dismiss</h4>
+            <p class="text-xs text-gray-600">Automatically disappear after timeout</p>
+          </div>
+          
+          <div class="text-center">
+            <mat-icon class="text-3xl text-green-500 mb-2">touch_app</mat-icon>
+            <h4 class="font-medium">Action Buttons</h4>
+            <p class="text-xs text-gray-600">Include interactive actions</p>
+          </div>
+
+          <div class="text-center">
+            <mat-icon class="text-3xl text-purple-500 mb-2">palette</mat-icon>
+            <h4 class="font-medium">Custom Styling</h4>
+            <p class="text-xs text-gray-600">Apply custom themes and colors</p>
+          </div>
+
+          <div class="text-center">
+            <mat-icon class="text-3xl text-orange-500 mb-2">position</mat-icon>
+            <h4 class="font-medium">Positioning</h4>
+            <p class="text-xs text-gray-600">Configure screen position</p>
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Bottom Sheets -->
+  <mat-card class="mb-8 shadow-lg">
+    <mat-card-header>
+      <mat-card-title class="text-xl font-semibold">Bottom Sheets</mat-card-title>
+      <mat-card-subtitle>Mobile-friendly panels that slide up from the bottom</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content class="p-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Bottom Sheet Actions -->
+        <div>
+          <h3 class="text-lg font-medium mb-4">Bottom Sheet Types</h3>
+          <div class="space-y-3">
+            <button mat-raised-button color="primary" (click)="openBottomSheet()" class="w-full">
+              <mat-icon class="mr-2">list</mat-icon>
+              Action List Sheet
+            </button>
+            
+            <button mat-raised-button color="accent" (click)="openListBottomSheet()" class="w-full">
+              <mat-icon class="mr-2">menu</mat-icon>
+              Menu Bottom Sheet
+            </button>
+          </div>
+          
+          <div class="mt-4 p-3 bg-purple-50 rounded-lg">
+            <p class="text-sm text-purple-800">
+              <strong>Bottom sheets</strong> are perfect for mobile interfaces and contextual actions.
+            </p>
+          </div>
+        </div>
+
+        <!-- Bottom Sheet Features -->
+        <div>
+          <h3 class="text-lg font-medium mb-4">When to Use</h3>
+          <div class="space-y-3">
+            <div class="flex items-start space-x-3">
+              <mat-icon class="text-blue-500 mt-1">smartphone</mat-icon>
+              <div>
+                <h4 class="font-medium text-sm">Mobile-First Design</h4>
+                <p class="text-xs text-gray-600">Better UX on touch devices</p>
+              </div>
+            </div>
+            
+            <div class="flex items-start space-x-3">
+              <mat-icon class="text-green-500 mt-1">list</mat-icon>
+              <div>
+                <h4 class="font-medium text-sm">Action Lists</h4>
+                <p class="text-xs text-gray-600">Multiple related actions</p>
+              </div>
+            </div>
+
+            <div class="flex items-start space-x-3">
+              <mat-icon class="text-purple-500 mt-1">share</mat-icon>
+              <div>
+                <h4 class="font-medium text-sm">Share Menus</h4>
+                <p class="text-xs text-gray-600">Social sharing options</p>
+              </div>
+            </div>
+
+            <div class="flex items-start space-x-3">
+              <mat-icon class="text-orange-500 mt-1">filter_list</mat-icon>
+              <div>
+                <h4 class="font-medium text-sm">Filter Options</h4>
+                <p class="text-xs text-gray-600">Data filtering controls</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Comparison Table -->
+  <mat-card class="mb-8 shadow-lg">
+    <mat-card-header>
+      <mat-card-title class="text-xl font-semibold">When to Use Each Component</mat-card-title>
+      <mat-card-subtitle>Choose the right overlay component for your use case</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content class="p-6">
+      <div class="overflow-x-auto">
+        <table class="w-full border-collapse">
+          <thead>
+            <tr class="border-b-2">
+              <th class="text-left p-3 font-semibold">Component</th>
+              <th class="text-left p-3 font-semibold">Best For</th>
+              <th class="text-left p-3 font-semibold">Interaction</th>
+              <th class="text-left p-3 font-semibold">Duration</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="border-b">
+              <td class="p-3">
+                <div class="flex items-center">
+                  <mat-icon class="text-blue-500 mr-2">open_in_new</mat-icon>
+                  <strong>Dialog</strong>
+                </div>
+              </td>
+              <td class="p-3">Critical actions, forms, confirmations</td>
+              <td class="p-3">Requires user action</td>
+              <td class="p-3">Until dismissed</td>
+            </tr>
+            <tr class="border-b">
+              <td class="p-3">
+                <div class="flex items-center">
+                  <mat-icon class="text-green-500 mr-2">message</mat-icon>
+                  <strong>Snackbar</strong>
+                </div>
+              </td>
+              <td class="p-3">Brief notifications, status updates</td>
+              <td class="p-3">Optional action</td>
+              <td class="p-3">Auto-dismiss (2-10s)</td>
+            </tr>
+            <tr>
+              <td class="p-3">
+                <div class="flex items-center">
+                  <mat-icon class="text-purple-500 mr-2">vertical_align_bottom</mat-icon>
+                  <strong>Bottom Sheet</strong>
+                </div>
+              </td>
+              <td class="p-3">Mobile actions, contextual menus</td>
+              <td class="p-3">Quick selection</td>
+              <td class="p-3">Until action selected</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Code Examples -->
+  <mat-card class="mb-8">
+    <mat-card-header>
+      <mat-card-title class="text-lg font-semibold">Code Examples</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="p-4 rounded-lg" style="background-color: var(--mat-sys-surface-variant);">
+        <pre class="text-sm overflow-x-auto" style="color: var(--mat-sys-on-surface-variant);">{{ codeExamples.dialog }}
+
+{{ codeExamples.snackbar }}
+
+{{ codeExamples.bottomSheet }}
+
+{{ codeExamples.dialogComponent }}</pre>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

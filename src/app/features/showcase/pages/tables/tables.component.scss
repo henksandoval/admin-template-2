@@ -1,0 +1,70 @@
+:host {
+  display: block;
+}
+
+.mat-column-select {
+  overflow: initial;
+  width: 48px;
+}
+
+.mat-column-id {
+  width: 80px;
+}
+
+.mat-column-actions {
+  width: 60px;
+}
+
+.mat-column-status {
+  width: 120px;
+}
+
+.mat-column-projects {
+  width: 100px;
+}
+
+table {
+  width: 100%;
+}
+
+.mat-row:hover {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+.mat-header-row {
+  background-color: var(--mat-sys-surface-variant);
+}
+
+.mat-header-cell {
+  font-weight: 600;
+  color: var(--mat-sys-on-surface);
+}
+
+.mat-cell {
+  padding: 12px 8px;
+}
+
+.mat-header-cell {
+  padding: 12px 8px;
+}
+
+.grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.grid-cols-1 {
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
+@media (min-width: 768px) {
+  .md\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .lg\:grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}

@@ -155,6 +155,14 @@ export class IndexComponent {
       icon: 'layers',
       route: '/showcase/popups-overlays',
       color: 'tertiary'
+    },
+    {
+      id: 'indicators',
+      title: 'Indicators & Utilities',
+      description: 'Badges, dividers, advanced tooltips, and utility components for enhanced UX.',
+      icon: 'label',
+      route: '/showcase/indicators',
+      color: 'primary'
     }
   ];
 

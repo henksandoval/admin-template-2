@@ -191,6 +191,15 @@ export const routes: AppRoute[] = [
               level: 2
             }
           },
+          {
+            path: 'indicators',
+            loadComponent: () => import('./features/showcase/pages/indicators/indicators.component').then(m => m.IndicatorsComponent),
+            data: {
+              label: 'Indicators & Utilities',
+              icon: 'label',
+              level: 2
+            }
+          },
         ]
       },
       {

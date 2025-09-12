@@ -3,12 +3,12 @@
   <div class="mb-6">
     <button mat-button (click)="goBack()" class="mb-4" style="color: var(--mat-sys-primary);">
       <mat-icon class="mr-2">arrow_back</mat-icon>
-      Back to Showcase
+      <span i18n="@@showcase.backToShowcase">Back to Showcase</span>
     </button>
-    <h1 class="text-3xl font-bold mb-2" style="color: var(--mat-sys-primary);">
+    <h1 class="text-3xl font-bold mb-2" style="color: var(--mat-sys-primary);" i18n="@@showcase.tables.title">
       📊 Data Tables
     </h1>
-    <p class="text-lg" style="color: var(--mat-sys-on-surface-variant);">
+    <p class="text-lg" style="color: var(--mat-sys-on-surface-variant);" i18n="@@showcase.tables.description">
       Comprehensive data tables with sorting, pagination, and selection
     </p>
   </div>
@@ -16,27 +16,27 @@
   <!-- Basic Table -->
   <mat-card class="mb-8 shadow-lg">
     <mat-card-header>
-      <mat-card-title class="text-xl font-semibold">Basic Table</mat-card-title>
-      <mat-card-subtitle>Simple data table with basic column display</mat-card-subtitle>
+      <mat-card-title class="text-xl font-semibold" i18n="@@showcase.tables.basic.title">Basic Table</mat-card-title>
+      <mat-card-subtitle i18n="@@showcase.tables.basic.subtitle">Simple data table with basic column display</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content class="p-6">
       <div class="overflow-auto">
         <table mat-table [dataSource]="basicData" class="w-full">
           <!-- Name Column -->
           <ng-container matColumnDef="name">
-            <th mat-header-cell *matHeaderCellDef>Name</th>
+            <th mat-header-cell *matHeaderCellDef i18n="@@showcase.tables.columns.name">Name</th>
             <td mat-cell *matCellDef="let user">{{user.name}}</td>
           </ng-container>
 
           <!-- Email Column -->
           <ng-container matColumnDef="email">
-            <th mat-header-cell *matHeaderCellDef>Email</th>
+            <th mat-header-cell *matHeaderCellDef i18n="@@showcase.tables.columns.email">Email</th>
             <td mat-cell *matCellDef="let user">{{user.email}}</td>
           </ng-container>
 
           <!-- Role Column -->
           <ng-container matColumnDef="role">
-            <th mat-header-cell *matHeaderCellDef>Role</th>
+            <th mat-header-cell *matHeaderCellDef i18n="@@showcase.tables.columns.role">Role</th>
             <td mat-cell *matCellDef="let user">
               <mat-chip [color]="user.role === 'Admin' ? 'primary' : 'basic'">
                 {{user.role}}
@@ -54,16 +54,16 @@
   <!-- Advanced Table with Sorting, Pagination, and Selection -->
   <mat-card class="mb-8 shadow-lg">
     <mat-card-header>
-      <mat-card-title class="text-xl font-semibold">Advanced Data Table</mat-card-title>
-      <mat-card-subtitle>Full-featured table with sorting, pagination, filtering, and row selection</mat-card-subtitle>
+      <mat-card-title class="text-xl font-semibold" i18n="@@showcase.tables.advanced.title">Advanced Data Table</mat-card-title>
+      <mat-card-subtitle i18n="@@showcase.tables.advanced.subtitle">Full-featured table with sorting, pagination, filtering, and row selection</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content class="p-6">
       <!-- Table Controls -->
       <div class="mb-6 flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
         <!-- Search Filter -->
         <mat-form-field appearance="outline" class="w-full sm:w-80">
-          <mat-label>Filter users</mat-label>
-          <input matInput (keyup)="applyFilter($event)" placeholder="Search by name, email, or role" #input>
+          <mat-label i18n="@@showcase.tables.filter.label">Filter users</mat-label>
+          <input matInput (keyup)="applyFilter($event)" placeholder="Search by name, email, or role" i18n-placeholder="@@showcase.tables.filter.placeholder" #input>
           <mat-icon matSuffix>search</mat-icon>
         </mat-form-field>
 
@@ -71,15 +71,15 @@
         <div class="flex gap-2" *ngIf="selection.selected.length > 0">
           <button mat-raised-button color="primary" (click)="onBulkAction('activate')">
             <mat-icon>check_circle</mat-icon>
-            Activate ({{selection.selected.length}})
+            <span i18n="@@showcase.tables.bulkActions.activate">Activate</span> ({{selection.selected.length}})
           </button>
           <button mat-raised-button color="accent" (click)="onBulkAction('deactivate')">
             <mat-icon>block</mat-icon>
-            Deactivate
+            <span i18n="@@showcase.tables.bulkActions.deactivate">Deactivate</span>
           </button>
           <button mat-raised-button color="warn" (click)="onBulkAction('delete')">
             <mat-icon>delete</mat-icon>
-            Delete
+            <span i18n="@@showcase.tables.bulkActions.delete">Delete</span>
           </button>
         </div>
       </div>
@@ -107,13 +107,13 @@
 
           <!-- ID Column -->
           <ng-container matColumnDef="id">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header i18n="@@showcase.tables.columns.id">ID</th>
             <td mat-cell *matCellDef="let user">#{{user.id}}</td>
           </ng-container>
 
           <!-- Name Column -->
           <ng-container matColumnDef="name">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header i18n="@@showcase.tables.columns.name">Name</th>
             <td mat-cell *matCellDef="let user">
               <div class="flex items-center">
                 <div class="w-8 h-8 rounded-full bg-blue-500 text-white flex items-center justify-center text-sm font-medium mr-3">
@@ -126,7 +126,7 @@
 
           <!-- Email Column -->
           <ng-container matColumnDef="email">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header i18n="@@showcase.tables.columns.email">Email</th>
             <td mat-cell *matCellDef="let user">
               <a href="mailto:{{user.email}}" class="text-blue-600 hover:underline">{{user.email}}</a>
             </td>
@@ -134,7 +134,7 @@
 
           <!-- Role Column -->
           <ng-container matColumnDef="role">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Role</th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header i18n="@@showcase.tables.columns.role">Role</th>
             <td mat-cell *matCellDef="let user">
               <mat-chip [color]="user.role === 'Admin' ? 'primary' : user.role === 'Manager' ? 'accent' : 'basic'">
                 <mat-icon *ngIf="user.role === 'Admin'" class="mr-1">admin_panel_settings</mat-icon>
@@ -149,7 +149,7 @@
 
           <!-- Status Column -->
           <ng-container matColumnDef="status">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header i18n="@@showcase.tables.columns.status">Status</th>
             <td mat-cell *matCellDef="let user">
               <mat-chip [color]="getStatusColor(user.status)">
                 <mat-icon class="mr-1">
@@ -162,7 +162,7 @@
 
           <!-- Last Login Column -->
           <ng-container matColumnDef="lastLogin">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Last Login</th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header i18n="@@showcase.tables.columns.lastLogin">Last Login</th>
             <td mat-cell *matCellDef="let user">
               <div class="text-sm">
                 <div>{{user.lastLogin | date:'MMM d, y'}}</div>
@@ -173,7 +173,7 @@
 
           <!-- Projects Column -->
           <ng-container matColumnDef="projects">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Projects</th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header i18n="@@showcase.tables.columns.projects">Projects</th>
             <td mat-cell *matCellDef="let user">
               <div class="flex items-center">
                 <mat-icon class="text-gray-500 mr-1">folder</mat-icon>
@@ -184,7 +184,7 @@
 
           <!-- Actions Column -->
           <ng-container matColumnDef="actions">
-            <th mat-header-cell *matHeaderCellDef>Actions</th>
+            <th mat-header-cell *matHeaderCellDef i18n="@@showcase.tables.columns.actions">Actions</th>
             <td mat-cell *matCellDef="let user">
               <button mat-icon-button [matMenuTriggerFor]="actionMenu" aria-label="Actions">
                 <mat-icon>more_vert</mat-icon>
@@ -192,20 +192,20 @@
               <mat-menu #actionMenu="matMenu">
                 <button mat-menu-item (click)="onRowAction('view', user)">
                   <mat-icon>visibility</mat-icon>
-                  View Details
+                  <span i18n="@@showcase.tables.actions.viewDetails">View Details</span>
                 </button>
                 <button mat-menu-item (click)="onRowAction('edit', user)">
                   <mat-icon>edit</mat-icon>
-                  Edit User
+                  <span i18n="@@showcase.tables.actions.editUser">Edit User</span>
                 </button>
                 <button mat-menu-item (click)="onRowAction('reset', user)">
                   <mat-icon>lock_reset</mat-icon>
-                  Reset Password
+                  <span i18n="@@showcase.tables.actions.resetPassword">Reset Password</span>
                 </button>
                 <mat-divider></mat-divider>
                 <button mat-menu-item (click)="onRowAction('delete', user)" class="text-red-600">
                   <mat-icon class="text-red-600">delete</mat-icon>
-                  Delete User
+                  <span i18n="@@showcase.tables.actions.deleteUser">Delete User</span>
                 </button>
               </mat-menu>
             </td>
@@ -221,7 +221,7 @@
             <td class="mat-cell text-center py-8" [attr.colspan]="advancedColumns.length">
               <div class="flex flex-col items-center text-gray-500">
                 <mat-icon class="text-4xl mb-2">search_off</mat-icon>
-                <p>No data matching the filter "{{input.value}}"</p>
+                <p><span i18n="@@showcase.tables.noData">No data matching the filter</span> "{{input.value}}"</p>
               </div>
             </td>
           </tr>
@@ -233,7 +233,8 @@
                      [pageSizeOptions]="[5, 10, 20, 50]"
                      [pageSize]="10"
                      showFirstLastButtons
-                     aria-label="Select page of users">
+                     aria-label="Select page of users"
+                     i18n-aria-label="@@showcase.tables.paginator.ariaLabel">
       </mat-paginator>
     </mat-card-content>
   </mat-card>
@@ -241,56 +242,56 @@
   <!-- Table Features Overview -->
   <mat-card class="mb-8 shadow-lg">
     <mat-card-header>
-      <mat-card-title class="text-xl font-semibold">Table Features</mat-card-title>
-      <mat-card-subtitle>Key features demonstrated in the tables above</mat-card-subtitle>
+      <mat-card-title class="text-xl font-semibold" i18n="@@showcase.tables.features.title">Table Features</mat-card-title>
+      <mat-card-subtitle i18n="@@showcase.tables.features.subtitle">Key features demonstrated in the tables above</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content class="p-6">
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <div class="flex items-start space-x-3">
           <mat-icon class="text-blue-500 mt-1">sort</mat-icon>
           <div>
-            <h3 class="font-medium">Sorting</h3>
-            <p class="text-sm text-gray-600">Click column headers to sort data ascending/descending</p>
+            <h3 class="font-medium" i18n="@@showcase.tables.features.sorting.title">Sorting</h3>
+            <p class="text-sm text-gray-600" i18n="@@showcase.tables.features.sorting.description">Click column headers to sort data ascending/descending</p>
           </div>
         </div>
         
         <div class="flex items-start space-x-3">
           <mat-icon class="text-green-500 mt-1">filter_list</mat-icon>
           <div>
-            <h3 class="font-medium">Filtering</h3>
-            <p class="text-sm text-gray-600">Search across all columns with live filtering</p>
+            <h3 class="font-medium" i18n="@@showcase.tables.features.filtering.title">Filtering</h3>
+            <p class="text-sm text-gray-600" i18n="@@showcase.tables.features.filtering.description">Search across all columns with live filtering</p>
           </div>
         </div>
 
         <div class="flex items-start space-x-3">
           <mat-icon class="text-purple-500 mt-1">view_list</mat-icon>
           <div>
-            <h3 class="font-medium">Pagination</h3>
-            <p class="text-sm text-gray-600">Navigate large datasets with configurable page sizes</p>
+            <h3 class="font-medium" i18n="@@showcase.tables.features.pagination.title">Pagination</h3>
+            <p class="text-sm text-gray-600" i18n="@@showcase.tables.features.pagination.description">Navigate large datasets with configurable page sizes</p>
           </div>
         </div>
 
         <div class="flex items-start space-x-3">
           <mat-icon class="text-orange-500 mt-1">check_box</mat-icon>
           <div>
-            <h3 class="font-medium">Selection</h3>
-            <p class="text-sm text-gray-600">Select individual rows or all rows for bulk operations</p>
+            <h3 class="font-medium" i18n="@@showcase.tables.features.selection.title">Selection</h3>
+            <p class="text-sm text-gray-600" i18n="@@showcase.tables.features.selection.description">Select individual rows or all rows for bulk operations</p>
           </div>
         </div>
 
         <div class="flex items-start space-x-3">
           <mat-icon class="text-red-500 mt-1">more_vert</mat-icon>
           <div>
-            <h3 class="font-medium">Row Actions</h3>
-            <p class="text-sm text-gray-600">Context menu for individual row operations</p>
+            <h3 class="font-medium" i18n="@@showcase.tables.features.rowActions.title">Row Actions</h3>
+            <p class="text-sm text-gray-600" i18n="@@showcase.tables.features.rowActions.description">Context menu for individual row operations</p>
           </div>
         </div>
 
         <div class="flex items-start space-x-3">
           <mat-icon class="text-teal-500 mt-1">refresh</mat-icon>
           <div>
-            <h3 class="font-medium">Responsive</h3>
-            <p class="text-sm text-gray-600">Horizontal scrolling on smaller screens</p>
+            <h3 class="font-medium" i18n="@@showcase.tables.features.responsive.title">Responsive</h3>
+            <p class="text-sm text-gray-600" i18n="@@showcase.tables.features.responsive.description">Horizontal scrolling on smaller screens</p>
           </div>
         </div>
       </div>
@@ -300,7 +301,7 @@
   <!-- Code Example -->
   <mat-card class="mb-8">
     <mat-card-header>
-      <mat-card-title class="text-lg font-semibold">Code Examples</mat-card-title>
+      <mat-card-title class="text-lg font-semibold" i18n="@@showcase.tables.codeExamples.title">Code Examples</mat-card-title>
     </mat-card-header>
     <mat-card-content>
       <div class="p-4 rounded-lg" style="background-color: var(--mat-sys-surface-variant);">

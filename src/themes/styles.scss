@@ -17,7 +17,7 @@ $default-light-theme: map.get(map.get(theme.$themes, 'jobmagnetic-blue'), 'light
 // Apply base Material styles
 @include mat.core();
 
-// Generate base themes (only color styles, no typography)
+// Generate complete themes (all component styles including shape, typography, density)
 @each $color-name, $theme-variants in theme.$themes {
   $light-theme: map.get($theme-variants, 'light');
   $dark-theme: map.get($theme-variants, 'dark');
@@ -28,11 +28,11 @@ $default-light-theme: map.get(map.get(theme.$themes, 'jobmagnetic-blue'), 'light
     :root,
     .light-theme,
     .light-theme[data-theme-color="#{$color-name}"] {
-      @include mat.all-component-colors($light-theme);
+      @include mat.all-component-themes($light-theme);
     }
   } @else {
     .light-theme[data-theme-color="#{$color-name}"] {
-      @include mat.all-component-colors($light-theme);
+      @include mat.all-component-themes($light-theme);
     }
   }
 
@@ -40,11 +40,11 @@ $default-light-theme: map.get(map.get(theme.$themes, 'jobmagnetic-blue'), 'light
   @if $color-name == 'jobmagnetic-blue' {
     .dark-theme,
     .dark-theme[data-theme-color="#{$color-name}"] {
-      @include mat.all-component-colors($dark-theme);
+      @include mat.all-component-themes($dark-theme);
     }
   } @else {
     .dark-theme[data-theme-color="#{$color-name}"] {
-      @include mat.all-component-colors($dark-theme);
+      @include mat.all-component-themes($dark-theme);
     }
   }
 }

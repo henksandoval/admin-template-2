@@ -32,8 +32,8 @@ import { NavigationItem, NavigationService } from '@layout/services/navigation/n
                [matTooltip]="item.label"
                matTooltipPosition="right">
 
-            <mat-icon [class]="getIconClasses(item)" class="text-xl">
-              {{ item.icon }}
+            <mat-icon [class]="getIconClasses(item)" class="text-lg">
+              {{ getOutlineIcon(item.icon) }}
             </mat-icon>
 
             <app-sidebar-mega-menu
@@ -56,6 +56,21 @@ export class SidebarNavigationComponent {
   private megaMenuTimeout: any;
 
   public navigationService = inject(NavigationService);
+
+  // Icon mapping from filled to outlined versions where available (same as in menu item component)
+  private iconMap: Record<string, string> = {
+    'dashboard': 'dashboard',
+    'people': 'people_outline',
+    'visibility': 'visibility_outlined',
+    'dashboard_customize': 'dashboard_customize',
+    'settings': 'settings',
+    'account_circle': 'account_circle',
+    'notifications': 'notifications_outlined',
+    'search': 'search',
+    'menu': 'menu',
+    'home': 'home',
+    'chevron_right': 'chevron_right'
+  };
 
   onItemHover(item: NavigationItem, index: number, event: MouseEvent) {
     if (!item.children || !this.navigationService.isSidebarCollapsed()) return;
@@ -94,5 +109,12 @@ export class SidebarNavigationComponent {
   getIconClasses(item: NavigationItem): string {
     const isActive = item.route && this.navigationService.isActiveRoute(item.route.substring(1));
     return isActive ? 'nav-icon active' : 'nav-icon inactive';
+  }
+
+  getOutlineIcon(iconName?: string): string {
+    if (!iconName) return '';
+    
+    // Return outlined version if available, otherwise return original
+    return this.iconMap[iconName] || iconName;
   }
 }

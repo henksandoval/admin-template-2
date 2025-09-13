@@ -1,33 +1,42 @@
 <div class="min-h-screen flex flex-col bg-surface text-on-surface">
-  <mat-sidenav-container class="flex-1">
+  
+  <!-- Header at top, always full width (100% viewport) -->
+  <div class="sticky top-0 z-50 transition-transform duration-300" appStickyHeader #stickyHeader>
+    <app-header (menuToggle)="onMenuToggle()"></app-header>
+  </div>
 
-    <!-- Sidebar managed by Angular Material -->
-    <mat-sidenav #sidenav 
-                 [mode]="(isHandset$ | async) ? 'over' : 'side'"
-                 [opened]="!(isHandset$ | async)"
-                 [ngClass]="sidebarWidthClass()"
-                 class="border-r border-surface-variant bg-surface-container transition-all duration-300">
-      
-      <!-- The sidebar content remains the same -->
+  <!-- Angular Material Sidenav Container -->
+  <mat-sidenav-container class="flex-1 sidenav-container">
+    
+    <!-- Angular Material Sidenav -->
+    <mat-sidenav 
+      #sidenav
+      [mode]="(getSidenavMode() | async) || 'side'"
+      [opened]="(getSidenavOpened() | async) || false"
+      [ngClass]="getSidebarClasses() | async"
+      class="bg-surface-container border-r border-surface-variant transition-all duration-300">
       <app-sidebar></app-sidebar>
-
     </mat-sidenav>
 
-    <!-- Main content that adjusts automatically -->
+    <!-- Sidenav Content -->
     <mat-sidenav-content>
       
-      <div class="sticky top-0 z-50 transition-transform duration-300" appStickyHeader #stickyHeader>
-        <app-header (menuToggle)="onMenuToggle(sidenav)"></app-header>
-      </div>
-
-      <main class="py-6">
-        <div class="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
-          <app-main-content></app-main-content>
+      <!-- Main content area -->
+      <main class="flex flex-col min-h-full">
+        
+        <!-- Content area -->
+        <div class="flex-1 py-6">
+          <div class="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
+            <app-main-content></app-main-content>
+          </div>
         </div>
+        
+        <!-- Footer -->
+        <app-footer></app-footer>
+        
       </main>
 
-      <app-footer></app-footer>
-
     </mat-sidenav-content>
+
   </mat-sidenav-container>
 </div>

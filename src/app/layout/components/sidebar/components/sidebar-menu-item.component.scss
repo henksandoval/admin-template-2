@@ -12,7 +12,7 @@
     position: relative;
     
     &:hover {
-      background-color: var(--mat-sys-surface-variant);
+      background-color: #f3f4f6; // gray-100
     }
 
     &.no-cursor {
@@ -21,7 +21,7 @@
 
     // Active state with vertical bar indicator
     &.active {
-      background-color: rgba(var(--mat-sys-primary-rgb), 0.08);
+      background-color: rgba(59, 130, 246, 0.08); // blue-500 with opacity
       
       &::before {
         content: '';
@@ -31,7 +31,7 @@
         transform: translateY(-50%);
         width: 3px;
         height: 50%;
-        background-color: var(--mat-sys-primary);
+        background-color: #3b82f6; // blue-500
         border-radius: 0 2px 2px 0;
       }
     }
@@ -45,12 +45,12 @@
     position: relative;
     
     &:hover {
-      background-color: var(--mat-sys-surface-variant);
+      background-color: #f3f4f6; // gray-100
     }
 
     // Active state for expandable items
     &.active {
-      background-color: rgba(var(--mat-sys-primary-rgb), 0.08);
+      background-color: rgba(59, 130, 246, 0.08); // blue-500 with opacity
       
       &::before {
         content: '';
@@ -60,7 +60,7 @@
         transform: translateY(-50%);
         width: 3px;
         height: 50%;
-        background-color: var(--mat-sys-primary);
+        background-color: #3b82f6; // blue-500
         border-radius: 0 2px 2px 0;
       }
     }
@@ -80,11 +80,11 @@
       flex-shrink: 0; // Prevent icon from shrinking
       
       &.active {
-        color: var(--mat-sys-primary);
+        color: #3b82f6; // blue-500
       }
       
       &.inactive {
-        color: var(--mat-sys-on-surface-variant);
+        color: #6b7280; // gray-500
       }
     }
     
@@ -94,12 +94,12 @@
       font-weight: 400; // Normal weight
       
       &.active {
-        color: var(--mat-sys-primary);
+        color: #3b82f6; // blue-500
         font-weight: 600; // Semi-bold for active state
       }
       
       &.inactive {
-        color: var(--mat-sys-on-surface);
+        color: #374151; // gray-700 (darker for better readability)
         font-weight: 400;
       }
     }
@@ -111,13 +111,13 @@
     justify-content: space-between;
     
     .expand-icon {
-      color: var(--mat-sys-on-surface-variant);
+      color: #6b7280; // gray-500
       transition: transform 200ms ease-in-out;
       font-size: 1.125rem; // Slightly smaller for better proportion
       
       &.expanded {
         transform: rotate(90deg);
-        color: var(--mat-sys-primary);
+        color: #3b82f6; // blue-500
       }
     }
   }

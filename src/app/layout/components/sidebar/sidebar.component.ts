@@ -17,7 +17,7 @@ import {LayoutService} from '@layout/services/layout.service';
   template: `
     <div class="sidebar-container">
       <app-sidebar-header></app-sidebar-header>
-      <div class="flex-1 overflow-y-auto">
+      <div class="navigation-area flex-1">
         <app-sidebar-navigation></app-sidebar-navigation>
       </div>
       <app-sidebar-footer></app-sidebar-footer>

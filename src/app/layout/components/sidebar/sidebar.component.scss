@@ -10,4 +10,12 @@
   background-color: var(--mat-sys-surface-container);
   color: var(--mat-sys-on-surface);
   box-shadow: var(--mat-sys-level-2);
+
+  // Ensure the navigation area can scroll internally
+  .navigation-area {
+    flex: 1;
+    min-height: 0; // Allow flex item to shrink below content size
+    display: flex;
+    flex-direction: column;
+  }
 }

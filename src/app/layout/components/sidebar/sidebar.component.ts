@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import {SidebarHeaderComponent} from '@layout/components/sidebar/components/sidebar-header.component';
 import {SidebarNavigationComponent} from '@layout/components/sidebar/components/sidebar-navigation.component';
 import {SidebarFooterComponent} from '@layout/components/sidebar/components/sidebar-footer.component';
-import {LayoutService} from '@layout/services/layout.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -15,15 +14,18 @@ import {LayoutService} from '@layout/services/layout.service';
     SidebarFooterComponent
   ],
   template: `
-    <div class="sidebar-container">
-      <app-sidebar-header></app-sidebar-header>
-      <div class="flex-1 overflow-y-auto">
-        <app-sidebar-navigation></app-sidebar-navigation>
-      </div>
-      <app-sidebar-footer></app-sidebar-footer>
+    <app-sidebar-header></app-sidebar-header>
+    <div class="flex-1 overflow-y-auto">
+      <app-sidebar-navigation></app-sidebar-navigation>
     </div>
+    <app-sidebar-footer></app-sidebar-footer>
   `,
-  styleUrl: './sidebar.component.scss'
+  styles: [`
+    :host {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+  `]
 })
-export class SidebarComponent {
-}
+export class SidebarComponent { }

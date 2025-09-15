@@ -8,6 +8,7 @@ import { NavigationStyleService } from '@layout/services/navigation/navigation-s
 import { RouterLink } from '@angular/router';
 import {SidenavMenuItemComponent} from '@layout/components/sidenav/components/sidenav-menu-item.component';
 import {SidenavMegaMenuComponent} from '@layout/components/sidenav/components/sidenav-mega-menu.component';
+import {MatNavList} from '@angular/material/list';
 
 @Component({
   selector: 'app-sidenav-navigation',
@@ -20,29 +21,33 @@ import {SidenavMegaMenuComponent} from '@layout/components/sidenav/components/si
     OverlayModule,
     SidenavMenuItemComponent,
     SidenavMegaMenuComponent,
+    MatNavList,
   ],
   template: `
     <div class="sidebar-navigation" [class.collapsed]="navigationService.isSidebarCollapsed()">
-      <div *ngFor="let item of navigationService.navigationItems()" class="nav-item">
+      <mat-nav-list *ngIf="!navigationService.isSidebarCollapsed()">
         <app-sidenav-menu-item
-          *ngIf="!navigationService.isSidebarCollapsed()"
+          *ngFor="let item of navigationService.navigationItems()"
           [item]="item">
         </app-sidenav-menu-item>
+      </mat-nav-list>
 
-        <div
-          *ngIf="navigationService.isSidebarCollapsed()"
-          class="nav-icon-container"
-          [matTooltip]="item.label"
-          matTooltipPosition="right"
-          [matTooltipDisabled]="isMenuOpen && activeMenuItem?.id === item.id"
-          (mouseenter)="onIconEnter(item, trigger)"
-          (mouseleave)="onIconLeave()"
-          (click)="onIconClick(item, trigger)"
-          [routerLink]="!item.children ? item.route : null"
-          [class.cursor-pointer]="!!item.route || !!item.children"
-          #trigger="cdkOverlayOrigin"
-          cdkOverlayOrigin>
-          <mat-icon [ngClass]="styleService.getIconClasses(item)">{{ item.icon }}</mat-icon>
+      <div *ngIf="navigationService.isSidebarCollapsed()">
+        <div *ngFor="let item of navigationService.navigationItems()" class="nav-item">
+          <div
+            class="nav-icon-container"
+            [matTooltip]="item.label"
+            matTooltipPosition="right"
+            [matTooltipDisabled]="isMenuOpen && activeMenuItem?.id === item.id"
+            (mouseenter)="onIconEnter(item, trigger)"
+            (mouseleave)="onIconLeave()"
+            (click)="onIconClick(item, trigger)"
+            [routerLink]="!item.children ? item.route : null"
+            [class.cursor-pointer]="!!item.route || !!item.children"
+            #trigger="cdkOverlayOrigin"
+            cdkOverlayOrigin>
+            <mat-icon [ngClass]="styleService.getIconClasses(item)">{{ item.icon }}</mat-icon>
+          </div>
         </div>
       </div>
     </div>
@@ -54,14 +59,12 @@ import {SidenavMegaMenuComponent} from '@layout/components/sidenav/components/si
       [cdkConnectedOverlayPositions]="overlayPositions"
       (overlayOutsideClick)="closeMenu()"
       (detach)="closeMenu()">
-
       <app-sidenav-mega-menu
         *ngIf="activeMenuItem"
         [item]="activeMenuItem"
         (mouseenter)="onMenuEnter()"
         (mouseleave)="onMenuLeave()">
       </app-sidenav-mega-menu>
-
     </ng-template>
   `,
 })
@@ -74,8 +77,6 @@ export class SidenavNavigationComponent {
   activeMenuTrigger: CdkOverlayOrigin = null!;
   isMenuPinned = false;
   private closeTimeout: any;
-
-  @ViewChild(CdkConnectedOverlay) private connectedOverlay?: CdkConnectedOverlay;
 
   overlayPositions: ConnectedPosition[] = [
     { originX: 'end', originY: 'top', overlayX: 'start', overlayY: 'top', offsetX: 8 },
@@ -132,6 +133,5 @@ export class SidenavNavigationComponent {
     this.isMenuOpen = false;
     this.isMenuPinned = false;
     this.activeMenuItem = null;
-    // this.activeMenuTrigger = null;
   }
 }

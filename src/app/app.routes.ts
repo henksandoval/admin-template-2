@@ -43,8 +43,9 @@ export const routes: AppRoute[] = [
             path: '',
             loadComponent: () => import('./features/showcase/pages/index/index.component').then(m => m.IndexComponent),
             data: {
-              label: 'Showcase',
-              hiddenInMenu: true
+              label: 'Showcase Index',
+              icon: 'home',
+              level: 2
             }
           },
           {

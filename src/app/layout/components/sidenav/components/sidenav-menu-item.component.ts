@@ -18,38 +18,74 @@ import {MatListItem, MatNavList} from '@angular/material/list';
     MatNavList
   ],
   template: `
+    <!-- Simple menu item without children -->
     <a mat-list-item
        *ngIf="!item.children"
        [routerLink]="item.route"
        [ngClass]="styleService.getItemClasses(item)"
-       class="menu-item-link"
-       [class.level-1]="(item.level || 1) === 1"
-       [class.level-2]="(item.level || 1) === 2"
-       [class.level-3]="(item.level || 1) === 3">
+       class="!p-0 !rounded-lg !mb-1 hover:!bg-transparent">
 
-      <mat-icon matListItemIcon [ngClass]="styleService.getIconClasses(item)">{{ item.icon }}</mat-icon>
-      <span matListItemTitle [ngClass]="styleService.getTextClasses(item)">{{ item.label }}</span>
+      <div class="flex items-center w-full px-3 py-2">
+        <mat-icon [ngClass]="styleService.getIconClasses(item)">{{ item.icon }}</mat-icon>
+        <span [ngClass]="styleService.getTextClasses(item)">{{ item.label }}</span>
+      </div>
     </a>
 
-    <div *ngIf="item.children" class="expandable-container">
+    <!-- Expandable menu item with children -->
+    <div *ngIf="item.children" class="relative">
+      <!-- Parent item -->
       <div mat-list-item
            (click)="navigationService.toggleMenuItem(item.id)"
            [ngClass]="styleService.getItemClasses(item)"
-           class="menu-item-expandable"
-           [class.level-1]="(item.level || 1) === 1">
+           class="!p-0 !rounded-lg !mb-1 hover:!bg-transparent cursor-pointer">
 
-        <mat-icon [ngClass]="styleService.getIconClasses(item)">{{ item.icon }}</mat-icon>
-        <span [ngClass]="styleService.getTextClasses(item)">{{ item.label }}</span>
-        <mat-icon class="expand-icon" [class.expanded]="navigationService.isMenuExpanded(item.id)">
-          chevron_right
-        </mat-icon>
+        <div class="flex items-center w-full px-3 py-2">
+          <mat-icon [ngClass]="styleService.getIconClasses(item)">{{ item.icon }}</mat-icon>
+          <span [ngClass]="styleService.getTextClasses(item)">{{ item.label }}</span>
+          <mat-icon [ngClass]="styleService.getExpandIconClasses(item, navigationService.isMenuExpanded(item.id))">
+            chevron_right
+          </mat-icon>
+        </div>
       </div>
 
-      <mat-nav-list *ngIf="navigationService.isMenuExpanded(item.id)" class="submenu">
-        <app-sidenav-menu-item *ngFor="let subItem of item.children" [item]="subItem"></app-sidenav-menu-item>
-      </mat-nav-list>
+      <!-- Submenu container with connecting lines -->
+      <div *ngIf="navigationService.isMenuExpanded(item.id)" 
+           class="relative ml-3 border-l-2 border-gray-200 dark:border-gray-700 pl-3 mt-1">
+        
+        <mat-nav-list class="!p-0">
+          <div *ngFor="let subItem of item.children; let isLast = last" 
+               class="relative">
+            
+            <!-- Horizontal connecting line -->
+            <div class="absolute left-0 top-4 w-3 h-0.5 bg-gray-200 dark:bg-gray-700 -translate-x-3"></div>
+            
+            <!-- Remove vertical line for last item -->
+            <div *ngIf="!isLast" 
+                 class="absolute left-0 top-4 bottom-0 w-0.5 bg-gray-200 dark:bg-gray-700 -translate-x-3"></div>
+            
+            <app-sidenav-menu-item [item]="subItem"></app-sidenav-menu-item>
+          </div>
+        </mat-nav-list>
+      </div>
     </div>
-  `
+  `,
+  styles: [`
+    /* Override Material Design default styles to ensure Tailwind takes precedence */
+    :host ::ng-deep .mat-mdc-list-item {
+      --mdc-list-list-item-container-color: transparent !important;
+      --mdc-list-list-item-hover-state-layer-color: transparent !important;
+      --mdc-list-list-item-focus-state-layer-color: transparent !important;
+      --mdc-list-list-item-selected-container-color: transparent !important;
+    }
+    
+    :host ::ng-deep .mat-mdc-list-item .mdc-list-item__content {
+      padding: 0 !important;
+    }
+    
+    :host ::ng-deep .mat-mdc-nav-list {
+      padding: 0 !important;
+    }
+  `]
 })
 export class SidenavMenuItemComponent {
   @Input() item!: NavigationItem;

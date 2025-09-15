@@ -5,6 +5,7 @@ import { HeaderComponent } from '@layout/components/header/header.component';
 import { MainContentComponent } from '@layout/components/main-content/main-content.component';
 import { NavigationService } from '@layout/services/navigation/navigation.service';
 import { SidebarComponent } from '@layout/components/sidebar/sidebar.component';
+import {SidenavComponent} from '@layout/components/sidenav/sidenav.component';
 
 @Component({
   selector: 'app-layout',
@@ -14,7 +15,8 @@ import { SidebarComponent } from '@layout/components/sidebar/sidebar.component';
     MatSidenavModule,
     HeaderComponent,
     MainContentComponent,
-    SidebarComponent
+    SidebarComponent,
+    SidenavComponent
   ],
   template: `
     <div class="bg-background text-on-background min-h-screen flex flex-col">
@@ -28,7 +30,7 @@ import { SidebarComponent } from '@layout/components/sidebar/sidebar.component';
           [opened]="navigationService.isSidebarVisible()"
           [ngClass]="sidebarClass()"
           class="bg-surface border-r border-outline transition-all duration-300 mat-elevation-z2">
-          <app-sidebar></app-sidebar>
+          <app-sidenav></app-sidenav>
         </mat-sidenav>
 
         <mat-sidenav-content class="bg-background">
